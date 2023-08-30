@@ -33,7 +33,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  job1:
+  edit_docker_version:
     name: Modifiy repository files
     runs-on: ubuntu-latest
     steps:
