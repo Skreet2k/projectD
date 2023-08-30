@@ -24,10 +24,3 @@ spec:
         env:
         - name: FOUNDRY_USERNAME
           value: "rabotyagi"
-        volumeMounts:
-        - mountPath: /data
-          name: projectd-volume
-      volumes:
-      - name: projectd-volume
-        persistentVolumeClaim:
-          claimName: projectd-back
