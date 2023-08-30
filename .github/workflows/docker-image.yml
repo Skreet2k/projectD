@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag skreet2k/projectD-back:$(date +%s)
+      run: docker build . --file Dockerfile --tag skreet2k/projectd-back:$(date +%s)
     - name: Docker push
-      run: docker push skreet2k/projectD-back
+      run: docker push skreet2k/projectd-back
