@@ -35,6 +35,7 @@ jobs:
 
   edit_docker_version:
     name: Modifiy repository files
+    needs: push_to_registry
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
