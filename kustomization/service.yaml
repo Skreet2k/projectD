@@ -9,5 +9,5 @@ spec:
   type: NodePort
   ports:
     - port: 8080
-      nodePort: 30056
+      nodePort: 30400
       name: http
