@@ -47,7 +47,7 @@ jobs:
           images: skreet2k/projectd-back
       - name: Modifiy the specific files using scripts
         run: |
-         sed -i 's/Go/${{ steps.meta.outputs.tags }}/g' README.md
+         sed -i 's/Go/${{ DOCKER_METADATA_OUTPUT_VERSION }}/g' README.md
       - name: Commit and push changes
         run: |
           git config --global user.name "file-updater"
