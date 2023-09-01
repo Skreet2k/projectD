@@ -1,20 +1,49 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Simbirsoft.Hakaton.ProjectD.Api.Hubs;
+using Microsoft.OpenApi.Models;
+using Simbirsoft.Hakaton.ProjectD.Api.Filters;
 using Simbirsoft.Hakaton.ProjectD.Api.Models;
+using Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
+using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
+using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
+using Simbirsoft.Hakaton.ProjectD.Persistence.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+    c.SwaggerDoc("v1",
+        new OpenApiInfo { Title = "This is fine", Version = "v1" });
+    c.DescribeAllParametersInCamelCase();
+
+    c.OperationFilter<AuthOperationFilter>();
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+});
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
+
+builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddSignalR().AddJsonProtocol(options =>
 {
@@ -49,13 +78,11 @@ app.UseCors(x => x
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-
-    endpoints.MapHub<MyHub>("/hubs/myhub");
-});
+app.MapHub<GameHub>("/hubs/game");
 
 app.Run();

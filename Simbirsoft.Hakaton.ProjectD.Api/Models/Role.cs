@@ -6,5 +6,4 @@ namespace Simbirsoft.Hakaton.ProjectD.Api.Models;
 [CollectionName("Roles")]
 public class Role : MongoIdentityRole<Guid>
 {
-    
 }

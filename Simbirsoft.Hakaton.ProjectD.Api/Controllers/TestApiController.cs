@@ -1,15 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos;
+using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
-public class TestApiController: ControllerBase
+[Authorize]
+public class TestApiController : ControllerBase
 {
-    [HttpGet]
-    public async Task<ActionResult<object>> Get()
+    private readonly ITestService _testService;
+
+    public TestApiController(ITestService testService)
     {
-        return new {Property = "value"};
+        _testService = testService;
+    }
+
+    [HttpGet]
+    public ResultList<TestDto> Get()
+    {
+        return _testService.Get();
+    }
+
+    [HttpPost]
+    public async Task<Result<TestDto>> Post([FromBody] TestDto dto)
+    {
+        return await _testService.AddAsync(dto);
     }
 }
