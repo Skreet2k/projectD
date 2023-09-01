@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles;
@@ -12,8 +13,13 @@ public static class DependencyInjection
 {
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddAutoMapper(typeof(TestMapper));
-        services.AddAutoMapper(typeof(MapProfile));
+        var mapperConfiguration = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(typeof(TestMapper));
+            cfg.AddProfile(typeof(MapProfile));
+        });        
+        mapperConfiguration.AssertConfigurationIsValid();
+        services.AddSingleton(mapperConfiguration.CreateMapper());
 
         services.AddLocalization();
         services.AddServices();
