@@ -39,6 +39,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
 
@@ -71,8 +73,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x => x
-    .WithOrigins()
-    .AllowCredentials()
+    .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
 
