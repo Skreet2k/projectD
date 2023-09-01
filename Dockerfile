@@ -15,7 +15,7 @@ RUN dotnet restore Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakat
 # copy everything else and build app
 COPY . .
 
-RUN dotnet publish Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakaton.ProjectD.Api.csproj --use-current-runtime --self-contained false --no-restore -o /app
+RUN dotnet publish "Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakaton.ProjectD.Api.csproj" -c Release --use-current-runtime --self-contained false --no-restore -o /app
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/nightly/aspnet:8.0-preview

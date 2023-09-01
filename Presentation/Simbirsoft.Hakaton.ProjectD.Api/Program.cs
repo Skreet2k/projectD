@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Simbirsoft.Hakaton.ProjectD.Api.Filters;
 using Simbirsoft.Hakaton.ProjectD.Api.Models;
+using Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
+using Simbirsoft.Hakaton.ProjectD.Persistence.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
