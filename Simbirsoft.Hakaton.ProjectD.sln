@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Api", "Simbirsoft.Hakaton.ProjectD.Api\Simbirsoft.Hakaton.ProjectD.Api.csproj", "{A2D29E73-7685-4E32-8818-7407026E7E20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Api", "Presentation\Simbirsoft.Hakaton.ProjectD.Api\Simbirsoft.Hakaton.ProjectD.Api.csproj", "{A2D29E73-7685-4E32-8818-7407026E7E20}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D3B7A1AF-E67A-4D1E-AF4D-AB073DD92C16}"
 EndProject
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Application", "Core\Simbirsoft.Hakaton.ProjectD.Application\Simbirsoft.Hakaton.ProjectD.Application.csproj", "{45DCCFD3-EA9D-47F2-AE4D-CA0EA460F66F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Persistence", "Simbirsoft.Hakaton.ProjectD.Persistence\Simbirsoft.Hakaton.ProjectD.Persistence.csproj", "{5E11E880-690A-4DD7-B544-010B0994AAA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Persistence", "Infrastructure\Simbirsoft.Hakaton.ProjectD.Persistence\Simbirsoft.Hakaton.ProjectD.Persistence.csproj", "{5E11E880-690A-4DD7-B544-010B0994AAA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Shared", "Core\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj", "{84904836-3FC6-4D97-B236-8F129B629AF0}"
 EndProject
