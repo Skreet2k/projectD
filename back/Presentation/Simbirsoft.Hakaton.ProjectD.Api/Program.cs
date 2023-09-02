@@ -92,8 +92,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Services.GetRequiredService<MapperConfiguration>().AssertConfigurationIsValid();
-
 app.MapHub<GameHub>("/hubs/game");
 
 app.Run();
