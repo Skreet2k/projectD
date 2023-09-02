@@ -12,8 +12,8 @@ function Cell({ cell, cellSize }: CellProps) {
 
   return (
     <CellDiv
-      size={cellSize}
-      cellInfo={cell}
+      $size={cellSize}
+      $cellInfo={cell}
       // id={`${position.x}${position.y}`} /* don't set symbols between x and y */
       onClick={getCellInfo}
     >
