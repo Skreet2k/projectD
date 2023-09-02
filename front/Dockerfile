@@ -5,7 +5,6 @@ WORKDIR /build
 ARG NPM_CONFIG_REGISTRY=""
 ARG YARN_REGISTRY=""
 COPY package.json ./
-COPY yarn.lock ./
 RUN yarn install
 
 FROM deps as build
