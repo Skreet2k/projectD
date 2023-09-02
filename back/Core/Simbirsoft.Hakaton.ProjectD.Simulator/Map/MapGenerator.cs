@@ -20,58 +20,41 @@ public class MapGenerator : IMapGenerator
 
     /// <inheritdoc />
     public async Task<Result<MapDto>> GenerateMapAsync(byte width, byte height, byte startX, byte startY,
-        byte finishX, byte finishY)
+        byte finishX, byte finishY, int counter = 0)
     {
-        if (
-            startX > width - 1
-            || startY > height - 1
-            || finishX > width - 1
-            || finishY > width - 1
-        )
-        {
-            return new Result<MapDto>
-            {
-                ReturnCode = -1, Content = null,
-                ErrorMessage = "Координаты начала и конца находятся за пределами карты."
-            };
-        }
-
-        var maze = await EllerGenerator.GenerateMaze(width, height);
-
-        var path = await GetPathGuaranteed(maze, startX, startY, finishX,
-            finishY, 0);
-
-        var map = new MapEntity
-        {
-            Width = width,
-            Height = height,
-            Path = path
-        };
-
-        var mapModel = _mapper.Map<MapDto>(map);
-
-        return new Result<MapDto>(mapModel);
-    }
-
-    /// <summary>
-    /// Ну да, костыль, на за 10 проходов-то точно сгенерит.
-    /// </summary>
-    /// <param name="maze"></param>
-    /// <param name="startX"></param>
-    /// <param name="startY"></param>
-    /// <param name="destX"></param>
-    /// <param name="destY"></param>
-    /// <param name="counter"></param>
-    /// <returns></returns>
-    private async Task<List<CoordinateEntity>> GetPathGuaranteed(Maze maze, byte startX, byte startY, byte destX,
-        byte destY, int counter)
-    {
-        List<CoordinateEntity> path;
+        Result<MapDto> result = new Result<MapDto>();
 
         try
         {
-            path = await CommonPathfinder.FindPath(maze, startX, startY, destX,
-                destY);
+            if (
+                startX > width - 1
+                || startY > height - 1
+                || finishX > width - 1
+                || finishY > width - 1
+            )
+            {
+                return new Result<MapDto>
+                {
+                    ReturnCode = -1, Content = null,
+                    ErrorMessage = "Координаты начала и конца находятся за пределами карты."
+                };
+            }
+
+            var maze = await EllerGenerator.GenerateMaze(width, height);
+
+            var path = await CommonPathfinder.FindPath(maze, startX, startY, finishX,
+                finishY);
+
+            var map = new MapEntity
+            {
+                Width = width,
+                Height = height,
+                Path = path
+            };
+
+            var mapModel = _mapper.Map<MapDto>(map);
+
+            return new Result<MapDto>(mapModel);
         }
         catch (Exception e)
         {
@@ -80,9 +63,9 @@ public class MapGenerator : IMapGenerator
             if (counter > 10)
                 throw;
 
-            path = await GetPathGuaranteed(maze, startX, startY, destX, destY, counter);
+            result = await GenerateMapAsync(width, height, startX, startY, finishX, finishY, counter + 1);
         }
 
-        return path;
+        return result;
     }
 }

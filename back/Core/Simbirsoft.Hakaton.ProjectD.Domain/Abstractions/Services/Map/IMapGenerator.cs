@@ -16,7 +16,8 @@ public interface IMapGenerator
     /// <param name="startY">Кордината начала пути по оси Y.</param>
     /// <param name="finishX">Кордината конца пути по оси X.</param>
     /// <param name="finishY">Кордината конца пути по оси Y.</param>
+    /// <param name="counter">Костыльный счётчик.</param>
     /// <returns>Карта с путём.</returns>
     Task<Result<MapDto>> GenerateMapAsync(byte width, byte height, byte startX, byte startY,
-        byte finishX, byte finishY);
+        byte finishX, byte finishY, int counter = 0);
 }
