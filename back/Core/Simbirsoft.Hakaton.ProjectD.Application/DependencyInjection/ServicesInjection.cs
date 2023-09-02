@@ -14,6 +14,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 /// </summary>
 public static class ServicesInjection
 {
+    /// <summary>
+    /// Внедрение сервисов.
+    /// </summary>
     public static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ITestService, TestService>();

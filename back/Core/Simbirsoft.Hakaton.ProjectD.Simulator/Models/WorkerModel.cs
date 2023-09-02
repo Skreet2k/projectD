@@ -46,7 +46,7 @@ public class WorkerModel
     {
         DefineTarget(features);
 
-        int damage = CalculateDamage();
+        var damage = CalculateDamage();
 
         DealDamage(damage);
     }
@@ -114,7 +114,7 @@ public class WorkerModel
     }
 
     /// <summary>
-    ///Нанесение урона цели.
+    /// Нанесение урона цели.
     /// </summary>
     /// <param name="damage">Наносимый урон.</param>
     private void DealDamage(int damage)

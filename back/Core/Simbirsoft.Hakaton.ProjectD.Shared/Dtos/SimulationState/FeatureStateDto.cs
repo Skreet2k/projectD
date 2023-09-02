@@ -5,16 +5,16 @@ namespace Simbirsoft.Hakaton.ProjectD.Shared.Dtos.SimulationState;
 public class FeatureStateDto
 {
     public string Id { get; set; }
-    
+
     public string Name { get; set; }
-    
+
     public int MaxHealthPoints { get; set; }
-    
+
     public int CurrentHealthPoints { get; set; }
 
     public CoordinateDto CurrentCoordinate { get; set; }
-    
+
     public CoordinateDto NextCoordinate { get; set; }
-    
+
     public int Progress { get; set; }
 }

@@ -2,15 +2,14 @@
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
-using Simbirsoft.Hakaton.ProjectD.Simulator.Services;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
 public class SimulationSessionService
 {
+    private static readonly ConcurrentDictionary<string, SimulationModel> UserSessions = new();
     private readonly IMapGenerator _mapGenerator;
     private readonly SimulationStarter _simulationStarter;
-    private static readonly ConcurrentDictionary<string, SimulationModel> UserSessions = new();
 
     public SimulationSessionService(IMapGenerator mapGenerator, SimulationStarter simulationStarter)
     {
@@ -23,12 +22,12 @@ public class SimulationSessionService
         var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 7, 5);
 
         var levelPool = new List<FeatureModel>();
-        
+
         var mapModel = new SimulationModel
         {
             Path = mapResult.Content.Path,
             Features = new List<FeatureModel>(),
-            Workers = new List<WorkerModel>(), 
+            Workers = new List<WorkerModel>(),
             Configuration = new SimulationConfiguration
             {
                 IsEndlessLevel = true,
@@ -50,7 +49,7 @@ public class SimulationSessionService
         UserSessions.TryGetValue(userId, out var session);
         await _simulationStarter.StartAsync(session, userId);
     }
-    
+
     public async Task StopSessionAsync(string userId)
     {
         UserSessions.Remove(userId, out var session);

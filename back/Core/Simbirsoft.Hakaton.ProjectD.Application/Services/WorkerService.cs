@@ -7,7 +7,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
 public class WorkerService : IWorkersService
 {
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public async Task<ResultList<WorkerDto>> GetWorkersAsync()
     {
         var workers = new List<WorkerDto>

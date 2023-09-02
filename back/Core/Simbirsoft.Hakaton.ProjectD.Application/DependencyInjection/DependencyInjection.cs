@@ -12,6 +12,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 /// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Внедрение зависимостей слоя Application.
+    /// </summary>
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         var mapperConfiguration = new MapperConfiguration(cfg =>

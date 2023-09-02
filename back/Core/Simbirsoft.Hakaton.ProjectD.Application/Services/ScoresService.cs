@@ -4,11 +4,13 @@ using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
+/// <inheritdoc />
 public class ScoresService : IScoresService
 {
+    /// <inheritdoc />
     public async Task<ResultList<ScoreRecordDto>> GetUserScores(string userId)
     {
-        List<ScoreRecordDto> result = new List<ScoreRecordDto>()
+        var result = new List<ScoreRecordDto>
         {
             new()
             {
@@ -36,11 +38,12 @@ public class ScoresService : IScoresService
         return new ResultList<ScoreRecordDto>(result);
     }
 
+    /// <inheritdoc />
     public async Task<ResultList<UserScoreRecordDto>> GetLevelScores(string levelId, string userId = null)
     {
-        List<UserScoreRecordDto> result = new List<UserScoreRecordDto>()
+        var result = new List<UserScoreRecordDto>
         {
-            new UserScoreRecordDto()
+            new()
             {
                 LevelId = "6555FA01-99C2-4179-BB01-2B091BCDFA17",
                 LevelName = "Уровень 2",
@@ -48,7 +51,7 @@ public class ScoresService : IScoresService
                 UserName = "Я",
                 Score = 6382
             },
-            new UserScoreRecordDto()
+            new()
             {
                 LevelId = "6555FA01-99C2-4179-BB01-2B091BCDFA17",
                 LevelName = "Уровень 2",
@@ -56,7 +59,7 @@ public class ScoresService : IScoresService
                 UserName = "OtherUser1",
                 Score = 5432
             },
-            new UserScoreRecordDto()
+            new()
             {
                 LevelId = "6555FA01-99C2-4179-BB01-2B091BCDFA17",
                 LevelName = "Уровень 2",
@@ -69,9 +72,10 @@ public class ScoresService : IScoresService
         return new ResultList<UserScoreRecordDto>(result);
     }
 
+    /// <inheritdoc />
     public async Task<ResultList<UserScoreRecordDto>> GetRecordScores(string userId = null)
     {
-        List<UserScoreRecordDto> result = new List<UserScoreRecordDto>()
+        var result = new List<UserScoreRecordDto>
         {
             new()
             {
@@ -79,7 +83,7 @@ public class ScoresService : IScoresService
                 LevelName = "Уровень 1",
                 UserId = "7271000C-8275-4030-A786-D1BEF714C34E",
                 UserName = "OtherUser1",
-                Score = 6436,
+                Score = 6436
             },
             new()
             {
@@ -95,7 +99,7 @@ public class ScoresService : IScoresService
                 LevelName = "Уровень 3",
                 UserId = "7271000C-8275-4030-A786-D1BEF714C32E",
                 UserName = "OtherUser2",
-                Score = 6645,
+                Score = 6645
             }
         };
 

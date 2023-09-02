@@ -3,6 +3,6 @@
 public class SimulationStateDto
 {
     public FeatureStateDto[] FeaturesState { get; set; }
-    
+
     public WorkerStateDto[] WorkersState { get; set; }
 }

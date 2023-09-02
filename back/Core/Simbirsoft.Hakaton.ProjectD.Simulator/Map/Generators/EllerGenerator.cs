@@ -2,7 +2,7 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Generators;
 
-static class EllerGenerator
+internal static class EllerGenerator
 {
     private static readonly Random Rand;
 
@@ -10,24 +10,24 @@ static class EllerGenerator
     {
         Rand = new Random();
     }
-    
+
     private static bool ShouldAddVWall()
     {
         return Rand.Next(10) > 4;
     }
-    
+
     private static bool ShouldAddHWall()
     {
         return Rand.Next(10) > 4;
     }
-    
+
     public static async Task<Maze> GenerateMaze(byte x, byte y)
     {
-        Cell[] cells = new Cell[x * y];
-        byte[] nums = new byte [x * y];
+        var cells = new Cell[x * y];
+        var nums = new byte [x * y];
 
         byte counter = 1;
-        byte[] scores = new byte[x * y];
+        var scores = new byte[x * y];
 
         for (byte i = 0; i < y; i++)
         {
@@ -66,7 +66,7 @@ static class EllerGenerator
             for (byte j = 0; j < x - 1; j++)
             {
                 var currentIndex = i * x + j;
-                bool d = ShouldAddVWall();
+                var d = ShouldAddVWall();
 
                 if (d || nums[currentIndex] == nums[currentIndex + 1])
                 {
@@ -80,15 +80,15 @@ static class EllerGenerator
                 }
             }
 
-            cells[(i * x) + (x - 1)].Right = true;
+            cells[i * x + (x - 1)].Right = true;
 
-            for (byte j = 0; j < x & i < y - 1; j++)
+            for (byte j = 0; (j < x) & (i < y - 1); j++)
             {
                 var currentIndex = i * x + j;
                 var currentScore = nums[currentIndex];
                 if (scores[currentScore] > 1)
                 {
-                    bool d = ShouldAddHWall();
+                    var d = ShouldAddHWall();
 
                     if (d && LowSpacesLeft(cells, nums, currentScore, i * x, x))
                     {
@@ -114,12 +114,12 @@ static class EllerGenerator
                     }
                 }
 
-                cells[(i * x) + (x - 1)].Bottom = true;
+                cells[i * x + (x - 1)].Bottom = true;
             }
         }
 
         var maze = new Maze { X = x, Y = y, Cells = cells };
-        
+
         return maze;
     }
 
@@ -141,6 +141,6 @@ static class EllerGenerator
             }
         }
 
-        return occur > (borders + 1);
+        return occur > borders + 1;
     }
 }
