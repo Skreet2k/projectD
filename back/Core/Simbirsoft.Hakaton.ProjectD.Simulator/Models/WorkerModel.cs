@@ -42,7 +42,7 @@ public class WorkerModel
     /// Симуляция выстрела в тик.
     /// </summary>
     /// <param name="features">Коллекция фич.</param>
-    public void Fire(FeatureModel[] features)
+    public void Fire(IEnumerable<FeatureModel> features)
     {
         DefineTarget(features);
 

@@ -9,7 +9,7 @@ public class TowerTests
 
     public TowerTests()
     {
-        var features = new FeatureModel[]
+        List<FeatureModel> features = new()
         {
             new()
             {
