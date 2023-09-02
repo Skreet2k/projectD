@@ -1,24 +1,17 @@
-# Learn about building .NET container images:
-# https://github.com/dotnet/dotnet-docker/blob/main/samples/README.md
-FROM mcr.microsoft.com/dotnet/nightly/sdk:8.0-preview AS build
-WORKDIR /source
+ARG NPM_CONFIG_LOGLEVEL=verbose
 
-# copy csproj and restore as distinct layers
-COPY Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakaton.ProjectD.Api.csproj Presentation/Simbirsoft.Hakaton.ProjectD.Api/
-COPY Infrastructure/Simbirsoft.Hakaton.ProjectD.Persistence/Simbirsoft.Hakaton.ProjectD.Persistence.csproj Infrastructure/Simbirsoft.Hakaton.ProjectD.Persistence/
-COPY Core/Simbirsoft.Hakaton.ProjectD.Application/Simbirsoft.Hakaton.ProjectD.Application.csproj Core/Simbirsoft.Hakaton.ProjectD.Application/
-COPY Core/Simbirsoft.Hakaton.ProjectD.Domain/Simbirsoft.Hakaton.ProjectD.Domain.csproj Core/Simbirsoft.Hakaton.ProjectD.Domain/
-COPY Core/Simbirsoft.Hakaton.ProjectD.Shared/Simbirsoft.Hakaton.ProjectD.Shared.csproj Core/Simbirsoft.Hakaton.ProjectD.Shared/
+FROM node:20-alpine3.17 as deps
+WORKDIR /build
+ARG NPM_CONFIG_REGISTRY=""
+ARG YARN_REGISTRY=""
+COPY package.json ./
+RUN yarn install
 
-RUN dotnet restore Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakaton.ProjectD.Api.csproj --use-current-runtime
-
-# copy everything else and build app
+FROM deps as build
 COPY . .
+RUN yarn run build
 
-RUN dotnet publish "Presentation/Simbirsoft.Hakaton.ProjectD.Api/Simbirsoft.Hakaton.ProjectD.Api.csproj" -c Release --use-current-runtime --self-contained false --no-restore -o /app
-
-# final stage/image
-FROM mcr.microsoft.com/dotnet/nightly/aspnet:8.0-preview
-WORKDIR /app
-COPY --from=build /app .
-ENTRYPOINT ["./Simbirsoft.Hakaton.ProjectD.Api"]
+FROM nginx:1.25.2-alpine
+WORKDIR /var/www
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /build/build /var/www

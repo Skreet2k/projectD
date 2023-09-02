@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Map;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.State;
+using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Workers;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 
@@ -12,6 +13,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 /// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Внедрение зависимостей слоя Application.
+    /// </summary>
     public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         var mapperConfiguration = new MapperConfiguration(cfg =>
@@ -19,6 +23,7 @@ public static class DependencyInjection
             cfg.AddProfile(typeof(TestMapper));
             cfg.AddProfile(typeof(MapProfile));
             cfg.AddProfile(typeof(StateProfile));
+            cfg.AddProfile(typeof(WorkerProfile));
         });
         mapperConfiguration.AssertConfigurationIsValid();
         services.AddSingleton(mapperConfiguration.CreateMapper());

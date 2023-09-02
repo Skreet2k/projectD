@@ -12,7 +12,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 public class GameHub : Hub<IReceiveGameClient>
 {
     private readonly IHubContext<GameHub> _myHubContext;
+
     private readonly SimulationSessionService _simulationSessionService;
+
     //
     public GameHub(IHubContext<GameHub> myHubContext, SimulationSessionService simulationSessionService)
     {
@@ -20,30 +22,48 @@ public class GameHub : Hub<IReceiveGameClient>
         _simulationSessionService = simulationSessionService;
     }
 
+
+    /// <inheritdoc />
     public override Task OnConnectedAsync()
     {
         Console.WriteLine("UserId is " + Context.UserIdentifier);
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Создание сессии.
+    /// </summary>
     public async Task<MapDto> CreateSession()
     {
         return await _simulationSessionService.CreateSessionAsync(Context.UserIdentifier);
     }
-    
+
+    /// <summary>
+    /// Старт сессии.
+    /// </summary>
     public async Task StartSession()
     {
         await _simulationSessionService.StartSessionAsync(Context.UserIdentifier);
     }
-
-    public Task Broadcast()
+    
+    /// <summary>
+    /// Добавить работника.
+    /// </summary>
+    public async Task AddWorker(string workerId, CoordinateDto coordinate)
     {
-        return _myHubContext.Clients.All.SendAsync("testMethod", "Привет");
+        await _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
+    }
+    
+        
+    /// <summary>
+    /// Удаляем работника.
+    /// </summary>
+    public async Task RemoveWorker(string workerId, CoordinateDto coordinate)
+    {
+        await _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
     }
 
-    /// <summary>
-    /// Срабатывает при закрытии соединения.
-    /// </summary>
+    /// <inheritdoc />
     public override async Task OnDisconnectedAsync(Exception exception)
     {
         await _simulationSessionService.StopSessionAsync(Context.UserIdentifier);

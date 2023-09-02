@@ -7,6 +7,7 @@ metadata:
   namespace: projectd
 spec:
   replicas: 1
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: projectd-back
@@ -17,10 +18,38 @@ spec:
     spec:
       containers:
       - name: projectd-back
-        image: skreet2k/projectd-back:0.0.4
+        image: skreet2k/projectd-back:0.0.13
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectd-front
+  labels:
+    app: projectd-front
+  namespace: projectd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: projectd-front
+  template:
+    metadata:
+      labels:
+        app: projectd-front
+    spec:
+      containers:
+      - name: projectd-front
+        image: skreet2k/projectd-front:0.0.13
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development

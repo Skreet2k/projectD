@@ -7,7 +7,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Map;
 /// <summary>
 /// Профиль маппинга карты.
 /// </summary>
-public class MapProfile: Profile
+public class MapProfile : Profile
 {
     public MapProfile()
     {

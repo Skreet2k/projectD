@@ -29,6 +29,7 @@ export interface FieldObject {
 }
 
 export interface Sizes {
+  // playingField
   sizeOfField?: {
     width: number;
     height: number;

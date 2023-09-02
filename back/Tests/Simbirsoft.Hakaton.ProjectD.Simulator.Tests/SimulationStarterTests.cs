@@ -15,6 +15,5 @@ public class SimulationStarterTests
         var service = new SimulationStarter((IHubContext<GameHub, IReceiveGameClient>)new object());
 
         service.StartAsync(mapModel, "").GetAwaiter().GetResult();
-
     }
 }

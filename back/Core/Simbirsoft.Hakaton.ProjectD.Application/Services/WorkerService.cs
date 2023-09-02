@@ -1,33 +1,31 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
+﻿using AutoMapper;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Repositoreis;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
+using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Workers;
-using Simbirsoft.Hakaton.ProjectD.Shared.Enums.Workers;
 using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
 public class WorkerService : IWorkersService
 {
-    /// <inheritdoc/>
+    private readonly IMapper _mapper;
+
+    private readonly IGenericRepository<WorkerEntity> _workerRepository;
+
+    public WorkerService(IGenericRepository<WorkerEntity> workerRepository, IMapper mapper)
+    {
+        _workerRepository = workerRepository;
+        _mapper = mapper;
+    }
+
+    /// <inheritdoc />
     public async Task<ResultList<WorkerDto>> GetWorkersAsync()
     {
-        var workers = new List<WorkerDto>
-        {
-            new()
-            {
-                Id = "1",
-                Name = "Backend разработчик",
-                Type = WorkerType.BackendDev,
-                Cost = 10
-            },
-            new()
-            {
-                Id = "2",
-                Name = "Frontend разработчик",
-                Type = WorkerType.FrontendDev,
-                Cost = 10
-            }
-        };
+        var entities = _workerRepository.Get();
 
-        return new ResultList<WorkerDto>(workers);
+        var models = _mapper.ProjectTo<WorkerDto>(entities).ToList();
+
+        return new ResultList<WorkerDto>(models);
     }
 }
