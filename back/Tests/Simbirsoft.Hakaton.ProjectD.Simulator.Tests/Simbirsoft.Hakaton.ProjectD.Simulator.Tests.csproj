@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Core\Simbirsoft.Hakaton.ProjectD.Application\Simbirsoft.Hakaton.ProjectD.Application.csproj" />
         <ProjectReference Include="..\..\Core\Simbirsoft.Hakaton.ProjectD.Simulator\Simbirsoft.Hakaton.ProjectD.Simulator.csproj"/>
     </ItemGroup>
 

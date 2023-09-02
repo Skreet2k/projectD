@@ -5,12 +5,12 @@ using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
-public class WorkersService : IWorkersService
+public class WorkerService : IWorkersService
 {
     /// <inheritdoc/>
     public async Task<ResultList<WorkerDto>> GetWorkersAsync()
     {
-        var workers = new List<WorkerDto>()
+        var workers = new List<WorkerDto>
         {
             new()
             {

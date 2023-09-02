@@ -101,7 +101,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x => x
-    .WithOrigins("https://stackoverflow.com", "http://localhost:3000")
+    .WithOrigins("https://stackoverflow.com", "http://localhost:3000", "https://gourav-d.github.io")
     .AllowAnyMethod()
     .AllowCredentials()
     .AllowAnyHeader());
