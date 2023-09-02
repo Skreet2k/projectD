@@ -5,7 +5,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Services;
 
 public class SimulationStarter
 {
-    public async Task StartAsync(MapModel mapModel)
+    public async Task StartAsync(SimulationModel mapModel)
     {
         var customerHandler = new CustomerHandler();
         var featureHandler = new FeatureHandler();

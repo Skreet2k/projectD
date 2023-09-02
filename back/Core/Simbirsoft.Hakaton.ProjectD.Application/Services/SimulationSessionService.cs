@@ -11,7 +11,7 @@ public class SimulationSessionService
 {
     private readonly IMapGenerator _mapGenerator;
     private readonly SimulationStarter _simulationStarter;
-    private static readonly ConcurrentDictionary<string, MapModel> UserSessions = new();
+    private static readonly ConcurrentDictionary<string, SimulationModel> UserSessions = new();
 
     public SimulationSessionService(IMapGenerator mapGenerator, SimulationStarter simulationStarter)
     {
@@ -23,7 +23,7 @@ public class SimulationSessionService
     {
         var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 8, 5);
 
-        var mapModel = new MapModel
+        var mapModel = new SimulationModel
         {
             Path = mapResult.Content.Path,
             Features = new List<FeatureModel>(),
