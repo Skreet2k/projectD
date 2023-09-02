@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectd-back
+  labels:
+    app: projectd-back
+  namespace: projectd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projectd-back
+  template:
+    metadata:
+      labels:
+        app: projectd-back
+    spec:
+      containers:
+      - name: projectd-back
+        image: skreet2k/projectd-back:0.0.9
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
