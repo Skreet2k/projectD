@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.Services;
-using Simbirsoft.Hakaton.ProjectD.Application.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Map;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Services;
 
@@ -16,6 +16,7 @@ public static class ServicesInjection
     public static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ITestService, TestService>();
+        services.AddScoped<IWorkersService, WorkersService>();
 
         services.AddScoped<IMapGenerator, MapGenerator>();
 
