@@ -7,7 +7,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Workers;
 /// <summary>
 /// Профиль маппинга Работников.
 /// </summary>
-public class WorkerProfile: Profile
+public class WorkerProfile : Profile
 {
     public WorkerProfile()
     {

@@ -5,10 +5,10 @@ using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
 namespace Simbirsoft.Hakaton.ProjectD.Persistence.Repositories;
 
 /// <inheritdoc />
-public class WorkerEntityRepository: IGenericRepository<WorkerEntity>
+public class WorkerEntityRepository : IGenericRepository<WorkerEntity>
 {
     private readonly IMongoCollection<WorkerEntity> _collection;
-    
+
     public WorkerEntityRepository(IMongoCollection<WorkerEntity> collection)
     {
         _collection = collection;
