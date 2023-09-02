@@ -11,7 +11,6 @@ public class WorkerService : IWorkersService
 {
     private readonly IMapper _mapper;
 
-    /// <inheritdoc />
     private readonly IGenericRepository<WorkerEntity> _workerRepository;
 
     public WorkerService(IGenericRepository<WorkerEntity> workerRepository, IMapper mapper)
