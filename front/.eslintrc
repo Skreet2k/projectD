@@ -24,6 +24,7 @@
       }
     ],
     "max-len": "off",
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "space-infix-ops": "off"
   }
 }

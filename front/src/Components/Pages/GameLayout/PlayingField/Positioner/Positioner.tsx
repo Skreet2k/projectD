@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {IPositionProps, IPositionPropsFiltered, TProps} from './Positioner.types';
+import { IPositionPropsFiltered, TProps } from './Positioner.types';
 import { TICK_MS } from '../../../../../constants';
 
 const linearRule = `${TICK_MS}ms linear`;

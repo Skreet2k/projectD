@@ -7,7 +7,7 @@ const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx 
   const { xPx = 50, yPx = 50 } = fieldObject.rows[pos.y].cells[pos.x].centerPx!;
   return { xPx, yPx };
 };
-export const usePlayFeatureCoordinates = (fieldObject: FieldObject | null, path: Position[]) => {
+export const usePlayFeatureCoordinates = (fieldObject: FieldObject | null | undefined, path: Position[] | undefined) => {
   const coordinateRef = useRef<IPositionProps>({});
   const [coordinate, setCoordinate] = useState(coordinateRef.current);
 
@@ -17,7 +17,7 @@ export const usePlayFeatureCoordinates = (fieldObject: FieldObject | null, path:
     }
     let pathPosition = 0;
     const iid = setInterval(() => {
-      const position = path[pathPosition];
+      const position = path && path[pathPosition];
       if (!position) {
         clearInterval(iid);
         coordinateRef.current = {};
