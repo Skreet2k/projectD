@@ -22,6 +22,6 @@ spec:
     app: projectd-front
   type: NodePort
   ports:
-    - port: 3000
+    - port: 80
       nodePort: 30410
       name: http
