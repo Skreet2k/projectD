@@ -1,47 +1,47 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./routes/root";
-import About from "./Components/Pages/About";
-import GameLayout from "./Components/Pages/GameLayout";
-import Login from "./Components/Pages/Login/Login";
-import Registration from "./Components/Pages/Registration/Registration";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import Root from './routes/root';
+import About from './Components/Pages/About';
+import GameLayout from './Components/Pages/GameLayout';
+import Login from './Components/Pages/Login';
+import Registration from './Components/Pages/Registration';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Root />,
     // errorElement: <ErrorPage/>,
     children: [
       {
-        path: "game",
+        path: 'game',
         element: <GameLayout />,
       },
       {
-        path: "about",
+        path: 'about',
         element: <About />,
       },
     ],
   },
   {
-    path: "login",
+    path: 'login',
     element: <Login />,
   },
   {
-    path: "registration",
+    path: 'registration',
     element: <Registration />,
   },
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

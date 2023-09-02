@@ -1,2 +1,3 @@
-import SettingsContextProvider from "./SettingsContextProvider";
+import SettingsContextProvider from './SettingsContextProvider';
+
 export default SettingsContextProvider;
