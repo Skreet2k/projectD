@@ -23,6 +23,11 @@ public class WorkerEntity: BaseEntity
     public WorkerLevel Level { get; set; }
     
     /// <summary>
+    /// Радиус поражения.
+    /// </summary>
+    public int Range { get; set; }
+    
+    /// <summary>
     /// Урон в секунду.
     /// </summary>
     public int Damage { get; set; }
