@@ -9,7 +9,7 @@ import About from './Components/Pages/About';
 import GameLayout from './Components/Pages/GameLayout';
 import Login from './Components/Pages/Login';
 import Registration from './Components/Pages/Registration';
-import { store } from './store';
+import { store } from './store/store';
 
 const router = createBrowserRouter([
   {

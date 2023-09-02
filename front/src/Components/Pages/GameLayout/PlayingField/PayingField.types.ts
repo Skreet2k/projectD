@@ -39,4 +39,5 @@ export interface Sizes {
 export interface InitialField {
   initialObject: FieldObject | null;
   sizes: Sizes;
+  path: Position[];
 }
