@@ -2,10 +2,14 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
-public class MapModel
+public class SimulationModel
 {
     public List<CoordinateDto> Path { get; set; }
-
+    
+    public SimulationConfiguration Configuration { get; set; }
+    
+    public  CustomerModel Customer { get; set; }
+    
     public List<WorkerModel> Workers { get; set; }
 
     public List<FeatureModel> Features { get; set; }

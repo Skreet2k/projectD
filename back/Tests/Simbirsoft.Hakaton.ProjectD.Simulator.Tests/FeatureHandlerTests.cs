@@ -19,7 +19,7 @@ public class FeatureHandlerTests
     {
         var service = new FeatureHandler();
 
-        var model = new MapModel
+        var model = new SimulationModel
         {
             Path = new List<CoordinateDto>()
             { new(0, 0), new(1, 1), new(2, 2), new(3, 3),

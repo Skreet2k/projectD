@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+  ],
+  "rules": {
+    "react/jsx-props-no-spreading": 0,
+    "import/prefer-default-export": "off",
+    "no-plusplus": [
+      2,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "max-len": "off",
+    "no-unused-vars": 1
+  }
+}

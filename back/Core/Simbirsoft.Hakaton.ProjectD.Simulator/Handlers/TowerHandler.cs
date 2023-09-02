@@ -4,7 +4,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
 public class TowerHandler : Handler
 {
-    public override void HandleRequest(MapModel request)
+    public override void HandleRequest(SimulationModel request)
     {
         foreach (var worker in request.Workers)
         {

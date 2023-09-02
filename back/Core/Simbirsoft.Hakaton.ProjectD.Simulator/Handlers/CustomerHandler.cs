@@ -3,10 +3,12 @@ using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
-public class CustomerHandler: Handler
+public class CustomerHandler : Handler
 {
-    public override void HandleRequest(MapModel request)
+    public override void HandleRequest(SimulationModel request)
     {
-        throw new NotImplementedException();
+        request.Customer.MakeLifeHarder();
+
+        _successor?.HandleRequest(request);
     }
 }
