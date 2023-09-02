@@ -1,5 +1,8 @@
 ﻿namespace Simbirsoft.Hakaton.ProjectD.Shared.Enums.Workers;
 
+/// <summary>
+/// Тип Работника.
+/// </summary>
 public enum WorkerType
 {
     Undefined = 0,

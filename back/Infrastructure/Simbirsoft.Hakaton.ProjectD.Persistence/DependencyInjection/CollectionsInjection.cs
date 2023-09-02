@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities;
+using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
 using Simbirsoft.Hakaton.ProjectD.Persistence.Context;
 
 namespace Simbirsoft.Hakaton.ProjectD.Persistence.DependencyInjection;
@@ -13,5 +14,6 @@ public static class CollectionsInjection
     {
         services.AddScoped(sp => sp.GetRequiredService<MongoDbContext>().GetCollection<BaseEntity>());
         services.AddScoped(sp => sp.GetRequiredService<MongoDbContext>().GetCollection<TestEntity>());
+        services.AddScoped(sp => sp.GetRequiredService<MongoDbContext>().GetCollection<WorkerEntity>());
     }
 }

@@ -5,6 +5,7 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities;
+using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
 using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
 
 // ReSharper disable AssignNullToNotNullAttribute
@@ -19,7 +20,8 @@ public class MongoDbContext
     // collections
     private readonly Dictionary<string, string> _collectionNames = new()
     {
-        { typeof(TestEntity).FullName, "testEntity" }
+        { typeof(TestEntity).FullName, "testEntity" },
+        { typeof(WorkerEntity).FullName, "workerEntity" }
     };
 
     private readonly IMongoDatabase _database;
