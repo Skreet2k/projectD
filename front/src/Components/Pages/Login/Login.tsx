@@ -1,22 +1,36 @@
+import React, { useEffect, useState } from 'react';
 import {
-  Box, Button, TextField, Typography,
+  Box,
+  Button,
+  TextField,
+  Typography,
 } from '@mui/material';
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, selectCount } from '../../../store/slices/counterSlice';
+import { loginWithPassword } from '../../../store/actions/authAction';
+import {
+  AppDispatch,
+  RootState,
+} from '../../../store/store';
 
 export function Login() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const isLogin = useSelector(
+    (state: RootState) => state.auth.isLogin,
+  );
 
   useEffect(() => {
-    console.log(count);
-  }, [count]);
+    if (isLogin) {
+      navigate('/');
+    }
+  }, [isLogin]);
 
-  useEffect(() => {
-    dispatch(increment());
-  }, []);
+  const finish = async () => {
+    dispatch(loginWithPassword({ username, password }));
+  };
 
   return (
     <Box
@@ -25,10 +39,15 @@ export function Login() {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100dvh',
+        backgroundImage:
+          'url(https://media.tenor.com/MYZgsN2TDJAAAAAC/this-is.gif)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
       }}
     >
       <Box
         sx={{
+          width: '307px',
           background: 'white',
           padding: '20px',
           boxShadow:
@@ -39,14 +58,24 @@ export function Login() {
         }}
       >
         <Typography component="h1">Войти</Typography>
-        <TextField id="outlined-basic" label="Логин" variant="standard" />
         <TextField
+          value={username}
+          onChange={(e) => setUsername(e.target?.value)}
+          id="outlined-basic"
+          label="Логин"
+          variant="standard"
+        />
+        <TextField
+          value={password}
+          onChange={(e) => setPassword(e.target?.value)}
           type="password"
           id="outlined-basic"
           label="Пароль"
           variant="standard"
         />
-        <Button variant="contained">Войти в мир разработчиков</Button>
+        <Button onClick={finish} variant="contained">
+          Войти в IT
+        </Button>
         <Link to="/registration">Стать защитником</Link>
       </Box>
     </Box>

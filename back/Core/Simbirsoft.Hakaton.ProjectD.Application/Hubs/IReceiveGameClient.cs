@@ -1,3 +1,5 @@
+using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
+
 namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 
 /// <summary>
@@ -5,4 +7,5 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 /// </summary>
 public interface IReceiveGameClient
 {
+    Task UpdateClient(SimulationModel model);
 }

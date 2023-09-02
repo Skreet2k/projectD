@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import Root from './routes/root';
@@ -10,20 +13,27 @@ import GameLayout from './Components/Pages/GameLayout';
 import Login from './Components/Pages/Login';
 import Registration from './Components/Pages/Registration';
 import { store } from './store/store';
+import PrivateRoute from './Components/PrivateRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <PrivateRoute />,
     // errorElement: <ErrorPage/>,
     children: [
       {
-        path: 'game',
-        element: <GameLayout />,
-      },
-      {
-        path: 'about',
-        element: <About />,
+        path: '/',
+        element: <Root />,
+        children: [
+          {
+            path: 'game',
+            element: <GameLayout />,
+          },
+          {
+            path: 'about',
+            element: <About />,
+          },
+        ],
       },
     ],
   },

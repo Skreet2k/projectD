@@ -16,7 +16,7 @@ public static class ServicesInjection
     public static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ITestService, TestService>();
-        services.AddScoped<IWorkersService, WorkersService>();
+        services.AddScoped<IWorkersService, WorkerService>();
 
         services.AddScoped<IMapGenerator, MapGenerator>();
 

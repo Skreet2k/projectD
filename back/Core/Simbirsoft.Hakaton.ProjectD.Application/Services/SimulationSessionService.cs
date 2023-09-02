@@ -1,7 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
-using Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Services;
 
@@ -21,7 +20,7 @@ public class SimulationSessionService
 
     public async Task<MapDto> CreateSessionAsync(string userId)
     {
-        var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 8, 5);
+        var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 7, 5);
 
         var levelPool = new List<FeatureModel>();
         
@@ -34,10 +33,12 @@ public class SimulationSessionService
             {
                 IsEndlessLevel = true,
                 TicksToSpawn = 5,
-                MillisecondsToTick = 200
+                MillisecondsToTick = 1000
             }
         };
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
+
+        mapModel.CancellationTokenSource = new CancellationTokenSource();
 
         UserSessions.TryAdd(userId, mapModel);
 
@@ -47,6 +48,12 @@ public class SimulationSessionService
     public async Task StartSessionAsync(string userId)
     {
         UserSessions.TryGetValue(userId, out var session);
-        await _simulationStarter.StartAsync(session);
+        await _simulationStarter.StartAsync(session, userId);
+    }
+    
+    public async Task StopSessionAsync(string userId)
+    {
+        UserSessions.Remove(userId, out var session);
+        await session.CancellationTokenSource.CancelAsync();
     }
 }
