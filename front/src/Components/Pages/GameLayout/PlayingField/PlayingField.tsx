@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useFieldParams } from './useFieldParams';
-import { BEFieldMock } from './mock';
 import Cell from './Cell/Cell';
-import { useGetPokemonByNameQuery } from '../../../../services/map';
+import { FieldObject, InitialField, Sizes } from './PayingField.types';
+import Positioner from './Positioner/Positioner';
+import { usePlayFeatureCoordinates } from '../../../../utils/gameLayout/usePlayFeatureCoordinates';
 
 const FieldWrapper = styled.div`
   position: relative;
@@ -19,20 +19,14 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-function PlayingField() {
-  const { data, error, isLoading } = useGetPokemonByNameQuery('bulbasaur');
-  const BEWidth = BEFieldMock.content.width;
-  const BEHeight = BEFieldMock.content.height;
-  const { path } = BEFieldMock.content;
+type PlayingFieldProps = InitialField;
 
-  const { initialObject, sizes } = useFieldParams(
-    {
-      widthAmount: BEWidth,
-      heightAmount: BEHeight,
-      path,
-    },
-  );
-
+function PlayingField({ initialObject, sizes, path }: PlayingFieldProps) {
+  const mockedStyle = {
+    width: '70px', height: '70px', borderRadius: '50%', backgroundColor: 'gray', lineHeight: '70px',
+  };
+  const mockedFeature = (<div style={mockedStyle}>Make me!</div>);
+  const coordinate = usePlayFeatureCoordinates(initialObject, path);
   return (
     <FieldWrapper>
       <Field>
@@ -47,6 +41,9 @@ function PlayingField() {
             ))}
           </Row>
         ))}
+        <Positioner {...coordinate}>
+          {mockedFeature}
+        </Positioner>
       </Field>
     </FieldWrapper>
   );
