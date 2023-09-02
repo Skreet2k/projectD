@@ -14,6 +14,10 @@ import Login from './Components/Pages/Login';
 import Registration from './Components/Pages/Registration';
 import { store } from './store/store';
 import PrivateRoute from './Components/PrivateRoute';
+import {
+  createTheme,
+  ThemeProvider,
+} from '@mui/material/styles';
 
 const router = createBrowserRouter([
   {
@@ -47,13 +51,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  palette: {
+    primary: { main: '#FF5733' },
+  },
+});
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
 );
