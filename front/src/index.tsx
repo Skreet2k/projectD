@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import Root from './routes/root';
 import About from './Components/Pages/About';
 import GameLayout from './Components/Pages/GameLayout';
 import Login from './Components/Pages/Login';
 import Registration from './Components/Pages/Registration';
+import { store } from './store';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +42,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
 
