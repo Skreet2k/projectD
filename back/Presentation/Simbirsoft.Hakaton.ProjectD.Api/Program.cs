@@ -2,7 +2,9 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Routing;
@@ -49,7 +51,25 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddCors();
 
-builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme, options =>
+    options.Events = new BearerTokenEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+
+            // If the request is for our hub...
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) &&
+                path.StartsWithSegments("/hubs"))
+            {
+                // Read the token out of the query string
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
+    });
 builder.Services.AddAuthorizationBuilder();
 
 builder.Services.AddPersistence(builder.Configuration);
@@ -81,7 +101,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x => x
-    .AllowAnyOrigin()
+    .SetIsOriginAllowed(_ => true)
     .AllowAnyMethod()
     .AllowAnyHeader());
 
