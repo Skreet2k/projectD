@@ -1,6 +1,6 @@
 ﻿namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Models;
 
-class Cell
+internal class Cell
 {
     public Cell()
     {

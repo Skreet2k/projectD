@@ -21,8 +21,9 @@ public class FeatureHandlerTests
 
         var model = new SimulationModel
         {
-            Path = new List<CoordinateDto>()
-            { new(0, 0), new(1, 1), new(2, 2), new(3, 3),
+            Path = new List<CoordinateDto>
+            {
+                new(0, 0), new(1, 1), new(2, 2), new(3, 3),
                 new(3, 4),
                 new(3, 5)
             },

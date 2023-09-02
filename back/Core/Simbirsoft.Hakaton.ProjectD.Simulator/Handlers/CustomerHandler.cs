@@ -1,5 +1,4 @@
-﻿using System;
-using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
+﻿using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 

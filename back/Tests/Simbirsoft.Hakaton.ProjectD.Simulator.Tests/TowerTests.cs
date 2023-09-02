@@ -5,52 +5,52 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Tests;
 
 public class TowerTests
 {
-    private SimulationModel Map;
+    private readonly SimulationModel Map;
 
     public TowerTests()
     {
         List<FeatureModel> features = new()
         {
-            new()
+            new FeatureModel
             {
                 Id = "1",
                 Name = "Важный рефакторинг сервиса связи",
                 CurrentHealthPoints = 10,
-                CurrentCoordinate = new()
+                CurrentCoordinate = new CoordinateDto
                 {
                     X = 1, Y = 4
                 }
             },
-            new()
+            new FeatureModel
             {
                 Id = "2",
                 Name = "Срочный фикс модели заказа",
                 CurrentHealthPoints = 10,
-                CurrentCoordinate = new()
+                CurrentCoordinate = new CoordinateDto
                 {
                     X = 4, Y = 1
                 }
             },
-            new()
+            new FeatureModel
             {
                 Id = "3",
                 Name = "Обязательный баг таблицы срочности",
                 CurrentHealthPoints = 5,
-                CurrentCoordinate = new()
+                CurrentCoordinate = new CoordinateDto
                 {
                     X = 5, Y = 4
                 }
             }
         };
 
-        List<WorkerModel> towers = new List<WorkerModel>()
+        var towers = new List<WorkerModel>
         {
             new()
             {
                 Id = "1",
                 Range = 2,
                 DamagePerTick = 1,
-                Coordinate = new()
+                Coordinate = new CoordinateDto
                 {
                     X = 0, Y = 5
                 }
@@ -60,7 +60,7 @@ public class TowerTests
                 Id = "2",
                 Range = 2,
                 DamagePerTick = 1,
-                Coordinate = new()
+                Coordinate = new CoordinateDto
                 {
                     X = 2, Y = 1
                 }
@@ -70,7 +70,7 @@ public class TowerTests
                 Id = "3",
                 Range = 2,
                 DamagePerTick = 1,
-                Coordinate = new()
+                Coordinate = new CoordinateDto
                 {
                     X = 4, Y = 3
                 }
@@ -80,7 +80,7 @@ public class TowerTests
                 Id = "4",
                 Range = 2,
                 DamagePerTick = 1,
-                Coordinate = new()
+                Coordinate = new CoordinateDto
                 {
                     X = 7, Y = 0
                 }
@@ -100,13 +100,13 @@ public class TowerTests
     {
         foreach (var worker in Map.Workers)
         {
-            worker.Fire(Map.Features);
+            worker.Do(Map.Features);
         }
 
         var task1 = Map.Features.FirstOrDefault(x => x.Id.Equals("1"));
         var task2 = Map.Features.FirstOrDefault(x => x.Id.Equals("2"));
         var task3 = Map.Features.FirstOrDefault(x => x.Id.Equals("3"));
-        
+
         Assert.Equal(9, task1.CurrentHealthPoints);
         Assert.Equal(9, task2.CurrentHealthPoints);
         Assert.Equal(4, task3.CurrentHealthPoints);

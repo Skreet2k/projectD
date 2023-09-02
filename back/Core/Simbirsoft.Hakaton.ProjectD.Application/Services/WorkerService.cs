@@ -9,8 +9,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
 public class WorkerService : IWorkersService
 {
-    private IGenericRepository<WorkerEntity> _workerRepository;
-    private IMapper _mapper;
+    private readonly IMapper _mapper;
+
+    private readonly IGenericRepository<WorkerEntity> _workerRepository;
 
     public WorkerService(IGenericRepository<WorkerEntity> workerRepository, IMapper mapper)
     {
@@ -18,7 +19,7 @@ public class WorkerService : IWorkersService
         _mapper = mapper;
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public async Task<ResultList<WorkerDto>> GetWorkersAsync()
     {
         var entities = _workerRepository.Get();

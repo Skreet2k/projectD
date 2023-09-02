@@ -1,8 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
-using Simbirsoft.Hakaton.ProjectD.Domain.Entities;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
 using Simbirsoft.Hakaton.ProjectD.Shared.Enums.Workers;
 

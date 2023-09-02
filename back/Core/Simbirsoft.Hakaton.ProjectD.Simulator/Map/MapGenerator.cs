@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Generators;
-using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Models;
 using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Pathfinders;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
@@ -22,7 +21,7 @@ public class MapGenerator : IMapGenerator
     public async Task<Result<MapDto>> GenerateMapAsync(byte width, byte height, byte startX, byte startY,
         byte finishX, byte finishY, int counter = 0)
     {
-        Result<MapDto> result = new Result<MapDto>();
+        var result = new Result<MapDto>();
 
         try
         {

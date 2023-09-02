@@ -7,6 +7,7 @@ metadata:
   namespace: projectd
 spec:
   replicas: 1
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: projectd-back
@@ -34,6 +35,7 @@ metadata:
   namespace: projectd
 spec:
   replicas: 1
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app: projectd-front

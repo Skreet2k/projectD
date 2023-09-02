@@ -6,14 +6,32 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 public class CustomerModel
 {
     /// <summary>
+    /// Живые фичи на уровне.
+    /// </summary>
+    private readonly List<FeatureModel> _features;
+
+    /// <summary>
     /// Запас фичей.
     /// </summary>
     private readonly List<FeatureModel> _featuresPool;
 
     /// <summary>
-    /// Живые фичи на уровне.
+    /// ГСЧ.
     /// </summary>
-    private readonly List<FeatureModel> _features;
+    private readonly Random _rand;
+
+    public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
+    {
+        _features = simulation.Features;
+        _featuresPool = levelFeatures;
+        StartCoordinate = simulation.Path[0];
+        TicksToSpawn = simulation.Configuration.TicksToSpawn;
+        IsEndlessGame = simulation.Configuration.IsEndlessLevel;
+        if (IsEndlessGame)
+        {
+            _rand = new Random();
+        }
+    }
 
     /// <summary>
     /// Количество тиков, через которое должна спавниться таска.
@@ -28,30 +46,12 @@ public class CustomerModel
     /// <summary>
     /// Признак бесконечного уровня.
     /// </summary>
-    private bool IsEndlessGame { get; set; }
+    private bool IsEndlessGame { get; }
 
     /// <summary>
     /// Координата начала пути.
     /// </summary>
     private CoordinateDto StartCoordinate { get; }
-
-    /// <summary>
-    /// ГСЧ.
-    /// </summary>
-    private Random _rand;
-
-    public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
-    {
-        _features = simulation.Features;
-        _featuresPool = levelFeatures;
-        StartCoordinate = simulation.Path[0];
-        TicksToSpawn = simulation.Configuration.TicksToSpawn;
-        IsEndlessGame = simulation.Configuration.IsEndlessLevel;
-        if (IsEndlessGame)
-        {
-            _rand = new Random();
-        }
-    }
 
     /// <summary>
     /// Тут всё, что делает Заказчик каждый тик.
@@ -99,7 +99,7 @@ public class CustomerModel
     {
         // Случайно определяем количество ХП 80-130.
         var hp = _rand.Next(51);
-        var feature = new FeatureModel()
+        var feature = new FeatureModel
         {
             Id = Guid.NewGuid().ToString(),
             Name = NameHelper.GenerateFeatureName(),

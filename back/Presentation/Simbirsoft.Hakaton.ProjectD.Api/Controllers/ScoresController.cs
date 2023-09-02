@@ -11,7 +11,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
 [Route("api/v1/[controller]")]
 [ApiController]
 [Authorize]
-public class ScoresController: ControllerBase
+public class ScoresController : ControllerBase
 {
     private readonly IScoresService _scoresService;
 

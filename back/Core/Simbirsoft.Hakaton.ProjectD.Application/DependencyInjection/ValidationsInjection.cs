@@ -7,6 +7,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 /// </summary>
 public static class ValidationsInjection
 {
+    /// <summary>
+    /// Внедрение валидаций.
+    /// </summary>
     public static void AddValidations(this IServiceCollection services)
     {
     }
