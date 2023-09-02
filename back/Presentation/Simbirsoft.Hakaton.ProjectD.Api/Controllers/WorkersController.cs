@@ -9,6 +9,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
+[Authorize]
 public class WorkersController : ControllerBase
 {
     private readonly IWorkersService _workersService;
