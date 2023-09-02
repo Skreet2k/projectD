@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  FieldObject, InitialField, Position, Row, UseFieldProps,
+  FieldObject, InitialField, Position, Row,
 } from './PayingField.types';
 import { MapResponse } from '../../../../services/map';
 
