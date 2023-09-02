@@ -19,7 +19,6 @@ const TowerContainer = styled.div<{ $size: number, $top:number, $left: number, $
   background-size: cover;
   top: ${(props) => props.$top};
   left: ${(props) => props.$left};
-  
   animation : ${(props) => spriteAnimation(props.$size * 3)} 1s steps(3) infinite;
 `;
 

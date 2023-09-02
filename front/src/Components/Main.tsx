@@ -6,27 +6,12 @@ import SettingsModal from './SettingsModal';
 
 function Main() {
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Header />
-      <Box>
+      <Box sx={{ display: 'flex', flex: '1 1 auto' }}>
         <Outlet />
       </Box>
       <SettingsModal />
-      {/* TODO move to separate drawer with context {settingsModalOpen && */}
-      {/*    <Drawer */}
-      {/*        variant="persistent" */}
-      {/*        anchor="bottom" */}
-      {/*        open={settingsModalOpen} */}
-      {/* > */}
-      {/*    <div> */}
-      {/*        <IconButton onClick={toggleOpen}> */}
-      {/*            <ChevronLeftIcon /> */}
-      {/*        </IconButton> */}
-      {/*    </div> */}
-      {/*    <Divider /> */}
-      {/*        <div>1</div> */}
-      {/*        <div>2</div> */}
-      {/* </Drawer>} */}
     </Box>
   );
 }
