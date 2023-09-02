@@ -6,6 +6,10 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import {
+  createTheme,
+  ThemeProvider,
+} from '@mui/material/styles';
 import reportWebVitals from './reportWebVitals';
 import Root from './routes/root';
 import About from './Components/Pages/About';
@@ -14,10 +18,6 @@ import Login from './Components/Pages/Login';
 import Registration from './Components/Pages/Registration';
 import { store } from './store/store';
 import PrivateRoute from './Components/PrivateRoute';
-import {
-  createTheme,
-  ThemeProvider,
-} from '@mui/material/styles';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +54,7 @@ const router = createBrowserRouter([
 const theme = createTheme({
   palette: {
     primary: { main: '#FF5733' },
+    action: { hover: '#FFC79A' },
   },
 });
 
