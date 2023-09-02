@@ -77,10 +77,35 @@ public class SimulationSessionService
         {
             Id = worker.Id,
             Coordinate = coordinate,
-            DamagePerTick = worker.Damage
+            DamagePerTick = worker.Damage,
+            Range = worker.Range
         };
         
         session.Workers.Add(workerModel);
+    }
+    
+    public async Task RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
+    {
+        UserSessions.TryGetValue(userId, out var session);
+
+        if (session is null)
+        {
+            return;
+        }
+        
+        var worker = (await _workersService.GetWorkersAsync()).Content.FirstOrDefault(x => x.Id == workerId);
+
+        if (worker == null)
+        {
+            return;
+        }
+
+        var workerModel = session.Workers.FirstOrDefault(x =>
+            x.Id == workerId && x.Coordinate.X == coordinate.X && x.Coordinate.Y == coordinate.Y);
+        
+        session.Workers.Remove(workerModel);
+
+        session.Money += worker.Cost;
     }
     
     public async Task StopSessionAsync(string userId)

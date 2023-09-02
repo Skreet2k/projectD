@@ -53,6 +53,15 @@ public class GameHub : Hub<IReceiveGameClient>
     {
         await _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
     }
+    
+        
+    /// <summary>
+    /// Удаляем работника.
+    /// </summary>
+    public async Task RemoveWorker(string workerId, CoordinateDto coordinate)
+    {
+        await _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
+    }
 
     /// <inheritdoc />
     public override async Task OnDisconnectedAsync(Exception exception)
