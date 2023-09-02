@@ -11,5 +11,5 @@ public abstract class Handler
         _successor = successor;
     }
 
-    public abstract void HandleRequest(MapModel request);
+    public abstract void HandleRequest(SimulationModel request);
 }

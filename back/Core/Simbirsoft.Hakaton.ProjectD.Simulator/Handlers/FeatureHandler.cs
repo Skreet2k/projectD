@@ -7,7 +7,7 @@ public class FeatureHandler : Handler
 {
     private const int MaxPercent = 100;
 
-    public override void HandleRequest(MapModel request)
+    public override void HandleRequest(SimulationModel request)
     {
         foreach (var feature in request.Features.ToList())
         {
