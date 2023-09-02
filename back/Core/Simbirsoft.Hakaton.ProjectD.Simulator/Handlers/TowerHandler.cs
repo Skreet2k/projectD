@@ -6,6 +6,11 @@ public class TowerHandler : Handler
 {
     public override void HandleRequest(MapModel request)
     {
+        foreach (var worker in request.Workers)
+        {
+            worker.Fire(request.Features);
+        }
+
         _successor?.HandleRequest(request);
     }
 }
