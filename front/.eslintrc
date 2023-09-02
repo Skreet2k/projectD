@@ -12,8 +12,11 @@
   "plugins": [
   ],
   "rules": {
+    "no-unsafe-optional-chaining": 0,
     "react/jsx-props-no-spreading": 0,
+    "react-hooks/exhaustive-deps": 0,
     "import/prefer-default-export": "off",
+    "no-param-reassign": 0,
     "no-plusplus": [
       2,
       {

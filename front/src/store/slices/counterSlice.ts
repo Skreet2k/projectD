@@ -24,6 +24,8 @@ export const { increment } = counterSlice.actions;
 //   }, 1000);
 // };
 
-export const selectCount = (state: { counter: { value: any; }; }) => state.counter.value;
+export const selectCount = (state: {
+  counter: { value: any };
+}) => state.counter.value;
 
 export default counterSlice.reducer;

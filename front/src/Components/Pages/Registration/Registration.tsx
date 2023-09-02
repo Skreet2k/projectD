@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import {
-  Alert, Box, Button, TextField, Typography,
+  Alert,
+  Box,
+  Button,
+  TextField,
+  Typography,
 } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -9,17 +13,17 @@ import { passwordStrength } from 'check-password-strength';
 export function Registration() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
   const [error, setError] = useState<string | null>('');
 
   const finish = async () => {
     const passStrength = passwordStrength(password).value;
 
-    if (passStrength === 'Medium' || passStrength === 'Strong') {
+    if (
+      passStrength === 'Medium' || passStrength === 'Strong'
+    ) {
       const json = JSON.stringify({
         username,
         password,
-        email,
       });
 
       const data = await axios.post(
@@ -58,6 +62,10 @@ export function Registration() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundImage:
+          'url(https://media.tenor.com/MYZgsN2TDJAAAAAC/this-is.gif)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
         height: '100dvh',
       }}
     >
@@ -72,7 +80,9 @@ export function Registration() {
           gap: '16px',
         }}
       >
-        <Typography component="h1">Защитите релиз от злобных задач</Typography>
+        <Typography component="h1">
+          Защитите релиз от злобных задач
+        </Typography>
         <TextField
           value={username}
           onChange={(e) => setUsername(e.target?.value)}
@@ -89,16 +99,13 @@ export function Registration() {
           variant="standard"
           error={!!error}
         />
-        <TextField
-          value={email}
-          onChange={(e) => setEmail(e.target?.value)}
-          id="outlined-basic"
-          label="E-mail"
-          variant="standard"
-        />
         {error && (
           <Alert
-            sx={{ position: 'fixed', bottom: '10px', right: '10px' }}
+            sx={{
+              position: 'fixed',
+              bottom: '10px',
+              right: '10px',
+            }}
             variant="outlined"
             severity="error"
           >
