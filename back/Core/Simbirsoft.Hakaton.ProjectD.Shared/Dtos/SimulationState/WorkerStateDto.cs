@@ -9,6 +9,4 @@ public class WorkerStateDto
     public CoordinateDto Coordinate { get; set; }
     
     public string TargetId { get; set; }
-
-    public int Damage { get; set; }
 }

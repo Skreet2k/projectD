@@ -14,9 +14,7 @@ public class FeatureStateDto
 
     public CoordinateDto CurrentCoordinate { get; set; }
     
-    public CoordinateDto NextCoordinage { get; set; }
+    public CoordinateDto NextCoordinate { get; set; }
     
     public int Progress { get; set; }
-    
-    public bool IsActive { get; set; }
 }
