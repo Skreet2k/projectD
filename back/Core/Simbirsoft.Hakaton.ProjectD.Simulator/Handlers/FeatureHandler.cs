@@ -22,7 +22,7 @@ public class FeatureHandler : Handler
         _successor?.HandleRequest(request);
     }
 
-    private void HandleFeature(FeatureModel featureModel, CoordinateDto[] path)
+    private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path)
     {
         // Заполняем следующую координату
         if (featureModel.NextCoordinate is null)
@@ -49,9 +49,9 @@ public class FeatureHandler : Handler
         }
     }
 
-    private CoordinateDto GetNextCoordinate(CoordinateDto currentCoordinate, CoordinateDto[] path)
+    private CoordinateDto GetNextCoordinate(CoordinateDto currentCoordinate, List<CoordinateDto> path)
     {
-        for (var index = 0; index < path.Length; index++)
+        for (var index = 0; index < path.Count; index++)
         {
             var coordinate = path[index];
 
@@ -61,7 +61,7 @@ public class FeatureHandler : Handler
                 continue;
             }
 
-            if (index + 1 >= path.Length)
+            if (index + 1 >= path.Count)
             {
                 return null;
             }

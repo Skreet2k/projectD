@@ -4,9 +4,9 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class MapModel
 {
-    public CoordinateDto[] Path { get; set; }
+    public List<CoordinateDto> Path { get; set; }
 
-    public WorkerModel[] Workers { get; set; }
+    public List<WorkerModel> Workers { get; set; }
 
     public List<FeatureModel> Features { get; set; }
 }

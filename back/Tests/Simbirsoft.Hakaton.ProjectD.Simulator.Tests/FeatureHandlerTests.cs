@@ -21,11 +21,10 @@ public class FeatureHandlerTests
 
         var model = new MapModel
         {
-            Path = new[]
-            {
-                new CoordinateDto(0, 0), new CoordinateDto(1, 1),
-                new CoordinateDto(2, 2), new CoordinateDto(3, 3),
-                new CoordinateDto(3, 4), new CoordinateDto(3, 5)
+            Path = new List<CoordinateDto>()
+            { new(0, 0), new(1, 1), new(2, 2), new(3, 3),
+                new(3, 4),
+                new(3, 5)
             },
             Features = new List<FeatureModel>
             {
@@ -39,7 +38,7 @@ public class FeatureHandlerTests
                     CurrentHealthPoints = 1000
                 }
             },
-            Workers = new[] { new WorkerModel() }
+            Workers = new List<WorkerModel> { new() }
         };
 
         for (var i = 0; i < 140; i++)

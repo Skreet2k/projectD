@@ -43,7 +43,7 @@ public class TowerTests
             }
         };
 
-        var towers = new WorkerModel[]
+        List<WorkerModel> towers = new List<WorkerModel>()
         {
             new()
             {
@@ -91,7 +91,7 @@ public class TowerTests
         {
             Features = features,
             Workers = towers,
-            Path = Array.Empty<CoordinateDto>()
+            Path = new List<CoordinateDto>(Array.Empty<CoordinateDto>())
         };
     }
 

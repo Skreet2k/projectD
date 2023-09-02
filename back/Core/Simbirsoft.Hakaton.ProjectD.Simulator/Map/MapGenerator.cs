@@ -7,7 +7,7 @@ using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 using Skreet2k.Common.Models;
 
-namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map;
+namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map;
 
 public class MapGenerator : IMapGenerator
 {
