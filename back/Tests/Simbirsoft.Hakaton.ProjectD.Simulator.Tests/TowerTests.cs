@@ -100,7 +100,7 @@ public class TowerTests
     {
         foreach (var worker in Map.Workers)
         {
-            worker.Fire(Map.Features);
+            worker.Do(Map.Features);
         }
 
         var task1 = Map.Features.FirstOrDefault(x => x.Id.Equals("1"));

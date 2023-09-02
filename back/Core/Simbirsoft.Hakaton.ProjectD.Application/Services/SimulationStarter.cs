@@ -18,10 +18,12 @@ public class SimulationStarter
     {
         var customerHandler = new CustomerHandler();
         var featureHandler = new FeatureHandler();
-        var towerHandler = new TowerHandler();
+        var workerHandler = new WorkerHandler();
+        var deadHandler = new FeatureDeadHandler();
 
         customerHandler.SetSuccessor(featureHandler);
-        featureHandler.SetSuccessor(towerHandler);
+        featureHandler.SetSuccessor(workerHandler);
+        featureHandler.SetSuccessor(deadHandler);
 
         while (true)
         {

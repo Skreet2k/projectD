@@ -14,6 +14,8 @@ public class SimulationModel
     public List<WorkerModel> Workers { get; set; }
 
     public List<FeatureModel> Features { get; set; }
+    
+    public int Money { get; set; }
 
     [JsonIgnore] public CancellationTokenSource CancellationTokenSource { get; set; }
 }

@@ -39,7 +39,8 @@ public class SimulationSessionService
                 IsEndlessLevel = true,
                 TicksToSpawn = 5,
                 MillisecondsToTick = 1000
-            }
+            },
+            Money = 100
         };
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
 
@@ -81,7 +82,7 @@ public class SimulationSessionService
         
         session.Workers.Add(workerModel);
     }
-
+    
     public async Task StopSessionAsync(string userId)
     {
         UserSessions.Remove(userId, out var session);
