@@ -105,7 +105,7 @@ public class CustomerModel
             Name = NameHelper.GenerateFeatureName(),
             MaxHealthPoints = 80 + hp,
             CurrentHealthPoints = 80 + hp,
-            ProgressPerTick = 10,
+            ProgressPerTick = 50
         };
 
         _featuresPool.Add(feature);
