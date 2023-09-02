@@ -17,7 +17,7 @@ public class SimulationStarter
         while (true)
         {
             customerHandler.HandleRequest(mapModel);
-            await Task.Delay(1000);
+            await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
     }
 }
