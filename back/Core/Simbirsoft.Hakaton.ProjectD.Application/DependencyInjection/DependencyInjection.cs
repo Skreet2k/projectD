@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Map;
+using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.State;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.DependencyInjection;
 
@@ -17,7 +18,8 @@ public static class DependencyInjection
         {
             cfg.AddProfile(typeof(TestMapper));
             cfg.AddProfile(typeof(MapProfile));
-        });        
+            cfg.AddProfile(typeof(StateProfile));
+        });
         mapperConfiguration.AssertConfigurationIsValid();
         services.AddSingleton(mapperConfiguration.CreateMapper());
 

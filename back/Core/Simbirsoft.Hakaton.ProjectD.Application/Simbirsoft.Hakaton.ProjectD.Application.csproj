@@ -22,7 +22,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Domain\Simbirsoft.Hakaton.ProjectD.Domain.csproj"/>
+        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Domain\Simbirsoft.Hakaton.ProjectD.Domain.csproj" />
+        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Simulator\Simbirsoft.Hakaton.ProjectD.Simulator.csproj" />
     </ItemGroup>
 
 </Project>
