@@ -5,7 +5,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Tests;
 
 public class TowerTests
 {
-    private MapModel Map;
+    private SimulationModel Map;
 
     public TowerTests()
     {
@@ -87,7 +87,7 @@ public class TowerTests
             }
         };
 
-        Map = new MapModel
+        Map = new SimulationModel
         {
             Features = features,
             Workers = towers,
