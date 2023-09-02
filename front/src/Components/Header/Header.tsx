@@ -21,8 +21,9 @@ function Header() {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={toggleOpen}
           >
-            <MenuIcon onClick={toggleOpen} />
+            <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
