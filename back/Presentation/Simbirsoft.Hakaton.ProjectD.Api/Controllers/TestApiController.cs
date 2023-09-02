@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos;
+using Simbirsoft.Hakaton.ProjectD.Shared.Helpers;
 using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
@@ -29,5 +30,11 @@ public class TestApiController : ControllerBase
     public async Task<Result<TestDto>> Post([FromBody] TestDto dto)
     {
         return await _testService.AddAsync(dto);
+    }
+
+    [HttpGet("getRandomName")]
+    public string GetName()
+    {
+        return NameHelper.GenerateFeatureName();
     }
 }
