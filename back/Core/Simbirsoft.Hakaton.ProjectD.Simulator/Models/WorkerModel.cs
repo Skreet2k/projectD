@@ -41,10 +41,10 @@ public class WorkerModel
     /// <summary>
     /// Симуляция выстрела в тик.
     /// </summary>
-    /// <param name="map">Состояние карты.</param>
-    public void Fire(MapModel map)
+    /// <param name="features">Коллекция фич.</param>
+    public void Fire(FeatureModel[] features)
     {
-        DefineTarget(map.Features);
+        DefineTarget(features);
 
         int damage = CalculateDamage();
 
@@ -72,7 +72,7 @@ public class WorkerModel
         }
 
         // Сортируем фичи по ХП, т.к. в приоритете будут фичи с минимальным ХП.
-        var orderedFeatures = features.OrderByDescending(t => t.CurrentHealthPoints);
+        var orderedFeatures = features.OrderBy(t => t.CurrentHealthPoints);
 
         // Проходим по фичам, от самой дохлой до самой здоровой.
         foreach (var feature in orderedFeatures)
