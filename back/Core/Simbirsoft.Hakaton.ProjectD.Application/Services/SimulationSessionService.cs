@@ -23,12 +23,21 @@ public class SimulationSessionService
     {
         var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 8, 5);
 
+        var levelPool = new List<FeatureModel>();
+        
         var mapModel = new SimulationModel
         {
             Path = mapResult.Content.Path,
             Features = new List<FeatureModel>(),
-            Workers = new List<WorkerModel>()
+            Workers = new List<WorkerModel>(), 
+            Configuration = new SimulationConfiguration
+            {
+                IsEndlessLevel = true,
+                TicksToSpawn = 5,
+                MillisecondsToTick = 200
+            }
         };
+        mapModel.Customer = new CustomerModel(mapModel, levelPool);
 
         UserSessions.TryAdd(userId, mapModel);
 
