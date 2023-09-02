@@ -103,6 +103,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(x => x
     .SetIsOriginAllowed(_ => true)
     .AllowAnyMethod()
+    .AllowCredentials()
     .AllowAnyHeader());
 
 app.UseRouting();
