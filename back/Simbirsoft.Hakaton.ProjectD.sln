@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Shared", "Core\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj", "{84904836-3FC6-4D97-B236-8F129B629AF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Simulator.Tests", "Tests\Simbirsoft.Hakaton.ProjectD.Simulator.Tests\Simbirsoft.Hakaton.ProjectD.Simulator.Tests.csproj", "{2EE9E7CD-8F49-4C86-AA1E-F76ED95DAE1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simbirsoft.Hakaton.ProjectD.Simulator", "Core\Simbirsoft.Hakaton.ProjectD.Simulator\Simbirsoft.Hakaton.ProjectD.Simulator.csproj", "{E0707B71-C732-4783-A63D-9C283A1B387F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,14 @@ Global
 		{84904836-3FC6-4D97-B236-8F129B629AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84904836-3FC6-4D97-B236-8F129B629AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84904836-3FC6-4D97-B236-8F129B629AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE9E7CD-8F49-4C86-AA1E-F76ED95DAE1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE9E7CD-8F49-4C86-AA1E-F76ED95DAE1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE9E7CD-8F49-4C86-AA1E-F76ED95DAE1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE9E7CD-8F49-4C86-AA1E-F76ED95DAE1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0707B71-C732-4783-A63D-9C283A1B387F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0707B71-C732-4783-A63D-9C283A1B387F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0707B71-C732-4783-A63D-9C283A1B387F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0707B71-C732-4783-A63D-9C283A1B387F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A2D29E73-7685-4E32-8818-7407026E7E20} = {4A566FB3-467B-4FD4-9CC0-547AB343F8F1}
@@ -49,5 +61,6 @@ Global
 		{45DCCFD3-EA9D-47F2-AE4D-CA0EA460F66F} = {D3B7A1AF-E67A-4D1E-AF4D-AB073DD92C16}
 		{5E11E880-690A-4DD7-B544-010B0994AAA9} = {3A60E9BE-8C72-4FE2-B697-C5529F2B21F5}
 		{84904836-3FC6-4D97-B236-8F129B629AF0} = {D3B7A1AF-E67A-4D1E-AF4D-AB073DD92C16}
+		{E0707B71-C732-4783-A63D-9C283A1B387F} = {D3B7A1AF-E67A-4D1E-AF4D-AB073DD92C16}
 	EndGlobalSection
 EndGlobal
