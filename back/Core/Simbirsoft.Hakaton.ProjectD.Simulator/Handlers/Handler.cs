@@ -4,7 +4,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
 public abstract class Handler
 {
-    protected Handler? _successor;
+    protected Handler _successor;
 
     public void SetSuccessor(Handler successor)
     {

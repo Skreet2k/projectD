@@ -1,6 +1,6 @@
-import React from "react";
-import { Outlet } from "react-router";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-export function PrivateRoute() {
+export default function PrivateRoute() {
   return <Outlet />;
 }

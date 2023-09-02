@@ -1,17 +1,11 @@
-import React from "react";
-import { styled } from "styled-components";
+import React from 'react';
+import PlayingField from './PlayingField/PlayingField';
 
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: #bf4f74;
-`;
-
-const GameLayout = () => {
+function GameLayout() {
   return (
     <div>
-      <Title>GameLayout</Title>
+      <PlayingField />
     </div>
   );
-};
+}
 export default GameLayout;

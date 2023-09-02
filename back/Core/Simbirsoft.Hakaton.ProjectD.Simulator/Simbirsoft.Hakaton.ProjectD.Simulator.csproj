@@ -3,13 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
 
-
     <ItemGroup>
-      <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj" />
+        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj"/>
     </ItemGroup>
 
 </Project>

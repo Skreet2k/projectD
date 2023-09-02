@@ -1,2 +1,3 @@
-import GameLayout from "./GameLayout";
+import GameLayout from './GameLayout';
+
 export default GameLayout;

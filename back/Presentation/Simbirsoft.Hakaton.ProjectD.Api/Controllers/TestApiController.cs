@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos;

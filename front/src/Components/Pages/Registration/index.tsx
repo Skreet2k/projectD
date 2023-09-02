@@ -1,1 +1,3 @@
-export * from "./Registration";
+import { Registration } from './Registration';
+
+export default Registration;
