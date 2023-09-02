@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@microsoft/signalr": "^7.0.10",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.7",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@^5.14.7",
