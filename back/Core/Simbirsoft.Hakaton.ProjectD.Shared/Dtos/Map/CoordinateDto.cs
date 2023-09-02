@@ -5,6 +5,8 @@
 /// </summary>
 public class CoordinateDto
 {
+    public CoordinateDto(){}
+    
     public CoordinateDto(byte x, byte y)
     {
         X = x;

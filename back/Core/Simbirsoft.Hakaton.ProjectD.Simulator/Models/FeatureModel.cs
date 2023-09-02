@@ -17,4 +17,25 @@ public class FeatureModel
     public int ProgressPerTick { get; set; }
 
     public int Reward { get; set; }
+
+    /// <summary>
+    /// Применить нанесённый урон.
+    /// </summary>
+    /// <param name="damage">Нанесённый урон.</param>
+    public void ReceiveDamage(int damage)
+    {
+        // Вычитаем урон из текущего ХП.
+        CurrentHealthPoints -= damage;
+
+        // Если фича опустилась до 0 ХП, он выполняется.
+        if (CurrentHealthPoints <= 0)
+            OnComplete();
+    }
+
+    /// <summary>
+    /// Событие завершения фичи.
+    /// </summary>
+    private void OnComplete()
+    {
+    }
 }
