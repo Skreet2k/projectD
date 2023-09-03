@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { CoordinatePx, FieldObject, Position } from '../../Components/Pages/GameLayout/PlayingField/PayingField.types';
-import { IPositionProps } from '../../Components/Pages/GameLayout/PlayingField/Positioner/Positioner.types';
 import { TICK_MS } from '../../constants';
 
 const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx => {
@@ -8,7 +7,7 @@ const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx 
   return { xPx, yPx };
 };
 export const usePlayFeatureCoordinates = (fieldObject: FieldObject | null | undefined, path: Position[] | undefined) => {
-  const coordinateRef = useRef<IPositionProps>({});
+  const coordinateRef = useRef<{ xPx?: number; yPx?: number }>({});
   const [coordinate, setCoordinate] = useState(coordinateRef.current);
 
   useEffect(() => {
