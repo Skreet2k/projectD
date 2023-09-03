@@ -11,7 +11,7 @@ function Header() {
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Simbirwars
+            This is fine!
           </Typography>
           <Rating />
           <Profile />
