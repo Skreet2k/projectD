@@ -38,7 +38,7 @@ public class SimulationStarter : ISimulationStarter
         customerHandler.SetSuccessor(featureHandler);
         featureHandler.SetSuccessor(workerHandler);
 
-        while (!mapModel.IsBurntOut || mapModel.CancellationTokenSource.IsCancellationRequested)
+        while (!mapModel.IsBurntOut && !mapModel.CancellationTokenSource.IsCancellationRequested)
         {
             customerHandler.HandleRequest(mapModel);
 
