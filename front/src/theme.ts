@@ -1,16 +1,19 @@
 import { createTheme } from '@mui/material/styles';
 
-export const playingField = {
+export const playingFieldTheme = {
   cell: {
-    light: '#ffd180',
-    light2: '#fff9c4',
+    light: '#bdd3f6',
+    light2: '#d6ebff',
   },
-  playingAreaBackground: '#ffab40',
+  playingAreaBackground: '#a8ccff',
+  pathColor: '#8ca7e5',
+  shopBackground: '#1976d2',
+  statsColor: '#1976d2',
 };
 
 export const theme = createTheme({
   palette: {
-    primary: { main: '#f4511e', light: '#f6734b', dark: '#aa3815' },
-    secondary: { main: '#ff9100', light: '#ffa733', dark: '#b26500' },
+    // primary: { main: '#f4511e', light: '#f6734b', dark: '#aa3815' },
+    // secondary: { main: '#ff9100', light: '#ffa733', dark: '#b26500' },
   },
 });

@@ -7,9 +7,9 @@ import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import WavesIcon from '@mui/icons-material/Waves';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { deepOrange } from '@mui/material/colors';
 
 import { GameLayoutContext } from '../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { playingFieldTheme } from '../../../theme';
 
 export default function Stats() {
   const { socket }: any = useContext(GameLayoutContext);
@@ -19,7 +19,7 @@ export default function Stats() {
       <List>
         <ListItem>
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+            <Avatar sx={{ backgroundColor: playingFieldTheme.statsColor }}>
               <SportsScoreIcon />
             </Avatar>
           </ListItemAvatar>
@@ -28,16 +28,16 @@ export default function Stats() {
         </ListItem>
         <ListItem>
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+            <Avatar sx={{ bgcolor: playingFieldTheme.statsColor }}>
               <AttachMoneyIcon />
             </Avatar>
           </ListItemAvatar>
           Деньги:&nbsp;
-          {socket?.socketData?.TotalMoney}
+          {socket?.socketData?.Money}
         </ListItem>
         <ListItem>
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+            <Avatar sx={{ bgcolor: playingFieldTheme.statsColor }}>
               <WavesIcon />
             </Avatar>
           </ListItemAvatar>
@@ -46,7 +46,7 @@ export default function Stats() {
         </ListItem>
         <ListItem>
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>
+            <Avatar sx={{ bgcolor: playingFieldTheme.statsColor }}>
               <FavoriteBorderIcon />
             </Avatar>
           </ListItemAvatar>

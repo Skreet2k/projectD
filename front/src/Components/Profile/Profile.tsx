@@ -8,6 +8,7 @@ import { Avatar, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import UserStats from '../userStats/UserStats';
 import { RootState } from '../../store/store';
+import { playingFieldTheme } from '../../theme';
 
 export default function Profile() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -34,7 +35,7 @@ export default function Profile() {
         onClose={() => toggleDrawer(false)}
       >
         <Box
-          sx={{ background: '#ffab40', height: '100%' }}
+          sx={{ background: playingFieldTheme.playingAreaBackground, height: '100%' }}
           onClick={() => toggleDrawer(false)}
         >
           <List>
