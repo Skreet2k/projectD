@@ -21,7 +21,7 @@ const FeatureBody = styled.div`
   font-size: 11px;
   word-wrap: break-word;
 `;
-export default function Feature({ name, progress }: TFeatureProps) {
+export default function Feature({ name /* , progress */ }: TFeatureProps) {
   const { sizes } = useContext(GameLayoutContext);
   const size = sizes?.sizeOfFieldCell || 70;
 
