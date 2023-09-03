@@ -19,9 +19,7 @@ type GameLayoutContextProps = {
 };
 export const GameLayoutContext = createContext<GameLayoutContextProps>({});
 
-function GameLayoutProvider({
-  children,
-}: GameLayoutProviderProps) {
+function GameLayoutProvider({ children }: GameLayoutProviderProps) {
   const { data } = useGetMapQuery({
     width: 8,
     height: 6,
@@ -33,16 +31,17 @@ function GameLayoutProvider({
 
   const socket = useSocketData();
   const fieldParams = useFieldParams(data, socket.path);
-  const gameLayoutProviderValue = useMemo(() => ({
-    sizes: fieldParams.sizes,
-    fieldParams,
-    socket,
-  }), [fieldParams.sizes, socket]);
+  const gameLayoutProviderValue = useMemo(
+    () => ({
+      sizes: fieldParams.sizes,
+      fieldParams,
+      socket,
+    }),
+    [fieldParams.sizes, socket],
+  );
 
   return (
-    <GameLayoutContext.Provider
-      value={gameLayoutProviderValue}
-    >
+    <GameLayoutContext.Provider value={gameLayoutProviderValue}>
       {children}
     </GameLayoutContext.Provider>
   );

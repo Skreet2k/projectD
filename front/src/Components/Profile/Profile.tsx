@@ -17,6 +17,12 @@ export default function Profile() {
     setOpenDrawer(open);
   };
 
+  const exit = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    window.location.href = '/login';
+  };
+
   return (
     <React.Fragment key="right">
       <Button onClick={() => toggleDrawer(true)}>
@@ -45,6 +51,7 @@ export default function Profile() {
             </ListItem>
           </List>
         </Box>
+        <Button onClick={exit}>Выйти</Button>
       </Drawer>
     </React.Fragment>
   );
