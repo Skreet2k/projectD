@@ -15,19 +15,22 @@ const Transition = React.forwardRef((
 
 function SettingsModal() {
   const { open, toggleOpen } = useContext(SettingsContext);
-  const { socket } = useContext(GameLayoutContext);
-  const [endData, setEndData] = useState<any>({});
+  const { socket, endData } = useContext(GameLayoutContext);
+  // const [endData, setEndData] = useState<any>(null);
   const handleClose = () => {
     toggleOpen();
   };
   useEffect(() => {
     if (socket?.isGameEnded) {
-      setEndData(socket?.endedGameData || {});
+      // setEndData({ ...socket?.endedGameData || {} });
+      const { Score, TotalMoney, WavesCleared } = socket?.endedGameData || {};
+      localStorage.setItem('thisIsFine', JSON.stringify({ Score, TotalMoney, WavesCleared }));
+      endData.Score = Score;
+      endData.TotalMoney = TotalMoney;
+      endData.WavesCleared = WavesCleared;
     }
   }, [socket?.isGameEnded]);
 
-  console.log(endData, socket);
-  const { Score, TotalMoney, WavesCleared } = endData;
   return (
     <Dialog
       open={open}
@@ -39,17 +42,11 @@ function SettingsModal() {
       <DialogTitle>Конец игры</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          `Очки: $
-          {Score || '?'}
-          `
+          {`Очки: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).Score}`}
           <br />
-          `Заработано денег: $
-          {TotalMoney || '?'}
-          `
+          {`Заработано денег: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).TotalMoney}`}
           <br />
-          `Пройдено волн: $
-          {WavesCleared || '?'}
-          `
+          {`Пройдено волн: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).WavesCleared}`}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

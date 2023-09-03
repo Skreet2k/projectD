@@ -16,6 +16,7 @@ type GameLayoutContextProps = {
   sizes?: Sizes;
   fieldParams?: InitialField;
   socket?: TSocket;
+  endData?:any
 };
 export const GameLayoutContext = createContext<GameLayoutContextProps>({});
 
@@ -36,6 +37,7 @@ function GameLayoutProvider({ children }: GameLayoutProviderProps) {
       sizes: fieldParams.sizes,
       fieldParams,
       socket,
+      endData: {},
     }),
     [fieldParams.sizes, socket],
   );
