@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CellProps } from './Cell.types';
 import { CellDiv } from './Cell.styles';
 import { RootState } from '../../../../../store/store';
-import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
 import { useAddTowerMutation } from '../../../../../services/towers/towers';
 
 function Cell({ cell, cellSize }: CellProps) {
   const dispatch = useDispatch();
-  const { socket } = useContext(GameLayoutContext);
   const shopTowerSelected = useSelector(
     (state: RootState) => state.gameLayout.shopTowerSelected,
   );
