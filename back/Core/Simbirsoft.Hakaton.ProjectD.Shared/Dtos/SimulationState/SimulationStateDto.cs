@@ -29,4 +29,14 @@ public class SimulationStateDto
     /// Текущее здоровье.
     /// </summary>
     public int CurrentHealthPoints { get; set; }
+    
+    /// <summary>
+    /// Счётчик завершённых фич.
+    /// </summary>
+    public int FeaturesCompleted { get; set; } = 0;
+
+    /// <summary>
+    /// Счёт.
+    /// </summary>
+    public int Score { get; set; } = 0;
 }
