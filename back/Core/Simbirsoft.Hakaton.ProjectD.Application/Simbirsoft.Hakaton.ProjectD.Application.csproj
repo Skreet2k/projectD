@@ -28,4 +28,5 @@
         <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Simulator\Simbirsoft.Hakaton.ProjectD.Simulator.csproj"/>
     </ItemGroup>
 
+
 </Project>

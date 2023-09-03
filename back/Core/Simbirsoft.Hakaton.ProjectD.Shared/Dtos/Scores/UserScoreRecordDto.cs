@@ -16,7 +16,7 @@ public class UserScoreRecordDto
     public int Score { get; set; }
 
     /// <summary>
-    /// заработанные деньги.
+    /// Заработанные деньги.
     /// </summary>
     public int TotalMoney { get; set; }
 }

@@ -10,24 +10,29 @@ const PositionContainer = styled.div<IPositionPropsFiltered>`
   transition: ${(props) => `top ${props.$duration}ms linear, left ${props.$duration}ms linear`};
 `;
 
-const Positioner = React.forwardRef(({ children, wayPoints }: TProps, ref: Ref<HTMLDivElement>) => {
-  const [pxPosition, setPxPosition] = useState<TWayPoint>(wayPoints[0]);
-  useEffect(() => {
-    const futureWayPoints = wayPoints;
-    setPxPosition(futureWayPoints.shift()!);
-    futureWayPoints.forEach(({ delayMS, ...futurePxPosition }) => {
-      setTimeout(() => setPxPosition(futurePxPosition), delayMS);
-    });
-  }, [wayPoints]);
-  if (!pxPosition) {
+function Positioner({ children, wayPoints }: TProps, ref: Ref<HTMLDivElement>) {
+  // const [pxPosition, setPxPosition] = useState<TWayPoint>(wayPoints[0]);
+  // useEffect(() => {
+  //   const futureWayPoints = [...wayPoints];
+  //   setPxPosition(futureWayPoints.shift()!);
+  //   futureWayPoints.forEach(({ delayMS, ...futurePxPosition }) => {
+  //     setTimeout(() => setPxPosition(futurePxPosition), delayMS);
+  //   });
+  // }, [wayPoints]);
+  // if (!pxPosition) {
+  //   return null;
+  // }
+
+  const firstPoint = wayPoints[0];
+  if (!firstPoint) {
     return null;
   }
-  const { xPx, yPx, duration } = pxPosition;
+  const { xPx, yPx, duration } = firstPoint;
   return (
-    <PositionContainer ref={ref} $xPx={xPx} $yPx={yPx} $duration={duration}>
+    <PositionContainer $xPx={xPx} $yPx={yPx} $duration={duration}>
       {children}
     </PositionContainer>
   );
-});
+}
 
 export default Positioner;

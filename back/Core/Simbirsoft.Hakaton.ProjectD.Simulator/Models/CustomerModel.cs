@@ -23,7 +23,7 @@ public class CustomerModel
     private readonly Random _rand;
 
     private readonly SimulationConfiguration _config;
-
+    
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {
         _model = simulation;

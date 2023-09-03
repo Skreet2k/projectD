@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { LinearProgress } from '@mui/material';
+// import { LinearProgress } from '@mui/material';
 import { TFeatureProps } from './Feature.types';
 import { GameLayoutContext } from '../../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 
@@ -27,7 +27,7 @@ export default function Feature({ name, progress }: TFeatureProps) {
 
   return (
     <FeatureWrapper $width={size - 5}>
-      <LinearProgress variant="determinate" value={progress} color="error" />
+      {/* <LinearProgress variant="determinate" value={progress} color="error" /> */}
       <FeatureBody>
         {name}
       </FeatureBody>

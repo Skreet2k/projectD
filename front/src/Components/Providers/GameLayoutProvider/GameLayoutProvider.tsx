@@ -31,8 +31,8 @@ function GameLayoutProvider({
     finishY: 3,
   });
 
-  const fieldParams = useFieldParams(data);
   const socket = useSocketData();
+  const fieldParams = useFieldParams(data, socket.path);
   const gameLayoutProviderValue = useMemo(() => ({
     sizes: fieldParams.sizes,
     fieldParams,

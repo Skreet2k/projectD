@@ -15,7 +15,7 @@ public interface ISimulationSessionService
     /// <summary>
     /// Старт сессии.
     /// </summary>
-    Task StartSessionAsync(string userId);
+    Task StartSessionAsync(string userId, string userName);
 
     /// <summary>
     /// Добавление воркеров.

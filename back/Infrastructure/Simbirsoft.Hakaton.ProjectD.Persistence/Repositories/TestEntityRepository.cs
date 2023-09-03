@@ -31,14 +31,14 @@ public class TestEntityRepository : IGenericRepository<TestEntity>
     }
 
     /// <inheritdoc />
-    public async Task<TestEntity> UpdateAsync(TestEntity portalSetting)
+    public async Task<TestEntity> UpdateAsync(TestEntity entity)
     {
         var update = Builders<TestEntity>.Update
             .Set(e => e.UpdatedAt, DateTimeOffset.Now);
 
-        await _collection.UpdateOneAsync(e => e.Id == portalSetting.Id, update);
+        await _collection.UpdateOneAsync(e => e.Id == entity.Id, update);
 
-        return portalSetting;
+        return entity;
     }
 
     /// <inheritdoc />

@@ -29,9 +29,9 @@ public class SimulationModel
 
     public int CurrentHealthPoints { get; set; }
 
-    public int FeaturesCompleted { get; set; } = 0;
+    public int FeaturesCompleted { get; set; }
 
-    public int Score { get; set; } = 0;
+    public int Score { get; set; }
 
     public int CurrentWave { get; set; }
 
@@ -119,7 +119,7 @@ public class SimulationModel
         }
 
         FeaturesCompleted++;
-        Score += CalculateScore(1);
+        Score += CalculateScore();
 
         Money += feature.Reward;
         TotalMoney += feature.Reward;

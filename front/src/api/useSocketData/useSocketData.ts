@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { TSocket, TSocketData } from './useSocketData.types';
+import { TPosition, TSocket, TSocketData } from './useSocketData.types';
+import { Position } from '../../Components/Pages/GameLayout/PlayingField/PayingField.types';
 
 export default function useSocketData(): TSocket {
   const [socketData, setSocketData] = useState<TSocketData | null>(null);
@@ -8,16 +9,21 @@ export default function useSocketData(): TSocket {
   const uniqSocketRef = useRef(0);
   const prevToken = useRef(token);
   const [connection, setConnection] = useState<HubConnection | null>(null);
+  const [path, setPath] = useState<Position[]>([]);
   const isSessionCreated = useRef(false);
   const isSessionStarted = useRef(false);
 
   const createSession = async () => {
     if (!connection || isSessionCreated.current) {
       // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({ connection, isSessionCreated });
+      const errorInfo = { connection, isSessionCreated };
+      // eslint-disable-next-line no-console
+      console.error('can\'t create session', errorInfo);
+      return Promise.resolve();
     }
     return connection.invoke('CreateSession')
-      .then(() => {
+      .then(({ Path }:{ Path:TPosition[] }) => {
+        setPath(Path.map(({ X, Y }) => ({ x: X, y: Y })));
         isSessionCreated.current = true;
       });
   };
@@ -25,14 +31,16 @@ export default function useSocketData(): TSocket {
   const startSession = async () => {
     if (!connection || !isSessionCreated.current || isSessionStarted.current) {
       // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({ connection, isSessionCreated, isSessionStarted });
+      const errorInfo = { connection, isSessionCreated, isSessionStarted };
+      // eslint-disable-next-line no-console
+      console.error('can\'t start session', errorInfo);
+      return Promise.resolve();
     }
     // the returning promise is ever pending
     connection.invoke('StartSession');
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        // console.info('session started');
         isSessionStarted.current = true;
         resolve(true);
       }, 200);
@@ -67,6 +75,7 @@ export default function useSocketData(): TSocket {
 
     hubConnection.on('UpdateClient', (data: TSocketData) => {
       setSocketData(data);
+      // console.log(data);
     });
 
     hubConnection.start()
@@ -75,6 +84,7 @@ export default function useSocketData(): TSocket {
       });
   }, [token]);
   return {
+    path,
     socketData,
     createSession,
     startSession,
