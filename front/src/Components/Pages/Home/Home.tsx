@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { playingFieldTheme } from '../../../theme';
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        background: '#ffab40',
+        background: playingFieldTheme.playingAreaBackground,
       }}
     >
       <Link to="/game">
