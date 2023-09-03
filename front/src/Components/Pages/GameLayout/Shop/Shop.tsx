@@ -5,15 +5,17 @@ import ShopItem from './ShopItem/ShopItem';
 import { useGetTowersQuery } from '../../../../services/towers/towers';
 
 export const ShopContentWrapper = styled.div`
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
   margin: 15px;
   justify-content: center;
   height: fit-content;
+  overflow-y: scroll;
+  height: calc(100vh - 100px);
 `;
 
 const ShopContentBackground = styled.div<{ $width: number }>`

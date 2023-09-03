@@ -27,7 +27,10 @@ export default function Profile() {
         open={openDrawer}
         onClose={() => toggleDrawer(false)}
       >
-        <Box onClick={() => toggleDrawer(false)}>
+        <Box
+          sx={{ background: '#ffab40', height: '100%' }}
+          onClick={() => toggleDrawer(false)}
+        >
           <List>
             <ListItem>
               <Avatar sx={{ textTransform: 'uppercase' }}>
