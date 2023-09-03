@@ -25,6 +25,8 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
+        - name: MongoDbConfig__ConnectionString
+          value: mongodb://root:A4hPcRbtE8@mongodb:27017/
 ---
 apiVersion: apps/v1
 kind: Deployment
