@@ -55,7 +55,7 @@ public class SimulationSessionService : ISimulationSessionService
             Coordinate = new CoordinateDto { X = 0, Y = 0 },
             Cost = 1,
             Range = 100,
-            DamagePerTick = 10,
+            DamagePerTick = 1,
             HealthPoints = 1000
         });
 
