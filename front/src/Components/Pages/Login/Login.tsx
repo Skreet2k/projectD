@@ -49,6 +49,7 @@ export function Login() {
             display: 'flex',
             flexDirection: 'column',
             gap: '16px',
+            opacity: '0.95',
           }}
         >
           <Typography component="h1">Войти</Typography>
