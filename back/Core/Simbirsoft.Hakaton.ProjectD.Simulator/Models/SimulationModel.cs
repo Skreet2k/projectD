@@ -15,7 +15,15 @@ public class SimulationModel
 
     public List<FeatureModel> Features { get; set; }
 
+    /// <summary>
+    /// Количество денег на текущий момент.
+    /// </summary>
     public int Money { get; set; }
+
+    /// <summary>
+    /// Заработанные деньги.
+    /// </summary>
+    public int TotalMoney { get; set; } = 0;
 
     public int MaximumHealthPoints { get; set; }
 
@@ -42,6 +50,9 @@ public class SimulationModel
         Money -= worker.Cost;
         Workers.Add(worker);
         MaximumHealthPoints += worker.HealthPoints;
+        CurrentHealthPoints += worker.HealthPoints;
+        
+        CheckHealthPoints();
     }
 
     public void RemoveWorker(WorkerModel worker)
@@ -109,6 +120,7 @@ public class SimulationModel
         Score += CalculateScore();
 
         Money += feature.Reward;
+        TotalMoney += feature.Reward;
 
         RemoveFeature(featureId);
     }

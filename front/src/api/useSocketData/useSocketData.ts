@@ -32,7 +32,7 @@ export default function useSocketData(): TSocket {
 
     return new Promise((resolve) => {
       setTimeout(() => {
-        console.info('session started');
+        // console.info('session started');
         isSessionStarted.current = true;
         resolve(true);
       }, 200);

@@ -100,7 +100,7 @@ public class CustomerModel
     /// </summary>
     private void AddGenericFeature()
     {
-        // Случайно определяем количество ХП 80-130.
+        // Случайно определяем количество ХП.
         var hp = _rand.Next(21);
         var feature = new FeatureModel
         {
@@ -109,6 +109,7 @@ public class CustomerModel
             Name = NameHelper.GenerateFeatureName(),
             MaxHealthPoints = 10 + hp,
             CurrentHealthPoints = 10 + hp,
+            Reward = 10,
             ProgressPerTick = 50
         };
 

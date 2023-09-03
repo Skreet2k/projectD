@@ -19,6 +19,11 @@ public class SimulationStateDto
     /// Количество денег.
     /// </summary>
     public int Money { get; set; }
+    
+    /// <summary>
+    /// Количество заработанных денег.
+    /// </summary>
+    public int TotalMoney { get; set; }
 
     /// <summary>
     /// Максимальное здоровье.
