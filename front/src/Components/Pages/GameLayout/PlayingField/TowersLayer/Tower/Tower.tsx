@@ -23,15 +23,15 @@ const TowerContainer = styled.div<{ $size: number, $top:number, $left: number, $
   animation : ${(props) => spriteAnimation(props.$size * 3)} 1s steps(3) infinite;
 `;
 
-// type TowerProps = {
-//   type: TowerType,
-//   level: DeveloperLevel,
-// };
-function Tower() {
+type TowerProps = {
+  type: TowerType,
+  level: DeveloperLevel,
+};
+function Tower({ type, level }:TowerProps) {
   const { sizes } = useContext(GameLayoutContext);
   const size = sizes?.sizeOfFieldCell;
 
-  const background = towers[TowerType.frontend][DeveloperLevel.junior];
+  const background = towers[type][level];
 
   return size ? (
     <TowerContainer $size={size} $top={0} $left={0} $background={background} />

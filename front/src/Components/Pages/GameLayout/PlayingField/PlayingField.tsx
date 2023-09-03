@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Cell from './Cell/Cell';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Features from './Features/Features';
-import TowersLayer from './TowersLayer/TowersLayer';
-import { DeveloperLevel, ITower, TowerType } from './TowersLayer/TowerLayer.types';
 
 const FieldWrapper = styled.div`
   position: relative;
@@ -22,7 +20,9 @@ const Row = styled.div`
 
 function PlayingField() {
   const { fieldParams } = useContext(GameLayoutContext);
-  const towers: ITower[] = [{ type: TowerType.frontend, level: DeveloperLevel.junior }];
+
+  // const { data } = useGetTowersQuery();
+  // const content = data?.content;
 
   return (
     <FieldWrapper>
@@ -40,7 +40,7 @@ function PlayingField() {
         ))}
         <Features />
       </Field>
-      <TowersLayer towers={towers} />
+      {/* <TowersLayer towers={towers} /> */}
     </FieldWrapper>
   );
 }
