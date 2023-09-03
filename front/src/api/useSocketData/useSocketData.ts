@@ -81,6 +81,7 @@ export default function useSocketData(): TSocket {
 
     hubConnection.on('UpdateClient', (data: TSocketData) => {
       setSocketData(data);
+      // console.log(data);
     });
 
     hubConnection.start()

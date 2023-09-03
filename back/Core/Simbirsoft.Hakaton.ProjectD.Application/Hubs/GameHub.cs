@@ -38,27 +38,7 @@ public class GameHub : Hub<IReceiveGameClient>
     /// </summary>
     public async Task StartSession()
     {
-        await _simulationSessionService.StartSessionAsync(Context.UserIdentifier, Context.User.Identity?.Name);
-    }
-
-    /// <summary>
-    /// Добавить работника.
-    /// </summary>
-    public Task AddWorker(string workerId, CoordinateDto coordinate)
-    {
-        _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
-
-        return Task.CompletedTask;
-    }
-
-    /// <summary>
-    /// Удаляем работника.
-    /// </summary>
-    public Task RemoveWorker(string workerId, CoordinateDto coordinate)
-    {
-        _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
-
-        return Task.CompletedTask;
+        _simulationSessionService.StartSessionAsync(Context.UserIdentifier, Context.User.Identity?.Name);
     }
 
     /// <inheritdoc />

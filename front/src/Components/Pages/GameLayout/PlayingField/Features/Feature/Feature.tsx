@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { LinearProgress } from '@mui/material';
+// import { LinearProgress } from '@mui/material';
 import { TFeatureProps } from './Feature.types';
 import { GameLayoutContext } from '../../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 
@@ -21,7 +21,7 @@ const FeatureBody = styled.div`
   font-size: 11px;
   word-wrap: break-word;
 `;
-export default function Feature({ name, progress }: TFeatureProps) {
+export default function Feature({ name /* , progress */ }: TFeatureProps) {
   const { sizes } = useContext(GameLayoutContext);
   const size = sizes?.sizeOfFieldCell || 70;
 

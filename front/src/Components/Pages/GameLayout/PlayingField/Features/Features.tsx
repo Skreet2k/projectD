@@ -1,11 +1,8 @@
-import React, {
-  useContext, useEffect, useRef, useState,
-} from 'react';
+import React, { useContext } from 'react';
 import Positioner from '../Positioner/Positioner';
 import { CoordinatePx, FieldObject, Position } from '../PayingField.types';
 import Feature from './Feature/Feature';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
-import { TFeatureData } from './Features.types';
 import { TPosition } from '../../../../../api/useSocketData/useSocketData.types';
 import { TWayPoint } from '../Positioner/Positioner.types';
 import { TFeatureProps } from './Feature/Feature.types';
@@ -19,54 +16,33 @@ const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx 
   return { xPx, yPx };
 };
 
-const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HTMLDivElement | null>, fieldObject:FieldObject): TWayPoint[] => {
-  // TODO make this smooth
-  const featureElement = featureElements[feature.id];
-  if (!featureElement) {
-    return [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
-  }
-  return [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
-};
-
+const getWayPoints = (feature: TFeatureProps, fieldObject:FieldObject): TWayPoint[] => [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
 export default function Features() {
   const { fieldParams, socket } = useContext(GameLayoutContext);
   const socketData = socket?.socketData;
   const initialObject = fieldParams?.initialObject;
   const path = fieldParams?.path;
-  const prevFeaturesData = useRef<TFeatureData[]>([]);
-  const [featuresData, setFeaturesData] = useState<TFeatureData[]>([]);
-  const featureElements = useRef<Record<string, HTMLDivElement | null>>({});
-  useEffect(() => {
-    if (!initialObject || !socketData || !path) {
-      return;
-    }
-    const newFeaturesData = socketData.Features.map((fFromBack) => {
-      const feature: TFeatureProps = {
-        id: fFromBack.Id,
-        speed: fFromBack.ProgressPerTick,
-        progress: fFromBack.ProgressPercents,
-        currentCell: toPosition(fFromBack.CurrentCoordinate),
-        nextCell: toPosition(fFromBack.NextCoordinate || fFromBack.CurrentCoordinate),
-        name: fFromBack.Name,
-      };
-      const wayPoints = getWayPoints(feature, featureElements.current, initialObject);
-      return { feature, wayPoints };
-    });
-
-    setFeaturesData(newFeaturesData);
-    prevFeaturesData.current = newFeaturesData;
-  }, [socketData]);
-  if (!initialObject || !socketData) {
+  if (!initialObject || !socketData || !path) {
     return null;
   }
+  const featuresData = socketData.Features.map((fFromBack) => {
+    const feature: TFeatureProps = {
+      id: fFromBack.Id,
+      speed: fFromBack.ProgressPerTick,
+      progress: fFromBack.ProgressPercents,
+      currentCell: toPosition(fFromBack.CurrentCoordinate),
+      nextCell: toPosition(fFromBack.NextCoordinate || fFromBack.CurrentCoordinate),
+      name: fFromBack.Name,
+    };
+    const wayPoints = getWayPoints(feature, initialObject);
+    return { feature, wayPoints };
+  });
+  // featuresData.push({ feature: { currentCell: { x: 1, y: 1 }, name: 'test', id: 'tid' }, wayPoints: [{ xPx: 450, yPx: 450, duration: 500 }] });
   return (
     <>
       {featuresData.map(({ feature, wayPoints }) => (
         <Positioner
           key={feature.id}
-          ref={(e) => {
-            featureElements.current[feature.id] = e;
-          }}
           wayPoints={wayPoints}
         >
           <Feature {...feature} />
