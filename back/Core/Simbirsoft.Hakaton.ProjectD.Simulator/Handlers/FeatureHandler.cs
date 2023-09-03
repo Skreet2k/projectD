@@ -3,10 +3,12 @@ using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class FeatureHandler : Handler
 {
     private const int MaxPercent = 100;
 
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var feature in request.Features.ToList())
@@ -19,9 +21,12 @@ public class FeatureHandler : Handler
             }
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 
+    /// <summary>
+    /// Обработать фитчу.
+    /// </summary>
     private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path, SimulationModel request)
     {
         // Заполняем следующую координату
@@ -52,6 +57,9 @@ public class FeatureHandler : Handler
         }
     }
 
+    /// <summary>
+    /// Получить следующую координату для фитчи.
+    /// </summary>
     private CoordinateDto GetNextCoordinate(CoordinateDto currentCoordinate, List<CoordinateDto> path)
     {
         for (var index = 0; index < path.Count; index++)
@@ -78,8 +86,6 @@ public class FeatureHandler : Handler
     /// <summary>
     /// Заканчиваем путь фичи.
     /// </summary>
-    /// <param name="feature"></param>
-    /// <param name="simulation"></param>
     private void FinishPath(FeatureModel feature, SimulationModel simulation)
     {
         simulation.ReceiveDamage(feature.CurrentHealthPoints);

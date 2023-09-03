@@ -1,6 +1,6 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Models;
+﻿using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Models;
 
-namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Generators;
+namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map.Generators;
 
 internal static class EllerGenerator
 {

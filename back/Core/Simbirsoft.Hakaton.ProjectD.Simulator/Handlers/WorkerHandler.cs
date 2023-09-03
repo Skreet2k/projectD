@@ -2,8 +2,10 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class WorkerHandler : Handler
 {
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var worker in request.Workers)
@@ -11,6 +13,6 @@ public class WorkerHandler : Handler
             worker.Do(request.Features);
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 }

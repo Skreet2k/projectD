@@ -2,8 +2,10 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class FeatureDeadHandler : Handler
 {
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var feature in request.Features.ToList())
@@ -20,6 +22,6 @@ public class FeatureDeadHandler : Handler
             request.Money += feature.Reward;
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 }

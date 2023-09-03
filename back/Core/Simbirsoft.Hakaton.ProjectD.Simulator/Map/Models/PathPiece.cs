@@ -1,4 +1,4 @@
-﻿namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Models;
+﻿namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map.Models;
 
 internal class PathPiece
 {
