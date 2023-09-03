@@ -2,7 +2,7 @@ export enum TowerType {
   frontend = 2,
   backend = 1,
   qa = 6,
-  // teamlead = 3, // TODO
+  teamlead = 3,
   analyst = 4,
   pm = 5,
   // dba = 7, // TODO

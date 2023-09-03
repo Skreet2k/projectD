@@ -16,6 +16,7 @@ import analystSenior from './analyst/analyt-senior.svg';
 import pmJunior from './pm/pm-junior.svg';
 import pmMiddle from './pm/pm-middle.svg';
 import pmSenior from './pm/pm-senior.svg';
+import teamlead from './teamlead.svg';
 
 import { DeveloperLevel, TowerType } from '../../Components/Pages/GameLayout/PlayingField/TowersLayer/TowerLayer.types';
 
@@ -49,5 +50,10 @@ export const towers = {
     [DeveloperLevel.junior]: pmJunior,
     [DeveloperLevel.middle]: pmMiddle,
     [DeveloperLevel.senior]: pmSenior,
+  },
+  [TowerType.teamlead]: {
+    [DeveloperLevel.junior]: teamlead,
+    [DeveloperLevel.middle]: teamlead,
+    [DeveloperLevel.senior]: teamlead,
   },
 };
