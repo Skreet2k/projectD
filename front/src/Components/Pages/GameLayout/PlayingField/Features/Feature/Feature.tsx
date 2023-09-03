@@ -27,7 +27,7 @@ export default function Feature({ name, progress }: TFeatureProps) {
 
   return (
     <FeatureWrapper $width={size - 5}>
-      <LinearProgress variant="determinate" value={progress} color="error" />
+      {/* <LinearProgress variant="determinate" value={progress} color="error" /> */}
       <FeatureBody>
         {name}
       </FeatureBody>

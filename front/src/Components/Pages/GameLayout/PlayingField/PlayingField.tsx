@@ -6,6 +6,8 @@ import Features from './Features/Features';
 
 const FieldWrapper = styled.div`
   position: relative;
+  border-style: solid;
+  border-width: 2px;
 `;
 
 const Field = styled.div`

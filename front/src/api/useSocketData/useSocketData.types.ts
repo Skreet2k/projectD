@@ -30,13 +30,18 @@ export type TSocketData = {
   Features: TFeature[]
 };
 
+export type WorkerPayload = {
+  workerId: string,
+  coordinate: TPosition
+};
+
 export type TSocket = {
   path: Position[]
   socketData: TSocketData | null
   createSession: () => Promise<any>
   startSession: () => Promise<any>
-  addWorker: () => Promise<any>
-  removeWorker: () => Promise<any>
+  addWorker: (args: WorkerPayload) => Promise<any>
+  removeWorker: (args: WorkerPayload) => Promise<any>
   connection: HubConnection | null
   isSessionCreated: boolean
   isSessionStarted: boolean

@@ -17,7 +17,7 @@ export const ShopContentWrapper = styled.div`
   overflow-y: scroll;
   height: calc(100vh - 100px);
   &::-webkit-scrollbar-thumb {
-    background-color: #f4511e;
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 35px;
   }
   &::-webkit-scrollbar-track {
@@ -27,6 +27,7 @@ export const ShopContentWrapper = styled.div`
   &::-webkit-scrollbar {
     width: 1em;
   }
+  padding-top: 15px;
 `;
 
 const ShopContentBackground = styled.div<{ $width: number }>`
