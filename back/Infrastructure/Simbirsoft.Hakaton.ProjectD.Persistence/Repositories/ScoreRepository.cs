@@ -39,6 +39,7 @@ public class ScoreRepository : IGenericRepository<UserScoreRecordEntity>
         var update = Builders<UserScoreRecordEntity>.Update
             .Set(e => e.UpdatedAt, DateTimeOffset.Now)
             .Set(e => e.Score, entity.Score)
+            .Set(e => e.WavesCleared, entity.WavesCleared)
             .Set(e => e.TotalMoney, entity.TotalMoney);
 
         await _collection.UpdateOneAsync(e => e.Id == entity.Id, update);
