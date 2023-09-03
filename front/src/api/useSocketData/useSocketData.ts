@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { NullableSocketData, TSocketData } from './useSocketData.types';
 
-export default function useSocketData() {
-  const [socketData, setSocketData] = useState({});
+export default function useSocketData(): NullableSocketData {
+  const [socketData, setSocketData] = useState<NullableSocketData>(null);
   const token = localStorage.getItem('token') || '';
   const uniqSocketRef = useRef(0);
   const prevToken = useRef(token);
@@ -23,7 +24,7 @@ export default function useSocketData() {
       .withUrl('https://projectd.onebranch.dev/hubs/game', { accessTokenFactory: () => token })
       .build();
 
-    connection.on('UpdateClient', (data) => {
+    connection.on('UpdateClient', (data: TSocketData) => {
       setSocketData(data);
     });
 

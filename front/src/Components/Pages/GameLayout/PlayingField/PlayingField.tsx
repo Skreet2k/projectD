@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Cell from './Cell/Cell';
-import Positioner from './Positioner/Positioner';
-import { usePlayFeatureCoordinates } from '../../../../utils/gameLayout/usePlayFeatureCoordinates';
 import Tower from '../Tower/Tower';
 import { DeveloperLevel, TowerType } from '../../../../assets/towers';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import Features from './Features/Features';
 
 const FieldWrapper = styled.div`
   position: relative;
@@ -23,11 +22,6 @@ const Row = styled.div`
 
 function PlayingField() {
   const { fieldParams } = useContext(GameLayoutContext);
-  const mockedStyle = {
-    width: '70px', height: '70px', borderRadius: '50%', backgroundColor: 'gray', lineHeight: '70px',
-  };
-  const mockedFeature = (<div style={mockedStyle}>Make me!</div>);
-  const coordinate = usePlayFeatureCoordinates(fieldParams?.initialObject, fieldParams?.path);
 
   return (
     <FieldWrapper>
@@ -43,9 +37,7 @@ function PlayingField() {
             ))}
           </Row>
         ))}
-        <Positioner {...coordinate}>
-          {mockedFeature}
-        </Positioner>
+        <Features />
       </Field>
       <Tower type={TowerType.backend} level={DeveloperLevel.junior} />
     </FieldWrapper>
