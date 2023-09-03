@@ -1,11 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const token = localStorage.getItem('token');
 export const api: any = axios.create({
   baseURL: 'https://projectd.onebranch.dev/api/v1',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
   },
 });
 
