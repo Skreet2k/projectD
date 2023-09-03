@@ -15,7 +15,9 @@ function Cell({ cell, cellSize }: CellProps) {
 
   const onClick = () => {
     if (shopTowerSelected) {
-      addTower({ id: shopTowerSelected.id, coordinate: { X: cell.position.x, Y: cell.position.y } });
+      if (!cell?.isPath) {
+        addTower({ id: shopTowerSelected.id, coordinate: { X: cell.position.x, Y: cell.position.y } });
+      }
       dispatch(setSelectedShopTower({ id: '' }));
     }
   };
