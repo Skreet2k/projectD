@@ -49,6 +49,16 @@ public class GameConfiguration
     /// Стартовый капитал.
     /// </summary>
     public int StartMoney { get; set; }
+
+    /// <summary>
+    /// Коэффициент вертикальных стен генератора. Обратная зависимость.
+    /// </summary>
+    public int KVertical { get; set; }
+
+    /// <summary>
+    /// Коэффициент горизонтальных стен генератора. Обратная зависимость.
+    /// </summary>
+    public int KHorizontal { get; set; }
 }
 
 /// <summary>

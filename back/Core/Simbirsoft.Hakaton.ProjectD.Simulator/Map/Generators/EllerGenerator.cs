@@ -1,27 +1,33 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Models;
+﻿using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map.Generators;
 
-internal static class EllerGenerator
+internal class EllerGenerator
 {
-    private static readonly Random Rand;
-
-    static EllerGenerator()
+    private readonly Random Rand;
+    private readonly GameConfiguration GameConfiguration;
+    private readonly int _kVertical;
+    private readonly int _kHorizontal;
+    
+    public EllerGenerator(int kVertical, int kHorizontal)
     {
         Rand = new Random();
+        _kVertical = kVertical;
+        _kHorizontal = kHorizontal;
     }
 
-    private static bool ShouldAddVWall()
+    private bool ShouldAddVWall()
     {
-        return Rand.Next(10) > 4;
+        return Rand.Next(10) > _kVertical;
     }
 
-    private static bool ShouldAddHWall()
+    private bool ShouldAddHWall()
     {
-        return Rand.Next(10) > 4;
+        return Rand.Next(10) > _kHorizontal;
     }
 
-    public static async Task<Maze> GenerateMaze(byte x, byte y)
+    public async Task<Maze> GenerateMaze(byte x, byte y)
     {
         var cells = new Cell[x * y];
         var nums = new byte [x * y];
@@ -123,7 +129,7 @@ internal static class EllerGenerator
         return maze;
     }
 
-    private static bool LowSpacesLeft(Cell[] cells, byte[] nums, byte score, int lineOffset, byte x)
+    private bool LowSpacesLeft(Cell[] cells, byte[] nums, byte score, int lineOffset, byte x)
     {
         byte occur = 0;
         byte borders = 0;
