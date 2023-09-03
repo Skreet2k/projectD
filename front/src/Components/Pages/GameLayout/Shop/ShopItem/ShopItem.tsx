@@ -52,8 +52,13 @@ function ShopItem({ tower }: ShopItemProps) {
 
   return (
     <Tooltip
+      placement="left"
       title={(
         <div>
+          <div>
+            Уровень
+            {level}
+          </div>
           <div>
             Цена:
             {cost}
