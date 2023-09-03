@@ -58,7 +58,7 @@ public class SimulationSessionService : ISimulationSessionService
         // TODO: тестовая башня.
         mapModel.AddWorker(new WorkerModel
         {
-            Id = "1",
+            Id = "64f398d3d85d555bcf3e78dc",
             Coordinate = new CoordinateDto { X = 0, Y = 0 },
             Cost = 1,
             Range = 100,
