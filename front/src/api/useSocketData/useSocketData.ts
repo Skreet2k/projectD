@@ -88,7 +88,7 @@ export default function useSocketData(): TSocket {
     hubConnection.on('EndGame', (gameData: any) => {
       // console.log(gameData);
       setIsGameEnded(true);
-      endedGameData.current = gameData;
+      endedGameData.current = Object.keys(endedGameData.current).length ? endedGameData.current : gameData;
     });
 
     hubConnection.start()
