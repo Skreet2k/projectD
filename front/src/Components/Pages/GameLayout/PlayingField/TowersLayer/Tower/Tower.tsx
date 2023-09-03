@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { keyframes } from '@mui/material';
-import { zIndex } from '../../../../constants';
-import { DeveloperLevel, towers, TowerType } from '../../../../assets/towers';
-import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { zIndex } from '../../../../../../constants';
+import { towers } from '../../../../../../assets/towers';
+import { GameLayoutContext } from '../../../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { DeveloperLevel, TowerType } from '../TowerLayer.types';
 
 const spriteAnimation = (x: number) => keyframes`
   from{background-position-x:0;}
@@ -30,7 +31,7 @@ function Tower({ type, level }: TowerProps) {
   const { sizes } = useContext(GameLayoutContext);
   const size = sizes?.sizeOfFieldCell;
 
-  const background = towers[type][level];
+  const background = towers[TowerType.frontend][DeveloperLevel.junior];
 
   return size ? (
     <TowerContainer $size={size} $top={0} $left={0} $background={background} />

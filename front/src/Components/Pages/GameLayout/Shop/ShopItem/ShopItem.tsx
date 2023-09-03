@@ -1,47 +1,88 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import {
-  Box, Card, CardActionArea, CardContent, CardMedia, keyframes, Paper, Typography,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  keyframes,
+  Typography,
 } from '@mui/material';
-import { DeveloperLevel, towers, TowerType } from '../../../../../assets/towers';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  towers,
+} from '../../../../../assets/towers';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { RootState } from '../../../../../store/store';
+import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
+import { DeveloperLevel, TowerType } from '../../PlayingField/TowersLayer/TowerLayer.types';
+import { Tower } from '../../../../../services/towers/towers';
 
 const spriteAnimation = (x: number) => keyframes`
   from{background-position-x:0;}
   to{background-position-x: -${x}px;}
 `;
 
-const ShopItemContainer = styled.div<{ $size: number, $background: string }>`
+const ShopItemContainer = styled.div<{
+  $size: number;
+  $background: string;
+}>`
   width: ${(props) => `${props.$size}px`};
   height: ${(props) => `${props.$size}px`};
   background-image: ${(props) => `url(${props.$background})`};
   background-size: cover;
-  animation : ${(props) => spriteAnimation(props.$size * 3)} 1s steps(3) infinite;
+  animation: ${(props) => spriteAnimation(props.$size * 3)}
+    1s steps(3) infinite;
 `;
 
 type ShopItemProps = {
-  type: TowerType,
-  level: DeveloperLevel,
+  tower: Tower;
 };
-function ShopItem({ type, level }: ShopItemProps) {
+function ShopItem({ tower }: ShopItemProps) {
+  const dispatch = useDispatch();
   const { sizes } = useContext(GameLayoutContext);
+
+  const {
+    level, type, name, id,
+  } = tower;
+
   const size = sizes?.sizeOfFieldCell;
+
+  const shopTowerSelected = useSelector(
+    (state: RootState) => state.gameLayout.shopTowerSelected,
+  );
 
   const background = towers[type][level];
 
   return (
-    <Card sx={{ maxWidth: size ? size + 15 : 100 }}>
-      <CardActionArea>
-        <CardMedia>
-          {size && <ShopItemContainer $size={size} $background={background} />}
+    <Card
+      sx={{ maxWidth: size ? size + 15 : 100, height: 'fit-content' }}
+    >
+      <CardActionArea
+        onClick={() => {
+          dispatch(setSelectedShopTower({ id }));
+        }}
+      >
+        <CardMedia sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '10px',
+        }}
+        >
+          {size && (
+            <ShopItemContainer
+              $size={size}
+              $background={background}
+            />
+          )}
         </CardMedia>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          <Typography
+            gutterBottom
+            variant="subtitle2"
+            component="div"
+          >
+            {name}
           </Typography>
         </CardContent>
       </CardActionArea>
