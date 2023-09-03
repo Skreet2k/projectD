@@ -81,6 +81,7 @@ public class WorkerModel
             CurrentTarget = null;
         }
 
+        // TODO: возможно ситуация, когда из-за удаления фичи изменится состояние коллекции, лучше .ToList().
         // Сортируем фичи по ХП, т.к. в приоритете будут фичи с минимальным ХП.
         var orderedFeatures = features.OrderBy(t => t.CurrentHealthPoints);
 
