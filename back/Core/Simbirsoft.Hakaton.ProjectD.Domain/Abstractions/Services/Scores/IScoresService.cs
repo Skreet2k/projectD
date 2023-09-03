@@ -11,19 +11,20 @@ public interface IScoresService
     /// <summary>
     /// Получить статистику пользователя по уровням.
     /// </summary>
-    /// <returns></returns>
     Task<ResultList<ScoreRecordDto>> GetUserScores(string userId);
 
     /// <summary>
     /// Получить общую статистику по уровню.
     /// </summary>
-    /// <param name="levelId"></param>
-    /// <returns></returns>
-    Task<ResultList<UserScoreRecordDto>> GetLevelScores(string levelId, string userId = "");
+    Task<ResultList<UserScoreRecordDto>> GetLevelScores(string levelId, string userId = null);
 
     /// <summary>
     /// Получить общие рекорды.
     /// </summary>
-    /// <returns></returns>
-    Task<ResultList<UserScoreRecordDto>> GetRecordScores(string userId = "");
+    Task<ResultList<UserScoreRecordDto>> GetRecordScores(string userId = null);
+
+    /// <summary>
+    /// Добавить или обновить рекорд юзера, если он круче
+    /// </summary>
+    Task AddOrUpdateRecordScoreAsync(string userId, string levelId, int score, int totalMoney);
 }
