@@ -19,26 +19,18 @@ public class ScoresController : ControllerBase
     {
         _scoresService = scoresService;
     }
-
+    
     [HttpGet("user")]
-    public async Task<ResultList<ScoreRecordDto>> GetScores()
+    public async Task<Result<UserScoreRecordDto>> GetScores()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         return await _scoresService.GetUserScores(userId);
     }
 
-    [HttpGet("level")]
-    public async Task<ResultList<UserScoreRecordDto>> GetLevelScores([FromQuery] string levelId)
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        return await _scoresService.GetLevelScores(levelId, userId);
-    }
-
-    [HttpGet("record")]
+    [HttpGet("global")]
     public ResultList<UserScoreRecordDto> GetRecordScores()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        return _scoresService.GetRecordScores(userId);
+        return _scoresService.GetRecordScores();
     }
 }

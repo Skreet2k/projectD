@@ -19,4 +19,9 @@ public class UserScoreRecordDto
     /// Заработанные деньги.
     /// </summary>
     public int TotalMoney { get; set; }
+    
+    /// <summary>
+    /// Закрыто волн.
+    /// </summary>
+    public  int WavesCleared { get; set; }
 }
