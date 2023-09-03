@@ -5,6 +5,8 @@ import {
 } from '../../Pages/GameLayout/PlayingField/PayingField.types';
 import { useGetMapQuery } from '../../../services/map/map';
 import { useFieldParams } from '../../Pages/GameLayout/PlayingField/useFieldParams';
+import { TSocket } from '../../../api/useSocketData/useSocketData.types';
+import useSocketData from '../../../api';
 
 type GameLayoutProviderProps = {
   children: React.ReactNode;
@@ -13,6 +15,7 @@ type GameLayoutProviderProps = {
 type GameLayoutContextProps = {
   sizes?: Sizes;
   fieldParams?: InitialField;
+  socket?: TSocket;
 };
 export const GameLayoutContext = createContext<GameLayoutContextProps>({});
 
@@ -29,10 +32,12 @@ function GameLayoutProvider({
   });
 
   const fieldParams = useFieldParams(data);
-  const gameLayoutProviderValue = useMemo(
-    () => ({ sizes: fieldParams.sizes, fieldParams }),
-    [fieldParams.sizes],
-  );
+  const socket = useSocketData();
+  const gameLayoutProviderValue = useMemo(() => ({
+    sizes: fieldParams.sizes,
+    fieldParams,
+    socket,
+  }), [fieldParams.sizes, socket]);
 
   return (
     <GameLayoutContext.Provider
