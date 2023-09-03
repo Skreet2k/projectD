@@ -5,7 +5,7 @@ import { CellDiv } from './Cell.styles';
 import { RootState } from '../../../../../store/store';
 
 function Cell({ cell, cellSize }: CellProps) {
-  const { position/* cellCenter */ } = cell;
+  // const { position/* cellCenter */ } = cell;
   const shopTowerSelected = useSelector(
     (state: RootState) => state.gameLayout.shopTowerSelected,
   );
@@ -24,9 +24,7 @@ function Cell({ cell, cellSize }: CellProps) {
       // id={`${position.x}${position.y}`} /* don't set symbols between x and y */
       onClick={onClick}
       role="button"
-    >
-      {`${position.x}${position.y}`}
-    </CellDiv>
+    />
   );
 }
 export default Cell;

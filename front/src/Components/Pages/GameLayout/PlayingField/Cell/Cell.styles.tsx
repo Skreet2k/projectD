@@ -8,9 +8,9 @@ export const CellDiv = styled.div<{ $size: number, $cellInfo: Cell }>`
   height: ${(props) => `${props.$size}px`};
   background-color: ${(props) => getColor(props.$cellInfo)};
   color: ${(props) => getColor(props.$cellInfo)};
-  
-  &:hover {
-    box-shadow: 0 0 10px 10px #F57F17;
-    z-index: 1;
+
+ &:hover {
+   box-shadow: ${(props) => !props.$cellInfo?.isPath && '0 0 10px 10px rgba(211, 104, 9, 0.6)'}; 
+   z-index: ${(props) => !props.$cellInfo?.isPath && 1};
   }
 `;
