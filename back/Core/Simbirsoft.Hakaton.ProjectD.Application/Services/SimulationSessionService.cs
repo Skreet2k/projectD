@@ -41,8 +41,8 @@ public class SimulationSessionService : ISimulationSessionService
             Configuration = new SimulationConfiguration
             {
                 IsEndlessLevel = true,
-                TicksToSpawn = 5,
-                MillisecondsToTick = 1000
+                TicksToSpawn = 2,
+                MillisecondsToTick = 200
             },
             Money = 100
         };
@@ -55,7 +55,7 @@ public class SimulationSessionService : ISimulationSessionService
             Coordinate = new CoordinateDto { X = 0, Y = 0 },
             Cost = 1,
             Range = 100,
-            DamagePerTick = 20,
+            DamagePerTick = 5,
             HealthPoints = 1000
         });
 

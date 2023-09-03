@@ -33,6 +33,8 @@ public class SimulationModel
 
     public int Score { get; set; } = 0;
 
+    public int CurrentWave { get; set; }
+
     /// <summary>
     /// Команда выгорела?
     /// </summary>
@@ -51,7 +53,7 @@ public class SimulationModel
         Workers.Add(worker);
         MaximumHealthPoints += worker.HealthPoints;
         CurrentHealthPoints += worker.HealthPoints;
-        
+
         CheckHealthPoints();
     }
 
@@ -133,7 +135,7 @@ public class SimulationModel
     private int CalculateScore(int featuresCompleted = 1)
     {
         // Вычисление модификаторов.
-        double modifiersMultiplier = 1;
+        double modifiersMultiplier = 1 + CurrentWave * Configuration.WaveScoreModifier;
 
         var result = (int)Math.Round(featuresCompleted * modifiersMultiplier);
 
