@@ -6,7 +6,7 @@ import GameLayout from '../Components/Pages/GameLayout';
 import About from '../Components/Pages/About';
 import Login from '../Components/Pages/Login';
 import Registration from '../Components/Pages/Registration';
-import Home from '../Components/Pages/Home';
+// import Home from '../Components/Pages/Home';
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +18,12 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Root />,
         children: [
+          // {
+          //   path: '/',
+          //   element: <Home />,
+          // },
           {
             path: '/',
-            element: <Home />,
-          },
-          {
-            path: 'game',
             element: <GameLayout />,
           },
           {
