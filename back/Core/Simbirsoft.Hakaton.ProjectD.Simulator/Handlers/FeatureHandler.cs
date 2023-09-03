@@ -14,11 +14,6 @@ public class FeatureHandler : Handler
         foreach (var feature in request.Features.ToList())
         {
             HandleFeature(feature, request.Path, request);
-
-            if (feature.NextCoordinate is null)
-            {
-                request.Features.Remove(feature);
-            }
         }
 
         Successor?.HandleRequest(request);
