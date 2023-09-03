@@ -42,6 +42,9 @@ public class SimulationModel
         Money -= worker.Cost;
         Workers.Add(worker);
         MaximumHealthPoints += worker.HealthPoints;
+        CurrentHealthPoints += worker.HealthPoints;
+        
+        CheckHealthPoints();
     }
 
     public void RemoveWorker(WorkerModel worker)

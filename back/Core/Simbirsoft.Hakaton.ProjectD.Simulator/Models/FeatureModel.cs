@@ -23,14 +23,20 @@ public class FeatureModel
     /// Применить нанесённый урон.
     /// </summary>
     /// <param name="damage">Нанесённый урон.</param>
-    public void ReceiveDamage(int damage)
+    public bool ReceiveDamage(int damage)
     {
         // Вычитаем урон из текущего ХП.
         CurrentHealthPoints -= damage;
 
         // Если фича опустилась до 0 ХП, он выполняется.
         if (CurrentHealthPoints <= 0)
+        {
             OnComplete();
+            
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>

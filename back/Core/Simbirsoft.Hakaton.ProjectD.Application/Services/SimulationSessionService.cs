@@ -44,11 +44,20 @@ public class SimulationSessionService : ISimulationSessionService
                 TicksToSpawn = 5,
                 MillisecondsToTick = 1000
             },
-            Money = 100,
-            MaximumHealthPoints = 1000,
-            CurrentHealthPoints = 1000
+            Money = 100
         };
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
+        
+        // TODO: тестовая башня.
+        mapModel.AddWorker(new WorkerModel
+        {
+            Id = "1",
+            Coordinate = new CoordinateDto { X = 0, Y = 0 },
+            Cost = 1,
+            Range = 100,
+            DamagePerTick = 20,
+            HealthPoints = 1000
+        });
 
         mapModel.CancellationTokenSource = new CancellationTokenSource();
 
