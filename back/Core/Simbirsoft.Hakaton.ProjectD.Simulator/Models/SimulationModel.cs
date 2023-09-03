@@ -24,7 +24,7 @@ public class SimulationModel
     /// <summary>
     /// Команда выгорела?
     /// </summary>
-    public bool IsBurtnOut { get; set; }
+    public bool IsBurntOut { get; set; }
 
     [JsonIgnore] public CancellationTokenSource CancellationTokenSource { get; set; }
 
@@ -90,6 +90,6 @@ public class SimulationModel
     private void OnZeroHealthPoints()
     {
         // Команда выгорела.
-        IsBurtnOut = true;
+        IsBurntOut = true;
     }
 }

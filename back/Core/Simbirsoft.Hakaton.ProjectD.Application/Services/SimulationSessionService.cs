@@ -44,7 +44,9 @@ public class SimulationSessionService : ISimulationSessionService
                 TicksToSpawn = 5,
                 MillisecondsToTick = 1000
             },
-            Money = 100
+            Money = 100,
+            MaximumHealthPoints = 1000,
+            CurrentHealthPoints = 1000
         };
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
 

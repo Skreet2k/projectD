@@ -1,16 +1,11 @@
-import {
-  createSlice,
-  PayloadAction,
-} from '@reduxjs/toolkit';
-import {
-  loginWithPassword,
-  loginWithToken,
-} from '../actions/authAction';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { loginWithPassword, loginWithToken } from '../actions/authAction';
 
 const initialState = {
   isLogin: false,
   error: null,
   loading: false,
+  data: {},
 };
 
 export const authSlice = createSlice({
@@ -34,20 +29,21 @@ export const authSlice = createSlice({
         },
       );
     builder
-      .addCase(loginWithToken.fulfilled, (state) => {
-        state.isLogin = true;
-        state.loading = false;
-      })
+      .addCase(
+        loginWithToken.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.isLogin = true;
+          state.loading = false;
+          state.data = action.payload;
+        },
+      )
       .addCase(loginWithToken.pending, (state) => {
         state.loading = true;
       })
-      .addCase(
-        loginWithToken.rejected,
-        (state, action: PayloadAction<any>) => {
-          state.loading = false;
-          state.error = action.payload;
-        },
-      );
+      .addCase(loginWithToken.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
