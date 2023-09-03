@@ -1,6 +1,6 @@
 import React from 'react';
+import { Tower as ITower } from '../../../../../services/towers/towers';
 import Tower from './Tower/Tower';
-import { ITower } from './TowerLayer.types';
 
 type TowersLayerProps = {
   towers: ITower[];
