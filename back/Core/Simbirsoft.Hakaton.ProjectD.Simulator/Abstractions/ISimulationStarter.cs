@@ -10,5 +10,5 @@ public interface ISimulationStarter
     /// <summary>
     /// Начать симуляцию.
     /// </summary>
-    Task StartAsync(SimulationModel mapModel, string userId);
+    Task StartAsync(SimulationModel mapModel, string userId, string userName);
 }

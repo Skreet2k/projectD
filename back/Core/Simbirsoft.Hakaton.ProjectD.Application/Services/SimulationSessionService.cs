@@ -58,10 +58,10 @@ public class SimulationSessionService : ISimulationSessionService
     }
 
     /// <inheritdoc />
-    public async Task StartSessionAsync(string userId)
+    public async Task StartSessionAsync(string userId, string userName)
     {
         UserSessions.TryGetValue(userId, out var session);
-        await _simulationStarter.StartAsync(session, userId);
+        await _simulationStarter.StartAsync(session, userId, userName);
     }
 
     /// <inheritdoc />

@@ -95,33 +95,35 @@ public class ScoresService : IScoresService
     }
 
     /// <inheritdoc />
-    public async Task AddOrUpdateRecordScoreAsync(string userId, string userName, int score, int totalMoney)
+    public async Task<UserScoreRecordDto> AddOrUpdateRecordScoreAsync(UserScoreRecordDto userScoreDto)
     {
-        var record = _repository.Get().FirstOrDefault(x => x.UserId == userId);
+        var record = _repository.Get().FirstOrDefault(x => x.UserId == userScoreDto.UserId);
 
         if (record == null)
         {
             record = new UserScoreRecordEntity
             {
-                Score = score,
-                UserId = userId,
-                UserName = userName,
-                TotalMoney = totalMoney
+                Score = userScoreDto.Score,
+                UserId = userScoreDto.UserId,
+                UserName = userScoreDto.UserName,
+                TotalMoney = userScoreDto.TotalMoney
             };
 
             await _repository.AddAsync(record);
 
-            return;
+            return _mapper.Map<UserScoreRecordDto>(record);
         }
 
-        if (record.Score > score)
+        if (record.Score > userScoreDto.Score)
         {
-            return;
+            return _mapper.Map<UserScoreRecordDto>(record);
         }
 
-        record.Score = score;
-        record.TotalMoney = totalMoney;
+        record.Score = userScoreDto.Score;
+        record.TotalMoney = userScoreDto.TotalMoney;
 
         await _repository.UpdateAsync(record);
+
+        return _mapper.Map<UserScoreRecordDto>(record);
     }
 }

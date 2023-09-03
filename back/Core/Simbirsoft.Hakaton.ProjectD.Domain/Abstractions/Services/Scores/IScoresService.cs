@@ -26,5 +26,5 @@ public interface IScoresService
     /// <summary>
     /// Добавить или обновить рекорд юзера, если он круче
     /// </summary>
-    Task AddOrUpdateRecordScoreAsync(string userId, string levelId, int score, int totalMoney);
+    Task<UserScoreRecordDto> AddOrUpdateRecordScoreAsync(UserScoreRecordDto userScoreDto);
 }
