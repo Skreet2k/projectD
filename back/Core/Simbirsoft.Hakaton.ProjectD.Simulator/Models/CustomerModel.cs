@@ -17,12 +17,12 @@ public class CustomerModel
     /// </summary>
     private readonly List<FeatureModel> _featuresPool;
 
+    private readonly SimulationModel _model;
+
     /// <summary>
     /// ГСЧ.
     /// </summary>
     private readonly Random _rand;
-
-    private readonly SimulationModel _model;
 
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {

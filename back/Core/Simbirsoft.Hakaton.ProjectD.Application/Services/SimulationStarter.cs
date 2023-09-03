@@ -60,4 +60,11 @@ public class SimulationStarter : ISimulationStarter
 
         await _hubContext.Clients.User(userId).EndGame(userScore);
     }
+
+    public async Task PrepareAsync(SimulationModel mapModel, string userId)
+    {
+        var state = _mapper.Map<SimulationStateDto>(mapModel);
+
+        await _hubContext.Clients.User(userId).UpdateClient(state);
+    }
 }

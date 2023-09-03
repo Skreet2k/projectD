@@ -52,11 +52,14 @@ public class SimulationSessionService : ISimulationSessionService
             },
             Money = 100
         };
+
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
 
         mapModel.CancellationTokenSource = new CancellationTokenSource();
 
         UserSessions.AddOrUpdate(userId, mapModel, (_, _) => mapModel);
+
+        await _simulationStarter.PrepareAsync(mapModel, userId);
 
         return mapResult.Content;
     }
@@ -71,7 +74,7 @@ public class SimulationSessionService : ISimulationSessionService
     }
 
     /// <inheritdoc />
-    public void AddWorker(string userId, string workerId, CoordinateDto coordinate)
+    public async Task AddWorkerAsync(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -97,10 +100,12 @@ public class SimulationSessionService : ISimulationSessionService
         };
 
         session.AddWorker(workerModel);
+
+        await _simulationStarter.PrepareAsync(session, userId);
     }
 
     /// <inheritdoc />
-    public void RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
+    public async Task RemoveWorkerAsync(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -125,6 +130,8 @@ public class SimulationSessionService : ISimulationSessionService
                 Y = coordinate.Y
             }
         });
+
+        await _simulationStarter.PrepareAsync(session, userId);
     }
 
     /// <inheritdoc />

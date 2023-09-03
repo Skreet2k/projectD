@@ -20,12 +20,12 @@ public interface ISimulationSessionService
     /// <summary>
     /// Добавление воркеров.
     /// </summary>
-    void AddWorker(string userId, string workerId, CoordinateDto coordinate);
+    Task AddWorkerAsync(string userId, string workerId, CoordinateDto coordinate);
 
     /// <summary>
     /// Удаление воркеров.
     /// </summary>
-    void RemoveWorker(string userId, string workerId, CoordinateDto coordinate);
+    Task RemoveWorkerAsync(string userId, string workerId, CoordinateDto coordinate);
 
     /// <summary>
     /// Остановка сессии.

@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
@@ -32,21 +33,21 @@ public class WorkersController : ControllerBase
     /// Добавляем работника.
     /// </summary>
     [HttpPost]
-    public void AddWorker(WorkerUpsetDto worker)
+    public async Task AddWorker(WorkerUpsetDto worker)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        _simulationSessionService.AddWorker(userId, worker.Id, worker.Coordinate);
+        await _simulationSessionService.AddWorkerAsync(userId, worker.Id, worker.Coordinate);
     }
 
     /// <summary>
     /// Удаляем работника.
     /// </summary>
     [HttpDelete]
-    public void RemoveWorker(WorkerUpsetDto worker)
+    public async Task RemoveWorker(WorkerUpsetDto worker)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        _simulationSessionService.RemoveWorker(userId, worker.Id, worker.Coordinate);
+        await _simulationSessionService.RemoveWorkerAsync(userId, worker.Id, worker.Coordinate);
     }
 }
