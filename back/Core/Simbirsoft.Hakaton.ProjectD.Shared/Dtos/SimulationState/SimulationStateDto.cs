@@ -44,4 +44,9 @@ public class SimulationStateDto
     /// Счёт.
     /// </summary>
     public int Score { get; set; } = 0;
+    
+    /// <summary>
+    /// Волна.
+    /// </summary>
+    public int CurrentWave { get; set; }
 }

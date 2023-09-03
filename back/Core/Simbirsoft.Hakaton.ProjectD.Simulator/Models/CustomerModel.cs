@@ -5,6 +5,8 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class CustomerModel
 {
+    private SimulationModel _model;
+
     /// <summary>
     /// Живые фичи на уровне.
     /// </summary>
@@ -20,41 +22,49 @@ public class CustomerModel
     /// </summary>
     private readonly Random _rand;
 
-    private readonly SimulationModel _model;
-
+    private readonly SimulationConfiguration _config;
+    
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {
         _model = simulation;
         _features = simulation.Features;
         _featuresPool = levelFeatures;
         StartCoordinate = simulation.Path[0];
-        TicksToSpawn = simulation.Configuration.TicksToSpawn;
-        IsEndlessGame = simulation.Configuration.IsEndlessLevel;
-        if (IsEndlessGame)
+        _config = simulation.Configuration;
+        if (_config.IsEndlessLevel)
         {
             _rand = new Random();
         }
     }
 
-    /// <summary>
-    /// Количество тиков, через которое должна спавниться таска.
-    /// </summary>
-    private int TicksToSpawn { get; }
+    #region Свойства
 
     /// <summary>
     /// Счётчик прошедших тиков.
     /// </summary>
-    private int _currentTick { get; set; }
-
-    /// <summary>
-    /// Признак бесконечного уровня.
-    /// </summary>
-    private bool IsEndlessGame { get; }
+    private int CurrentTick { get; set; }
 
     /// <summary>
     /// Координата начала пути.
     /// </summary>
     private CoordinateDto StartCoordinate { get; }
+
+    #region Настройки волн
+
+    /// <summary>
+    /// Текущая волна.
+    /// </summary>
+    private int CurrentWave
+    {
+        get { return _model.CurrentWave; }
+        set { _model.CurrentWave = value; }
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Тут всё, что делает Заказчик каждый тик.
@@ -62,11 +72,11 @@ public class CustomerModel
     public void MakeLifeHarder()
     {
         // Каждый тик смотрим, прошло ли нужное количество тиков с прошлого спауна.
-        _currentTick++;
-        if (_currentTick == TicksToSpawn)
+        CurrentTick++;
+        if (CurrentTick == _config.TicksToSpawn)
         {
             // Если прошло, обнуляем счётчик тиков и спауним
-            _currentTick = 0;
+            CurrentTick = 0;
             SpawnFeature();
         }
     }
@@ -76,9 +86,10 @@ public class CustomerModel
     /// </summary>
     private void SpawnFeature()
     {
-        if (IsEndlessGame)
+        if (_config.IsEndlessLevel && _featuresPool.Count == 0)
         {
-            AddGenericFeature();
+            CurrentWave++;
+            GenerateWavePool();
         }
 
         // Берём фичу из начала пула и удаляем её из пула.
@@ -96,23 +107,32 @@ public class CustomerModel
     }
 
     /// <summary>
-    /// Режим бесконечного пула.
+    /// Генерация фичей для волны и размещение их в пулле.
     /// </summary>
-    private void AddGenericFeature()
+    private void GenerateWavePool()
     {
-        // Случайно определяем количество ХП.
-        var hp = _rand.Next(21);
-        var feature = new FeatureModel
-        {
-            Model = _model,
-            Id = Guid.NewGuid().ToString(),
-            Name = NameHelper.GenerateFeatureName(),
-            MaxHealthPoints = 10 + hp,
-            CurrentHealthPoints = 10 + hp,
-            Reward = 10,
-            ProgressPerTick = 50
-        };
+        int taskHealth = (int)Math.Round(20 * (1 + _config.WaveHealthModifier * CurrentWave));
 
-        _featuresPool.Add(feature);
+        int taskSpeed = (int)Math.Round(50 * (1 + _config.WaveSpeedModifier * CurrentWave));
+
+        int taskReward = (int)Math.Round(10 * (1 + _config.WaveRewardModifier * CurrentWave));
+
+        for (int i = 0; i < _config.WaveCapacity; i++)
+        {
+            var feature = new FeatureModel
+            {
+                Model = _model,
+                Id = Guid.NewGuid().ToString(),
+                Name = NameHelper.GenerateFeatureName(),
+                MaxHealthPoints = taskHealth,
+                CurrentHealthPoints = taskHealth,
+                ProgressPerTick = taskSpeed,
+                Reward = taskReward
+            };
+
+            _featuresPool.Add(feature);
+        }
     }
+
+    #endregion
 }

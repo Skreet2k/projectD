@@ -19,6 +19,7 @@ public class SimulationStateProfile : Profile
             .ForMember(d => d.Workers, opt => opt.MapFrom(s => s.Workers))
             .ForMember(d => d.MaximumHealthPoints, opt => opt.MapFrom(s => s.MaximumHealthPoints))
             .ForMember(d => d.FeaturesCompleted, opt => opt.MapFrom(s => s.FeaturesCompleted))
-            .ForMember(d => d.Score, opt => opt.MapFrom(s => s.Score));
+            .ForMember(d => d.Score, opt => opt.MapFrom(s => s.Score))
+            .ForMember(d => d.CurrentWave, opt => opt.MapFrom(s => s.CurrentWave));
     }
 }
