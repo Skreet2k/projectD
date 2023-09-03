@@ -6,6 +6,12 @@ export type TPosition = {
   Y: number
 };
 
+export type TWorker = {
+  Id: string
+  TargetId: string
+  Coordinate: TPosition
+};
+
 export type TFeature = {
   Id: string,
   CurrentCoordinate: TPosition,
@@ -26,7 +32,7 @@ export type TSocketData = {
     IsEndlessLevel: boolean
   },
   Customer: any,
-  Workers: any[],
+  Workers: TWorker[]
   Features: TFeature[]
 };
 
