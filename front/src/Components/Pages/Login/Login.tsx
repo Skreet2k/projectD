@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import {
   Box, Button, TextField, Typography,
 } from '@mui/material';
@@ -20,8 +20,9 @@ export function Login() {
     }
   }, [isLogin]);
 
-  const finish = async () => {
+  const finish = async (e: FormEvent) => {
     dispatch(loginWithPassword({ username, password }));
+    e.preventDefault();
   };
 
   return (
@@ -37,39 +38,41 @@ export function Login() {
         backgroundSize: 'cover',
       }}
     >
-      <Box
-        sx={{
-          width: '307px',
-          background: 'white',
-          padding: '20px',
-          boxShadow:
-            'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-        }}
-      >
-        <Typography component="h1">Войти</Typography>
-        <TextField
-          value={username}
-          onChange={(e) => setUsername(e.target?.value)}
-          id="outlined-basic"
-          label="Логин"
-          variant="standard"
-        />
-        <TextField
-          value={password}
-          onChange={(e) => setPassword(e.target?.value)}
-          type="password"
-          id="outlined-basic"
-          label="Пароль"
-          variant="standard"
-        />
-        <Button onClick={finish} variant="contained">
-          Войти в IT
-        </Button>
-        <Link to="/registration">Стать защитником</Link>
-      </Box>
+      <form onSubmit={finish}>
+        <Box
+          sx={{
+            width: '307px',
+            background: 'white',
+            padding: '20px',
+            boxShadow:
+              'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+          }}
+        >
+          <Typography component="h1">Войти</Typography>
+          <TextField
+            value={username}
+            onChange={(e) => setUsername(e.target?.value)}
+            id="outlined-basic"
+            label="Логин"
+            variant="standard"
+          />
+          <TextField
+            value={password}
+            onChange={(e) => setPassword(e.target?.value)}
+            type="password"
+            id="outlined-basic"
+            label="Пароль"
+            variant="standard"
+          />
+          <Button type="submit" variant="contained">
+            Войти в IT
+          </Button>
+          <Link to="/registration">Стать защитником</Link>
+        </Box>
+      </form>
     </Box>
   );
 }

@@ -1,11 +1,9 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from "axios";
 
-const token = localStorage.getItem('token');
 export const api: any = axios.create({
-  baseURL: 'https://projectd.onebranch.dev/api/v1',
+  baseURL: "https://projectd.onebranch.dev/api/v1",
   headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   },
 });
 
@@ -17,17 +15,17 @@ api.interceptors.response.use(
 
     if (error?.response?.status === 401) {
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken = localStorage.getItem("refreshToken");
 
         const { data } = await axios.post(
-          'https://projectd.onebranch.dev/api/v1/refresh',
+          "https://projectd.onebranch.dev/api/v1/refresh",
           {
             refreshToken,
-          },
+          }
         );
 
-        localStorage.setItem('token', data.access_token);
-        localStorage.setItem('refreshToken', data.refresh_token);
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("refreshToken", data.refresh_token);
 
         const res = await axios({
           method,
@@ -45,5 +43,5 @@ api.interceptors.response.use(
       }
     }
     return Promise.reject(error.message);
-  },
+  }
 );
