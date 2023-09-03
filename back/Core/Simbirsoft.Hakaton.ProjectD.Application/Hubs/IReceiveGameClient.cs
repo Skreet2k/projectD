@@ -1,4 +1,4 @@
-using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.SimulationState;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 
@@ -10,5 +10,5 @@ public interface IReceiveGameClient
     /// <summary>
     /// Обновление данных клиента.
     /// </summary>
-    Task UpdateClient(SimulationModel model);
+    Task UpdateClient(SimulationStateDto state);
 }

@@ -4,9 +4,10 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class FeatureModel
 {
+    public SimulationModel Model { get; set; }
     public string Id { get; set; }
     public CoordinateDto CurrentCoordinate { get; set; }
-    public CoordinateDto? NextCoordinate { get; set; }
+    public CoordinateDto NextCoordinate { get; set; }
     public int ProgressPercents { get; set; }
 
     public int CurrentHealthPoints { get; set; }
@@ -37,5 +38,6 @@ public class FeatureModel
     /// </summary>
     private void OnComplete()
     {
+        Model.HandleFeatureCompleted(Id);
     }
 }

@@ -105,4 +105,36 @@ public class ScoresService : IScoresService
 
         return new ResultList<UserScoreRecordDto>(result);
     }
+
+    /// <inheritdoc />
+    public async Task AddOrUpdateRecordScoreAsync(string userId, string levelId, int score, int totalMoney)
+    {
+        var result = new List<UserScoreRecordDto>
+        {
+            new()
+            {
+                LevelId = "5C907330-17FA-454D-BA0B-B7B9C79F226E",
+                LevelName = "Уровень 1",
+                UserId = "7271000C-8275-4030-A786-D1BEF714C34E",
+                UserName = "OtherUser1",
+                Score = 6436
+            },
+            new()
+            {
+                LevelId = "6555FA01-99C2-4179-BB01-2B091BCDFA17",
+                LevelName = "Уровень 2",
+                UserId = userId,
+                UserName = "Я",
+                Score = 6382
+            },
+            new()
+            {
+                LevelId = "A5A51A59-5B36-4AD4-9BF0-B2A400039F0C",
+                LevelName = "Уровень 3",
+                UserId = "7271000C-8275-4030-A786-D1BEF714C32E",
+                UserName = "OtherUser2",
+                Score = 6645
+            }
+        };
+    }
 }

@@ -24,6 +24,7 @@ public static class DependencyInjection
             cfg.AddProfile(typeof(MapProfile));
             cfg.AddProfile(typeof(StateProfile));
             cfg.AddProfile(typeof(WorkerProfile));
+            cfg.AddProfile(typeof(SimulationStateProfile));
         });
         mapperConfiguration.AssertConfigurationIsValid();
         services.AddSingleton(mapperConfiguration.CreateMapper());

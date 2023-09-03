@@ -21,6 +21,10 @@ public class SimulationModel
 
     public int CurrentHealthPoints { get; set; }
 
+    public int FeaturesCompleted { get; set; } = 0;
+
+    public int Score { get; set; } = 0;
+
     /// <summary>
     /// Команда выгорела?
     /// </summary>
@@ -91,5 +95,36 @@ public class SimulationModel
     {
         // Команда выгорела.
         IsBurntOut = true;
+    }
+
+    public void HandleFeatureCompleted(string featureId)
+    {
+        var feature = Features.FirstOrDefault(x => x.Id == featureId);
+        if (feature == null)
+        {
+            return;
+        }
+
+        FeaturesCompleted++;
+        Score += CalculateScore(1);
+
+        Money += feature.Reward;
+
+        RemoveFeature(featureId);
+    }
+
+    /// <summary>
+    /// Метод подсчёта очков за выполненную фичу.
+    /// </summary>
+    /// <param name="featuresCompleted"></param>
+    /// <returns></returns>
+    private int CalculateScore(int featuresCompleted = 1)
+    {
+        // Вычисление модификаторов.
+        double modifiersMultiplier = 1;
+
+        var result = (int)Math.Round(featuresCompleted * modifiersMultiplier);
+
+        return result;
     }
 }

@@ -10,5 +10,13 @@ public class UserScoreRecordDto
 
     public string LevelName { get; set; }
 
+    /// <summary>
+    /// Убитые фитчи.
+    /// </summary>
     public int Score { get; set; }
+
+    /// <summary>
+    /// заработанные деньги.
+    /// </summary>
+    public int TotalMoney { get; set; }
 }

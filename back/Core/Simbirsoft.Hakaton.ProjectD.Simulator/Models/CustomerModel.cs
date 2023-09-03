@@ -5,6 +5,8 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class CustomerModel
 {
+    private SimulationModel _model;
+    
     /// <summary>
     /// Живые фичи на уровне.
     /// </summary>
@@ -22,6 +24,7 @@ public class CustomerModel
 
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {
+        _model = simulation;
         _features = simulation.Features;
         _featuresPool = levelFeatures;
         StartCoordinate = simulation.Path[0];
@@ -101,6 +104,7 @@ public class CustomerModel
         var hp = _rand.Next(21);
         var feature = new FeatureModel
         {
+            Model = _model,
             Id = Guid.NewGuid().ToString(),
             Name = NameHelper.GenerateFeatureName(),
             MaxHealthPoints = 10 + hp,
