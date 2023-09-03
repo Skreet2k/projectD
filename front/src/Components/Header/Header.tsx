@@ -3,6 +3,7 @@ import {
   AppBar, Box, Toolbar, Typography,
 } from '@mui/material';
 import Profile from '../Profile/Profile';
+import Rating from '../Rating/Rating';
 
 function Header() {
   return (
@@ -12,6 +13,7 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Simbirwars
           </Typography>
+          <Rating />
           <Profile />
         </Toolbar>
       </AppBar>
