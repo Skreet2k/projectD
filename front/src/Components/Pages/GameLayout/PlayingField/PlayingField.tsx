@@ -5,6 +5,7 @@ import Cell from './Cell/Cell';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Features from './Features/Features';
 import TowersLayer from './TowersLayer/TowersLayer';
+import { SettingsContext } from '../../../Providers/SettingsContextProvider/SettingsContextProvider';
 
 const FieldWrapper = styled.div`
   position: relative;
@@ -31,6 +32,14 @@ function PlayingField() {
     }
     socket.createSession();
   }, [socket?.connection]);
+
+  const { toggleOpen } = useContext(SettingsContext);
+
+  useEffect(() => {
+    if (socket?.isGameEnded) {
+      toggleOpen();
+    }
+  }, [socket]);
 
   return (
     <>
