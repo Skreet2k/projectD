@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Button } from '@mui/material';
 import Cell from './Cell/Cell';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Features from './Features/Features';
@@ -23,34 +24,50 @@ const Row = styled.div`
 
 function PlayingField() {
   const { fieldParams, socket } = useContext(GameLayoutContext);
+  const [isStartClicked, setIsStartClicked] = useState(false);
   useEffect(() => {
     if (!socket || !socket.connection) {
       return;
     }
-    socket.createSession().then(() => socket.startSession());
+    socket.createSession();
   }, [socket?.connection]);
 
-  // const { data } = useGetTowersQuery();
-  // const content = data?.content;
-
   return (
-    <FieldWrapper>
-      <Field>
-        {fieldParams?.initialObject && fieldParams?.initialObject.rows.map((row) => (
-          <Row key={`Row-${row.id}`}>
-            {row.cells.map((cell) => (
-              <Cell
-                key={`Cell-${cell.position.x}${cell.position.y}`}
-                cell={cell}
-                cellSize={fieldParams?.sizes.sizeOfFieldCell}
-              />
-            ))}
-          </Row>
-        ))}
-        <Features />
-      </Field>
-      <TowersLayer workers={socket?.socketData?.Workers || []} />
-    </FieldWrapper>
+    <>
+      <FieldWrapper>
+        <Field>
+          {fieldParams?.initialObject && fieldParams?.initialObject.rows.map((row) => (
+            <Row key={`Row-${row.id}`}>
+              {row.cells.map((cell) => (
+                <Cell
+                  key={`Cell-${cell.position.x}${cell.position.y}`}
+                  cell={cell}
+                  cellSize={fieldParams?.sizes.sizeOfFieldCell}
+                />
+              ))}
+            </Row>
+          ))}
+          <Features />
+        </Field>
+        <TowersLayer workers={socket?.socketData?.Workers || []} />
+      </FieldWrapper>
+
+      {!isStartClicked
+        && (
+        <Button
+          onClick={() => {
+            socket?.startSession();
+            setIsStartClicked(true);
+          }}
+          disabled={!socket?.isSessionCreated || socket.isSessionStarted || isStartClicked}
+          // doesn't hide!
+          // hidden={isStartClicked}
+          variant="contained"
+        >
+          НАЧАТЬ!
+        </Button>
+        )}
+    </>
   );
 }
 
