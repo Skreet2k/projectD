@@ -51,7 +51,7 @@ function SettingsModal() {
       </DialogContent>
       <DialogActions>
         {/* <Button onClick={handleClose}>Disagree</Button> */}
-        <Button onClick={handleClose}>Сохранить настройки</Button>
+        <Button onClick={() => window.location.reload()}>Начать заново</Button>
       </DialogActions>
     </Dialog>
   // <div></div>
