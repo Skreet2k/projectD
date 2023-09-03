@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box,
-  Button,
-  TextField,
-  Typography,
+  Box, Button, TextField, Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginWithPassword } from '../../../store/actions/authAction';
-import {
-  AppDispatch,
-  RootState,
-} from '../../../store/store';
+import { AppDispatch, RootState } from '../../../store/store';
 
 export function Login() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const isLogin = useSelector(
-    (state: RootState) => state.auth.isLogin,
-  );
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
 
   useEffect(() => {
     if (isLogin) {

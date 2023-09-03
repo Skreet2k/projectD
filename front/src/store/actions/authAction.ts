@@ -4,10 +4,7 @@ import { api } from '../../lib/axios';
 
 export const loginWithPassword = createAsyncThunk(
   'auth/loginWithPassword',
-  async (
-    _: { username: string; password: string },
-    { rejectWithValue },
-  ) => {
+  async (_: { username: string; password: string }, { rejectWithValue }) => {
     try {
       const { data } = await api.post('/login', {
         username: _.username,
@@ -15,10 +12,7 @@ export const loginWithPassword = createAsyncThunk(
       });
 
       localStorage.setItem('token', data.access_token);
-      localStorage.setItem(
-        'refreshToken',
-        data.refresh_token,
-      );
+      localStorage.setItem('refreshToken', data.refresh_token);
 
       return data;
     } catch (e: any) {
@@ -26,9 +20,7 @@ export const loginWithPassword = createAsyncThunk(
         return rejectWithValue('Неверный логин или пароль');
       }
 
-      return rejectWithValue(
-        'Что-то пошло не так, повторите позже',
-      );
+      return rejectWithValue('Что-то пошло не так, повторите позже');
     }
   },
 );

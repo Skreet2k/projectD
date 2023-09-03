@@ -1,15 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {
-  createTheme,
-  ThemeProvider,
-} from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Root from './routes/root';
 import About from './Components/Pages/About';
 import GameLayout from './Components/Pages/GameLayout';
@@ -53,6 +47,7 @@ const router = createBrowserRouter([
 const theme = createTheme({
   palette: {
     primary: { main: '#FF5733' },
+    action: { hover: '#FFC79A' },
   },
 });
 
