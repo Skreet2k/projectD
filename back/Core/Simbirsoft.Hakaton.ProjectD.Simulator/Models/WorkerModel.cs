@@ -107,6 +107,9 @@ public class WorkerModel
     /// <returns></returns>
     private bool IsInActionRadius(FeatureModel feature)
     {
+        if (feature.CurrentCoordinate == null)
+            return false;
+
         return GeometryHelper.IsInRange(Coordinate.X, Coordinate.Y, Range, feature.CurrentCoordinate.X,
             feature.CurrentCoordinate.Y);
     }

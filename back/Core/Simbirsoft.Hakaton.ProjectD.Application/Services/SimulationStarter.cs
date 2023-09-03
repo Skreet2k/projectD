@@ -38,13 +38,8 @@ public class SimulationStarter : ISimulationStarter
         customerHandler.SetSuccessor(featureHandler);
         featureHandler.SetSuccessor(workerHandler);
 
-        while (!mapModel.IsBurntOut)
+        while (!mapModel.IsBurntOut || mapModel.CancellationTokenSource.IsCancellationRequested)
         {
-            if (mapModel.CancellationTokenSource.IsCancellationRequested)
-            {
-                return;
-            }
-
             customerHandler.HandleRequest(mapModel);
 
             var state = _mapper.Map<SimulationStateDto>(mapModel);
@@ -52,7 +47,7 @@ public class SimulationStarter : ISimulationStarter
             await _hubContext.Clients.User(userId).UpdateClient(state);
             await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
-
+        
         var userScoreDto = new UserScoreRecordDto
         {
             Score = mapModel.Score,

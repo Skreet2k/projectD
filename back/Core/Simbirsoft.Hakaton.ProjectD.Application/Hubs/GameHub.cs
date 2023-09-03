@@ -41,26 +41,6 @@ public class GameHub : Hub<IReceiveGameClient>
         await _simulationSessionService.StartSessionAsync(Context.UserIdentifier, Context.User.Identity?.Name);
     }
 
-    /// <summary>
-    /// Добавить работника.
-    /// </summary>
-    public Task AddWorker(string workerId, CoordinateDto coordinate)
-    {
-        _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
-
-        return Task.CompletedTask;
-    }
-
-    /// <summary>
-    /// Удаляем работника.
-    /// </summary>
-    public Task RemoveWorker(string workerId, CoordinateDto coordinate)
-    {
-        _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
-
-        return Task.CompletedTask;
-    }
-
     /// <inheritdoc />
     public override async Task OnDisconnectedAsync(Exception exception)
     {
