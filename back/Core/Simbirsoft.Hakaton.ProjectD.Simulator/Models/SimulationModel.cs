@@ -15,7 +15,15 @@ public class SimulationModel
 
     public List<FeatureModel> Features { get; set; }
 
+    /// <summary>
+    /// Количество денег на текущий момент.
+    /// </summary>
     public int Money { get; set; }
+
+    /// <summary>
+    /// Заработанные деньги.
+    /// </summary>
+    public int TotalMoney { get; set; } = 0;
 
     public int MaximumHealthPoints { get; set; }
 
@@ -112,6 +120,7 @@ public class SimulationModel
         Score += CalculateScore(1);
 
         Money += feature.Reward;
+        TotalMoney += feature.Reward;
 
         RemoveFeature(featureId);
     }
