@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { SettingsContext } from '../Providers/SettingsContextProvider/SettingsContextProvider';
+import { GameLayoutContext } from '../Providers/GameLayoutProvider/GameLayoutProvider';
 
 const Transition = React.forwardRef((
   props: TransitionProps & {
@@ -14,9 +15,19 @@ const Transition = React.forwardRef((
 
 function SettingsModal() {
   const { open, toggleOpen } = useContext(SettingsContext);
+  const { socket } = useContext(GameLayoutContext);
+  const [endData, setEndData] = useState<any>({});
   const handleClose = () => {
     toggleOpen();
   };
+  useEffect(() => {
+    if (socket?.isGameEnded) {
+      setEndData(socket?.endedGameData || {});
+    }
+  }, [socket?.isGameEnded]);
+
+  console.log(endData, socket);
+  const { Score, TotalMoney, WavesCleared } = endData;
   return (
     <Dialog
       open={open}
@@ -28,7 +39,17 @@ function SettingsModal() {
       <DialogTitle>Конец игры</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Модальное окно для показа пользователю его армии и возможности прокачки его героев
+          `Очки: $
+          {Score || '?'}
+          `
+          <br />
+          `Заработано денег: $
+          {TotalMoney || '?'}
+          `
+          <br />
+          `Пройдено волн: $
+          {WavesCleared || '?'}
+          `
         </DialogContentText>
       </DialogContent>
       <DialogActions>
