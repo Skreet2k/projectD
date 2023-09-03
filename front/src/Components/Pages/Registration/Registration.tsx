@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Alert,
-  Box,
-  Button,
-  TextField,
-  Typography,
+  Alert, Box, Button, TextField, Typography,
 } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -18,12 +14,11 @@ export function Registration() {
   const finish = async () => {
     const passStrength = passwordStrength(password).value;
 
-    if (
-      passStrength === 'Medium' || passStrength === 'Strong'
-    ) {
+    if (passStrength === 'Medium' || passStrength === 'Strong') {
       const json = JSON.stringify({
         username,
         password,
+        email: 'test@test.ru',
       });
 
       const data = await axios.post(
@@ -80,9 +75,7 @@ export function Registration() {
           gap: '16px',
         }}
       >
-        <Typography component="h1">
-          Защитите релиз от злобных задач
-        </Typography>
+        <Typography component="h1">Защитите релиз от злобных задач</Typography>
         <TextField
           value={username}
           onChange={(e) => setUsername(e.target?.value)}
