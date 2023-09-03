@@ -3,8 +3,8 @@ export enum TowerType {
   backend = 1,
   qa = 6,
   // teamlead = 3, // TODO
-  // analyst = 4,
-  // projectManager = 5, // TODO
+  analyst = 4,
+  pm = 5,
   // dba = 7, // TODO
   designer = 8,
 }
