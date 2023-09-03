@@ -16,20 +16,33 @@ export const ShopContentWrapper = styled.div`
   height: fit-content;
   overflow-y: scroll;
   height: calc(100vh - 100px);
+  &::-webkit-scrollbar-thumb {
+    background-color: #f4511e;
+    border-radius: 35px;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 35px;
+  }
+  &::-webkit-scrollbar {
+    width: 1em;
+  }
 `;
 
 const ShopContentBackground = styled.div<{ $width: number }>`
-    min-width: ${(props) => `${props.$width}px`};
-    max-width: 20%;
-    position: relative;
-    display: flex;
+  min-width: ${(props) => `${props.$width}px`};
+  max-width: 20%;
+  position: relative;
+  display: flex;
   height: 100%;
-  background-color: #F57C00; // TODO move to colors
+  background-color: #f57c00; // TODO move to colors
 `;
 function Shop() {
   // ширина в 3 ячейки
   const { fieldParams } = useContext(GameLayoutContext);
-  const shopWidth = fieldParams?.sizes?.sizeOfFieldCell ? +fieldParams?.sizes.sizeOfFieldCell : 200;
+  const shopWidth = fieldParams?.sizes?.sizeOfFieldCell
+    ? +fieldParams?.sizes.sizeOfFieldCell
+    : 200;
 
   const { data } = useGetTowersQuery();
   const content = data?.content;
@@ -37,7 +50,8 @@ function Shop() {
   return (
     <ShopContentBackground $width={shopWidth}>
       <ShopContentWrapper>
-        {content?.length && content.map((item) => <ShopItem key={item.id} tower={item} />)}
+        {content?.length
+          && content.map((item) => <ShopItem key={item.id} tower={item} />)}
       </ShopContentWrapper>
     </ShopContentBackground>
   );
