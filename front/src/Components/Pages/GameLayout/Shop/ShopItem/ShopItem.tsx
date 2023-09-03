@@ -8,13 +8,14 @@ import {
   keyframes,
   Typography,
 } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   towers,
 } from '../../../../../assets/towers';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
 import { Tower } from '../../../../../services/towers/towers';
+import { RootState } from '../../../../../store/store';
 
 const spriteAnimation = (x: number) => keyframes`
   from{background-position-x:0;}
@@ -39,6 +40,9 @@ type ShopItemProps = {
 function ShopItem({ tower }: ShopItemProps) {
   const dispatch = useDispatch();
   const { sizes } = useContext(GameLayoutContext);
+  const shopTowerSelected = useSelector(
+    (state: RootState) => state.gameLayout.shopTowerSelected,
+  );
 
   const {
     level, type, name, id,
@@ -50,7 +54,11 @@ function ShopItem({ tower }: ShopItemProps) {
 
   return (
     <Card
-      sx={{ maxWidth: size ? size + 15 : 100, height: 'fit-content' }}
+      sx={{
+        maxWidth: size ? size + 15 : 100,
+        height: 'fit-content',
+        ...(shopTowerSelected?.id === tower.id && { boxShadow: '0px 0px 0px 2px black' }),
+      }}
     >
       <CardActionArea
         onClick={() => {

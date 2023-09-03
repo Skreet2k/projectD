@@ -4,16 +4,19 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { baseUrl } from '../constants';
 import { DeveloperLevel, TowerType } from '../../Components/Pages/GameLayout/PlayingField/TowersLayer/TowerLayer.types';
+import { Position } from '../../Components/Pages/GameLayout/PlayingField/PayingField.types';
+import { TPosition } from '../../api/useSocketData/useSocketData.types';
 
 export interface Tower {
-  cost: number;
-  damage: number;
-  healthPoints: number;
+  cost?: number;
+  damage?: number;
+  healthPoints?: number;
   id: string;
   level: DeveloperLevel;
-  name: string;
-  range: number;
+  name?: string;
+  range?: number;
   type: TowerType;
+  position: Position
 }
 interface TowerResponse {
   content: Tower[];
@@ -21,6 +24,11 @@ interface TowerResponse {
   errorMessage: string | null;
   isSuccess: boolean;
   returnCode: number;
+}
+
+interface SetTowerPayload {
+  id: string;
+  coordinate: TPosition;
 }
 export const towersApi = createApi({
   reducerPath: 'towers',
@@ -38,6 +46,20 @@ export const towersApi = createApi({
       },
       providesTags: ['Towers'],
     }),
+    addTower: builder.mutation<void, SetTowerPayload>({
+      query: (payload) => {
+        const token = localStorage.getItem('token');
+        return ({
+          url: '/workers',
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: {
+            Id: payload.id,
+            coordinate: payload.coordinate,
+          },
+        });
+      },
+    }),
   }),
 });
-export const { useGetTowersQuery } = towersApi;
+export const { useGetTowersQuery, useAddTowerMutation } = towersApi;

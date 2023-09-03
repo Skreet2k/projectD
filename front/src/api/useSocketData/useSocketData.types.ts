@@ -6,6 +6,12 @@ export type TPosition = {
   Y: number
 };
 
+export type TWorker = {
+  Id: string
+  TargetId: string
+  Coordinate: TPosition
+};
+
 export type TFeature = {
   Id: string,
   CurrentCoordinate: TPosition,
@@ -26,8 +32,13 @@ export type TSocketData = {
     IsEndlessLevel: boolean
   },
   Customer: any,
-  Workers: any[],
+  Workers: TWorker[]
   Features: TFeature[]
+};
+
+export type WorkerPayload = {
+  workerId: string,
+  coordinate: TPosition
 };
 
 export type TSocket = {
@@ -35,8 +46,8 @@ export type TSocket = {
   socketData: TSocketData | null
   createSession: () => Promise<any>
   startSession: () => Promise<any>
-  addWorker: () => Promise<any>
-  removeWorker: () => Promise<any>
+  addWorker: (args: WorkerPayload) => Promise<any>
+  removeWorker: (args: WorkerPayload) => Promise<any>
   connection: HubConnection | null
   isSessionCreated: boolean
   isSessionStarted: boolean

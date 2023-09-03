@@ -4,7 +4,7 @@ import {
 } from '@reduxjs/toolkit';
 
 export type ShopTower = {
-  id: string;
+  id: string | '';
 };
 type InitialState = {
   shopTowerSelected?: ShopTower;

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { TPosition, TSocket, TSocketData } from './useSocketData.types';
 import { Position } from '../../Components/Pages/GameLayout/PlayingField/PayingField.types';
@@ -47,15 +48,20 @@ export default function useSocketData(): TSocket {
     });
   };
 
-  const callMethod = async (methodName: string) => {
+  const callMethod = async (methodName: string, args: any) => {
     if (!connection) {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      return Promise.reject({ connection, isSessionCreated });
+      const errorInfo = {
+        args, connection, isSessionCreated, isSessionStarted,
+      };
+      // eslint-disable-next-line no-console
+      console.error(`can't call ${methodName}`, errorInfo);
+      return Promise.resolve();
     }
-    return connection.invoke(methodName);
+    return connection.invoke(methodName, args);
   };
-  const addWorker = async () => callMethod('AddWorker');
-  const removeWorker = async () => callMethod('RemoveWorker');
+
+  const addWorker = async (args: any) => callMethod('AddWorker', args);
+  const removeWorker = async (args: any) => callMethod('RemoveWorker', args);
 
   useEffect(() => {
     const closureId = Math.random();

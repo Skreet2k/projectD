@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Cell from './Cell/Cell';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Features from './Features/Features';
+import TowersLayer from './TowersLayer/TowersLayer';
 
 const FieldWrapper = styled.div`
   position: relative;
+  border-style: solid;
+  border-width: 2px;
 `;
 
 const Field = styled.div`
@@ -46,7 +49,7 @@ function PlayingField() {
         ))}
         <Features />
       </Field>
-      {/* <TowersLayer towers={towers} /> */}
+      <TowersLayer workers={socket?.socketData?.Workers || []} />
     </FieldWrapper>
   );
 }
