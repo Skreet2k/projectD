@@ -14,7 +14,7 @@ public class UserScoreRecordDto
     /// Убитые фитчи.
     /// </summary>
     public int Score { get; set; }
-    
+
     /// <summary>
     /// заработанные деньги.
     /// </summary>

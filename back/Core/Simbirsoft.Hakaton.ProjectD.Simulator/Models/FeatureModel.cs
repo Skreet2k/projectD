@@ -6,7 +6,7 @@ public class FeatureModel
 {
     public string Id { get; set; }
     public CoordinateDto CurrentCoordinate { get; set; }
-    public CoordinateDto? NextCoordinate { get; set; }
+    public CoordinateDto NextCoordinate { get; set; }
     public int ProgressPercents { get; set; }
 
     public int CurrentHealthPoints { get; set; }
