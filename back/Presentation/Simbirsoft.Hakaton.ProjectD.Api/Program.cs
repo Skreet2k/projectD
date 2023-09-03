@@ -51,6 +51,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors();
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme, options =>
+{
     options.Events = new BearerTokenEvents
     {
         OnMessageReceived = context =>
@@ -68,7 +69,10 @@ builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerSche
 
             return Task.CompletedTask;
         }
-    });
+    };
+    options.BearerTokenExpiration = TimeSpan.FromDays(2);
+
+});
 builder.Services.AddAuthorizationBuilder();
 
 builder.Services.AddPersistence(builder.Configuration);
