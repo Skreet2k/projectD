@@ -38,7 +38,7 @@ public class GameHub : Hub<IReceiveGameClient>
     /// </summary>
     public async Task StartSession()
     {
-        await _simulationSessionService.StartSessionAsync(Context.UserIdentifier);
+        await _simulationSessionService.StartSessionAsync(Context.UserIdentifier, Context.User.Identity?.Name);
     }
 
     /// <summary>

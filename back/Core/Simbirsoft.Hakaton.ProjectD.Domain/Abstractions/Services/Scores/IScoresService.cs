@@ -21,10 +21,10 @@ public interface IScoresService
     /// <summary>
     /// Получить общие рекорды.
     /// </summary>
-    Task<ResultList<UserScoreRecordDto>> GetRecordScores(string userId = null);
+    ResultList<UserScoreRecordDto> GetRecordScores(string userId = null);
 
     /// <summary>
     /// Добавить или обновить рекорд юзера, если он круче
     /// </summary>
-    Task AddOrUpdateRecordScoreAsync(string userId, string levelId, int score, int totalMoney);
+    Task<UserScoreRecordDto> AddOrUpdateRecordScoreAsync(UserScoreRecordDto userScoreDto);
 }

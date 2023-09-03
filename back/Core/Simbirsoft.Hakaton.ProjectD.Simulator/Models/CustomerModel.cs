@@ -5,8 +5,6 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class CustomerModel
 {
-    private SimulationModel _model;
-    
     /// <summary>
     /// Живые фичи на уровне.
     /// </summary>
@@ -21,6 +19,8 @@ public class CustomerModel
     /// ГСЧ.
     /// </summary>
     private readonly Random _rand;
+
+    private readonly SimulationModel _model;
 
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {

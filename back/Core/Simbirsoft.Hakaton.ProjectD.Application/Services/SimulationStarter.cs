@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Scores;
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Scores;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.SimulationState;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Abstractions;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
@@ -14,15 +16,20 @@ public class SimulationStarter : ISimulationStarter
     private readonly IHubContext<GameHub, IReceiveGameClient> _hubContext;
 
     private readonly IMapper _mapper;
+    private readonly IScoresService _scoresService;
 
-    public SimulationStarter(IHubContext<GameHub, IReceiveGameClient> hubContext, IMapper mapper)
+    public SimulationStarter(
+        IHubContext<GameHub, IReceiveGameClient> hubContext,
+        IMapper mapper,
+        IScoresService scoresService)
     {
         _hubContext = hubContext;
         _mapper = mapper;
+        _scoresService = scoresService;
     }
 
     /// <inheritdoc />
-    public async Task StartAsync(SimulationModel mapModel, string userId)
+    public async Task StartAsync(SimulationModel mapModel, string userId, string userName)
     {
         var customerHandler = new CustomerHandler();
         var featureHandler = new FeatureHandler();
@@ -45,5 +52,16 @@ public class SimulationStarter : ISimulationStarter
             await _hubContext.Clients.User(userId).UpdateClient(state);
             await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
+
+        var userScoreDto = new UserScoreRecordDto
+        {
+            Score = mapModel.Score,
+            UserId = userId,
+            UserName = userName
+        };
+
+        var userScore = await _scoresService.AddOrUpdateRecordScoreAsync(userScoreDto);
+
+        await _hubContext.Clients.User(userId).EndGame(userScore);
     }
 }

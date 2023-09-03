@@ -55,7 +55,7 @@ public class SimulationSessionService : ISimulationSessionService
             Coordinate = new CoordinateDto { X = 0, Y = 0 },
             Cost = 1,
             Range = 100,
-            DamagePerTick = 20,
+            DamagePerTick = 1,
             HealthPoints = 1000
         });
 
@@ -67,10 +67,10 @@ public class SimulationSessionService : ISimulationSessionService
     }
 
     /// <inheritdoc />
-    public async Task StartSessionAsync(string userId)
+    public async Task StartSessionAsync(string userId, string userName)
     {
         UserSessions.TryGetValue(userId, out var session);
-        await _simulationStarter.StartAsync(session, userId);
+        await _simulationStarter.StartAsync(session, userId, userName);
     }
 
     /// <inheritdoc />

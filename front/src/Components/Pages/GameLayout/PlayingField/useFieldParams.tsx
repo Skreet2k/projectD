@@ -62,6 +62,7 @@ const getInitialFieldObject = ({
 
 export const useFieldParams = (
   data: MapResponse | undefined,
+  path: Position[],
 ): InitialField => {
   const [initialFieldProps, setInitialFieldProps] = useState<InitialField>({
     initialObject: null,
@@ -86,7 +87,7 @@ export const useFieldParams = (
         path,
       });
     }
-  }, [data]);
+  }, [data, path]);
 
   return initialFieldProps;
 };

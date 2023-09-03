@@ -1,6 +1,6 @@
 ﻿using Simbirsoft.Hakaton.ProjectD.Shared.Enums.Workers;
 
-namespace Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
+namespace Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualtion;
 
 /// <summary>
 /// Сущность Работника.
