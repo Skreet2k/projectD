@@ -47,7 +47,7 @@ export default function Features() {
         speed: fFromBack.ProgressPerTick,
         progress: fFromBack.ProgressPercents,
         currentCell: toPosition(fFromBack.CurrentCoordinate),
-        nextCell: toPosition(fFromBack.NextCoordinate),
+        nextCell: toPosition(fFromBack.NextCoordinate || fFromBack.CurrentCoordinate),
         name: fFromBack.Name,
       };
       const wayPoints = getWayPoints(feature, featureElements.current, initialObject);
