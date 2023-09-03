@@ -6,7 +6,7 @@ import { GameLayoutContext } from '../../../../../Providers/GameLayoutProvider/G
 
 const FeatureWrapper = styled.div<{ $width: number }>`
   width: ${(props) => `${props.$width}px`};
-  height: ${(props) => `${props.$width}px`};
+  max-height: ${(props) => `${props.$width}px`};
   overflow: hidden;
   display: flex;
   flex-direction: column;
