@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 import {
   Card,
   CardActionArea,
@@ -8,13 +8,13 @@ import {
   keyframes,
   Typography,
   Tooltip,
-} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { towers } from "../../../../../assets/towers";
-import { GameLayoutContext } from "../../../../Providers/GameLayoutProvider/GameLayoutProvider";
-import { setSelectedShopTower } from "../../../../../store/slices/gameLayoutSlice";
-import { Tower } from "../../../../../services/towers/towers";
-import { RootState } from "../../../../../store/store";
+} from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { towers } from '../../../../../assets/towers';
+import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
+import { Tower } from '../../../../../services/towers/towers';
+import { RootState } from '../../../../../store/store';
 
 const spriteAnimation = (x: number) => keyframes`
   from{background-position-x:0;}
@@ -39,10 +39,12 @@ function ShopItem({ tower }: ShopItemProps) {
   const dispatch = useDispatch();
   const { sizes } = useContext(GameLayoutContext);
   const shopTowerSelected = useSelector(
-    (state: RootState) => state.gameLayout.shopTowerSelected
+    (state: RootState) => state.gameLayout.shopTowerSelected,
   );
 
-  const { level, type, name, id, cost, damage, range } = tower;
+  const {
+    level, type, name, id, cost, damage, range,
+  } = tower;
 
   const size = sizes?.sizeOfFieldCell;
 
@@ -50,7 +52,8 @@ function ShopItem({ tower }: ShopItemProps) {
 
   return (
     <Tooltip
-      title={
+      placement="left"
+      title={(
         <div>
           <div>
             Уровень
@@ -69,14 +72,14 @@ function ShopItem({ tower }: ShopItemProps) {
             {range}
           </div>
         </div>
-      }
+      )}
     >
       <Card
         sx={{
           maxWidth: size ? size + 15 : 100,
-          height: "fit-content",
+          height: 'fit-content',
           ...(shopTowerSelected?.id === tower.id && {
-            boxShadow: "0px 0px 0px 2px black",
+            boxShadow: '0px 0px 0px 2px black',
           }),
         }}
       >
@@ -87,9 +90,9 @@ function ShopItem({ tower }: ShopItemProps) {
         >
           <CardMedia
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              padding: "10px",
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '10px',
             }}
           >
             {size && (
