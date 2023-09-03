@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
+using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Generators;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Pathfinders;
@@ -11,10 +13,12 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map;
 public class MapGenerator : IMapGenerator
 {
     private static IMapper _mapper;
+    private EllerGenerator _generator;
 
-    public MapGenerator(IMapper mapper)
+    public MapGenerator(IMapper mapper, IOptions<GameConfiguration> gameConfig)
     {
         _mapper = mapper;
+        _generator = new EllerGenerator(gameConfig.Value.KVertical, gameConfig.Value.KHorizontal);
     }
 
     /// <inheritdoc />
@@ -39,7 +43,7 @@ public class MapGenerator : IMapGenerator
                 };
             }
 
-            var maze = await EllerGenerator.GenerateMaze(width, height);
+            var maze = await _generator.GenerateMaze(width, height);
 
             var path = await CommonPathfinder.FindPath(maze, startX, startY, finishX,
                 finishY);

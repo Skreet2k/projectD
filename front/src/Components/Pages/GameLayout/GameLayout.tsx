@@ -4,6 +4,7 @@ import { PlayingArea, StyledGameLayout } from './GameLayout.styles';
 import GameLayoutProvider from '../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Shop from './Shop/Shop';
 import Stats from './Stats';
+import SettingsModal from '../../SettingsModal';
 
 function GameLayout() {
   return (
@@ -15,6 +16,7 @@ function GameLayout() {
         </PlayingArea>
         <Shop />
       </StyledGameLayout>
+      <SettingsModal />
     </GameLayoutProvider>
   );
 }

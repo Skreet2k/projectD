@@ -25,7 +25,7 @@ function SettingsModal() {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>Моя галера</DialogTitle>
+      <DialogTitle>Конец игры</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           Модальное окно для показа пользователю его армии и возможности прокачки его героев
