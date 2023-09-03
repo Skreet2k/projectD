@@ -18,7 +18,7 @@ public class SimulationModel
     public int Money { get; set; }
 
     public int MaximumHealthPoints { get; set; }
-    
+
     public int CurrentHealthPoints { get; set; }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class SimulationModel
         Workers.Remove(workerModel);
         Money += worker.Cost;
         MaximumHealthPoints -= worker.HealthPoints;
-        
+
         CheckHealthPoints();
     }
 

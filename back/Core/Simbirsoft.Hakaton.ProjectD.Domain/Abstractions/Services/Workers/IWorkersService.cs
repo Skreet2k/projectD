@@ -12,5 +12,5 @@ public interface IWorkersService
     /// Получить список доступных Работников.
     /// </summary>
     /// <returns>Список работников.</returns>
-    Task<ResultList<WorkerDto>> GetWorkersAsync();
+    ResultList<WorkerDto> GetWorkers();
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Workers;
@@ -20,8 +19,8 @@ public class WorkersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ResultList<WorkerDto>> GetWorkers()
+    public ResultList<WorkerDto> GetWorkers()
     {
-        return await _workersService.GetWorkersAsync();
+        return _workersService.GetWorkers();
     }
 }

@@ -1,5 +1,4 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
-using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
+﻿using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
@@ -13,9 +12,10 @@ public class FeatureDeadHandler : Handler
             {
                 continue;
             }
+
             // Удаляем выполненую задачу.
             request.Features.Remove(feature);
-            
+
             // Добавляем деньги за выполнение.
             request.Money += feature.Reward;
         }

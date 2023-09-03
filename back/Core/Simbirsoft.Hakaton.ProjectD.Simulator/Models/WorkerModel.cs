@@ -37,12 +37,12 @@ public class WorkerModel
     /// Урон в тик.
     /// </summary>
     public int DamagePerTick { get; set; }
-    
+
     /// <summary>
     /// Стоимость.
     /// </summary>
     public int Cost { get; set; }
-    
+
     /// <summary>
     /// Здоровье Работника.
     /// </summary>

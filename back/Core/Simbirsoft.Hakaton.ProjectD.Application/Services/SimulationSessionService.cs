@@ -1,21 +1,24 @@
 ﻿using System.Collections.Concurrent;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Abstractions;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
-public class SimulationSessionService
+/// <inheritdoc />
+public class SimulationSessionService : ISimulationSessionService
 {
     private static readonly ConcurrentDictionary<string, SimulationModel> UserSessions = new();
     private readonly IMapGenerator _mapGenerator;
-    private readonly SimulationStarter _simulationStarter;
+    private readonly ISimulationStarter _simulationStarter;
     private readonly IWorkersService _workersService;
 
     public SimulationSessionService(
-        IMapGenerator mapGenerator, 
-        SimulationStarter simulationStarter,
+        IMapGenerator mapGenerator,
+        ISimulationStarter simulationStarter,
         IWorkersService workersService)
     {
         _mapGenerator = mapGenerator;
@@ -23,6 +26,7 @@ public class SimulationSessionService
         _workersService = workersService;
     }
 
+    /// <inheritdoc />
     public async Task<MapDto> CreateSessionAsync(string userId)
     {
         var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 7, 5);
@@ -51,13 +55,15 @@ public class SimulationSessionService
         return mapResult.Content;
     }
 
+    /// <inheritdoc />
     public async Task StartSessionAsync(string userId)
     {
         UserSessions.TryGetValue(userId, out var session);
         await _simulationStarter.StartAsync(session, userId);
     }
-    
-    public async Task AddWorker(string userId, string workerId, CoordinateDto coordinate)
+
+    /// <inheritdoc />
+    public void AddWorker(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -65,8 +71,8 @@ public class SimulationSessionService
         {
             return;
         }
-        
-        var worker = (await _workersService.GetWorkersAsync()).Content.FirstOrDefault(x => x.Id == workerId);
+
+        var worker = _workersService.GetWorkers().Content.FirstOrDefault(x => x.Id == workerId);
 
         if (worker == null)
         {
@@ -81,11 +87,12 @@ public class SimulationSessionService
             Range = worker.Range,
             Cost = worker.Cost
         };
-        
+
         session.AddWorker(workerModel);
     }
-    
-    public async Task RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
+
+    /// <inheritdoc />
+    public void RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -93,8 +100,8 @@ public class SimulationSessionService
         {
             return;
         }
-        
-        var worker = (await _workersService.GetWorkersAsync()).Content.FirstOrDefault(x => x.Id == workerId);
+
+        var worker = _workersService.GetWorkers().Content.FirstOrDefault(x => x.Id == workerId);
 
         if (worker == null)
         {
@@ -111,7 +118,8 @@ public class SimulationSessionService
             }
         });
     }
-    
+
+    /// <inheritdoc />
     public async Task StopSessionAsync(string userId)
     {
         UserSessions.Remove(userId, out var session);

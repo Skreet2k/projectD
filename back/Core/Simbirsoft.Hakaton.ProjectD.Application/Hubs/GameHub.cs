@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using Simbirsoft.Hakaton.ProjectD.Application.Services;
+using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
@@ -11,17 +11,12 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 [Authorize]
 public class GameHub : Hub<IReceiveGameClient>
 {
-    private readonly IHubContext<GameHub> _myHubContext;
+    private readonly ISimulationSessionService _simulationSessionService;
 
-    private readonly SimulationSessionService _simulationSessionService;
-
-    //
-    public GameHub(IHubContext<GameHub> myHubContext, SimulationSessionService simulationSessionService)
+    public GameHub(ISimulationSessionService simulationSessionService)
     {
-        _myHubContext = myHubContext;
         _simulationSessionService = simulationSessionService;
     }
-
 
     /// <inheritdoc />
     public override Task OnConnectedAsync()
@@ -45,22 +40,25 @@ public class GameHub : Hub<IReceiveGameClient>
     {
         await _simulationSessionService.StartSessionAsync(Context.UserIdentifier);
     }
-    
+
     /// <summary>
     /// Добавить работника.
     /// </summary>
-    public async Task AddWorker(string workerId, CoordinateDto coordinate)
+    public Task AddWorker(string workerId, CoordinateDto coordinate)
     {
-        await _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
+        _simulationSessionService.AddWorker(Context.UserIdentifier, workerId, coordinate);
+
+        return Task.CompletedTask;
     }
-    
-        
+
     /// <summary>
     /// Удаляем работника.
     /// </summary>
-    public async Task RemoveWorker(string workerId, CoordinateDto coordinate)
+    public Task RemoveWorker(string workerId, CoordinateDto coordinate)
     {
-        await _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
+        _simulationSessionService.RemoveWorker(Context.UserIdentifier, workerId, coordinate);
+
+        return Task.CompletedTask;
     }
 
     /// <inheritdoc />

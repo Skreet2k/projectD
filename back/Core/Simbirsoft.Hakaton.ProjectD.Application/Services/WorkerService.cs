@@ -7,6 +7,7 @@ using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
+/// <inheritdoc />
 public class WorkerService : IWorkersService
 {
     private readonly IMapper _mapper;
@@ -20,7 +21,7 @@ public class WorkerService : IWorkersService
     }
 
     /// <inheritdoc />
-    public async Task<ResultList<WorkerDto>> GetWorkersAsync()
+    public ResultList<WorkerDto> GetWorkers()
     {
         var entities = _workerRepository.Get();
 
