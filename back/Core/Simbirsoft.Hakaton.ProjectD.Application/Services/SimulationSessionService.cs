@@ -50,7 +50,7 @@ public class SimulationSessionService : ISimulationSessionService
 
         mapModel.CancellationTokenSource = new CancellationTokenSource();
 
-        UserSessions.TryAdd(userId, mapModel);
+        UserSessions.AddOrUpdate(userId, mapModel, (_, _) => mapModel);
 
         return mapResult.Content;
     }
