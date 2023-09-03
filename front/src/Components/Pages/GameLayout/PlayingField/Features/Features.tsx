@@ -7,7 +7,7 @@ import { CoordinatePx, FieldObject, Position } from '../PayingField.types';
 import Feature from './Feature/Feature';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import { TFeatureData } from './Features.types';
-import { TFeature, TPosition } from '../../../../../api/useSocketData/useSocketData.types';
+import { TPosition } from '../../../../../api/useSocketData/useSocketData.types';
 import { TWayPoint } from '../Positioner/Positioner.types';
 import { TFeatureProps } from './Feature/Feature.types';
 

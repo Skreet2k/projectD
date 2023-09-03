@@ -1,7 +1,6 @@
 import React, { Ref, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IPositionPropsFiltered, TProps, TWayPoint } from './Positioner.types';
-import { TICK_MS } from '../../../../../constants';
 
 const PositionContainer = styled.div<IPositionPropsFiltered>`
   position: absolute;
