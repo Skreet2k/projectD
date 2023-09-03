@@ -1,6 +1,6 @@
-import React, { Ref, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { IPositionPropsFiltered, TProps, TWayPoint } from './Positioner.types';
+import { IPositionPropsFiltered, TProps } from './Positioner.types';
 
 const PositionContainer = styled.div<IPositionPropsFiltered>`
   position: absolute;
@@ -10,7 +10,7 @@ const PositionContainer = styled.div<IPositionPropsFiltered>`
   transition: ${(props) => `top ${props.$duration}ms linear, left ${props.$duration}ms linear`};
 `;
 
-function Positioner({ children, wayPoints }: TProps, ref: Ref<HTMLDivElement>) {
+function Positioner({ children, wayPoints }: TProps) {
   // const [pxPosition, setPxPosition] = useState<TWayPoint>(wayPoints[0]);
   // useEffect(() => {
   //   const futureWayPoints = [...wayPoints];
