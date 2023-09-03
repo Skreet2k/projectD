@@ -6,7 +6,7 @@ export enum TowerType {
   // analyst = 4,
   // projectManager = 5, // TODO
   // dba = 7, // TODO
-  // designer = 8,
+  designer = 8,
 }
 
 export enum DeveloperLevel {
