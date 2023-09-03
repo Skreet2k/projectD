@@ -13,6 +13,7 @@ import { GameLayoutContext } from '../../Providers/GameLayoutProvider/GameLayout
 
 export default function Stats() {
   const { socket }: any = useContext(GameLayoutContext);
+
   return (
     <div>
       <List>

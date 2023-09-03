@@ -14,6 +14,7 @@ type Row = {
   score: number;
   won: boolean;
   userName: string;
+  wavesCleared: number;
 };
 
 export default function UserStats() {
@@ -22,7 +23,7 @@ export default function UserStats() {
     const fetch = async () => {
       const token = localStorage.getItem('token');
       const { data } = await api.get(
-        'https://projectd.onebranch.dev/api/v1/scores/record',
+        'https://projectd.onebranch.dev/api/v1/scores/global',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,6 +44,7 @@ export default function UserStats() {
             <StyledTableCell>Уровень</StyledTableCell>
             <StyledTableCell align="right">Игрок</StyledTableCell>
             <StyledTableCell align="right">Счет</StyledTableCell>
+            <StyledTableCell align="right">Волн пройдено</StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
@@ -56,6 +58,7 @@ export default function UserStats() {
               </TableCell>
               <TableCell align="right">{row.userName}</TableCell>
               <TableCell align="right">{row.score}</TableCell>
+              <TableCell align="right">{row.wavesCleared}</TableCell>
             </StyledTableRow>
           ))}
         </TableBody>

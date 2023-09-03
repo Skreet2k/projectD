@@ -7,11 +7,10 @@ import {
   CardMedia,
   keyframes,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  towers,
-} from '../../../../../assets/towers';
+import { towers } from '../../../../../assets/towers';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
 import { Tower } from '../../../../../services/towers/towers';
@@ -30,8 +29,7 @@ const ShopItemContainer = styled.div<{
   height: ${(props) => `${props.$size}px`};
   background-image: ${(props) => `url(${props.$background})`};
   background-size: cover;
-  animation: ${(props) => spriteAnimation(props.$size * 3)}
-    1s steps(3) infinite;
+  animation: ${(props) => spriteAnimation(props.$size * 3)} 1s steps(3) infinite;
 `;
 
 type ShopItemProps = {
@@ -45,7 +43,7 @@ function ShopItem({ tower }: ShopItemProps) {
   );
 
   const {
-    level, type, name, id,
+    level, type, name, id, cost, damage, range,
   } = tower;
 
   const size = sizes?.sizeOfFieldCell;
@@ -53,42 +51,57 @@ function ShopItem({ tower }: ShopItemProps) {
   const background = towers[type][level];
 
   return (
-    <Card
-      sx={{
-        maxWidth: size ? size + 15 : 100,
-        height: 'fit-content',
-        ...(shopTowerSelected?.id === tower.id && { boxShadow: '0px 0px 0px 2px black' }),
-      }}
+    <Tooltip
+      title={(
+        <div>
+          <div>
+            Цена:
+            {cost}
+          </div>
+          <div>
+            Урон:
+            {damage}
+          </div>
+          <div>
+            Дальность атаки:
+            {range}
+          </div>
+        </div>
+      )}
     >
-      <CardActionArea
-        onClick={() => {
-          dispatch(setSelectedShopTower({ id }));
+      <Card
+        sx={{
+          maxWidth: size ? size + 15 : 100,
+          height: 'fit-content',
+          ...(shopTowerSelected?.id === tower.id && {
+            boxShadow: '0px 0px 0px 2px black',
+          }),
         }}
       >
-        <CardMedia sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '10px',
-        }}
+        <CardActionArea
+          onClick={() => {
+            dispatch(setSelectedShopTower({ id }));
+          }}
         >
-          {size && (
-            <ShopItemContainer
-              $size={size}
-              $background={background}
-            />
-          )}
-        </CardMedia>
-        <CardContent>
-          <Typography
-            gutterBottom
-            variant="subtitle2"
-            component="div"
+          <CardMedia
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '10px',
+            }}
           >
-            {name}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            {size && (
+              <ShopItemContainer $size={size} $background={background} />
+            )}
+          </CardMedia>
+          <CardContent>
+            <Typography gutterBottom variant="subtitle2" component="div">
+              {name}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Tooltip>
   );
 }
 
