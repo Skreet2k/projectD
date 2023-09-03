@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Repositoreis;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
-using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
+using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualtion;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Workers;
 using Skreet2k.Common.Models;
 

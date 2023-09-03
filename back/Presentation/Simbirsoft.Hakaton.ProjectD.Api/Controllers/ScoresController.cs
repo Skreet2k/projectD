@@ -36,9 +36,9 @@ public class ScoresController : ControllerBase
     }
 
     [HttpGet("record")]
-    public async Task<ResultList<UserScoreRecordDto>> GetRecordScores()
+    public ResultList<UserScoreRecordDto> GetRecordScores()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        return await _scoresService.GetRecordScores(userId);
+        return _scoresService.GetRecordScores(userId);
     }
 }

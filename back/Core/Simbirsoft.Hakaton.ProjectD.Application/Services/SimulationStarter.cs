@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Scores;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.SimulationState;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Abstractions;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
@@ -47,5 +48,7 @@ public class SimulationStarter : ISimulationStarter
             await _hubContext.Clients.User(userId).UpdateClient(state);
             await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
+
+        await _hubContext.Clients.User(userId).EndGame(new UserScoreRecordDto());
     }
 }

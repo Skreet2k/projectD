@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Map;
+using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Score;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.State;
 using Simbirsoft.Hakaton.ProjectD.Application.MappingProfiles.Workers;
 
@@ -25,6 +26,7 @@ public static class DependencyInjection
             cfg.AddProfile(typeof(StateProfile));
             cfg.AddProfile(typeof(WorkerProfile));
             cfg.AddProfile(typeof(SimulationStateProfile));
+            cfg.AddProfile(typeof(UserScoreProfile));
         });
         mapperConfiguration.AssertConfigurationIsValid();
         services.AddSingleton(mapperConfiguration.CreateMapper());

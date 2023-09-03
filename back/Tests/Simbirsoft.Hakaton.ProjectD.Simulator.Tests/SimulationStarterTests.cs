@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
 using Simbirsoft.Hakaton.ProjectD.Application.Services;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
@@ -12,7 +13,10 @@ public class SimulationStarterTests
     {
         var mapModel = new SimulationModel();
 
-        var service = new SimulationStarter((IHubContext<GameHub, IReceiveGameClient>)new object());
+        var mockMapper = new MapperConfiguration(cfg => { });
+        var mapper = mockMapper.CreateMapper();
+
+        var service = new SimulationStarter((IHubContext<GameHub, IReceiveGameClient>)new object(), mapper);
 
         service.StartAsync(mapModel, "").GetAwaiter().GetResult();
     }

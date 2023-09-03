@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Repositoreis;
-using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualation;
+using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Simualtion;
 
 namespace Simbirsoft.Hakaton.ProjectD.Persistence.Repositories;
 
@@ -20,16 +20,19 @@ public class WorkerEntityRepository : IGenericRepository<WorkerEntity>
         return _collection.AsQueryable();
     }
 
+    /// <inheritdoc />
     public Task<WorkerEntity> AddAsync(WorkerEntity entity)
     {
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc />
     public Task<WorkerEntity> UpdateAsync(WorkerEntity entity)
     {
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc />
     public Task DeleteAsync(string id)
     {
         throw new NotImplementedException();

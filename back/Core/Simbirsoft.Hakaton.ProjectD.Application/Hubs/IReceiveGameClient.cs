@@ -1,3 +1,4 @@
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Scores;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.SimulationState;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Hubs;
@@ -11,4 +12,9 @@ public interface IReceiveGameClient
     /// Обновление данных клиента.
     /// </summary>
     Task UpdateClient(SimulationStateDto state);
+
+    /// <summary>
+    /// Конец игры.
+    /// </summary>
+    Task EndGame(UserScoreRecordDto state);
 }
