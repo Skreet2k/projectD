@@ -3,6 +3,9 @@ using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Scores;
 
+/// <summary>
+/// Работа со статистикой пользователя.
+/// </summary>
 public interface IScoresService
 {
     /// <summary>
@@ -10,7 +13,7 @@ public interface IScoresService
     /// </summary>
     /// <returns></returns>
     Task<ResultList<ScoreRecordDto>> GetUserScores(string userId);
-    
+
     /// <summary>
     /// Получить общую статистику по уровню.
     /// </summary>

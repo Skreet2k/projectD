@@ -1,29 +1,34 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Simbirsoft.Hakaton.ProjectD.Application.Hubs;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Abstractions;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 
-public class SimulationStarter
+/// <inheritdoc />
+public class SimulationStarter : ISimulationStarter
 {
     private readonly IHubContext<GameHub, IReceiveGameClient> _hubContext;
-    
+
     public SimulationStarter(IHubContext<GameHub, IReceiveGameClient> hubContext)
     {
         _hubContext = hubContext;
     }
 
+    /// <inheritdoc />
     public async Task StartAsync(SimulationModel mapModel, string userId)
     {
         var customerHandler = new CustomerHandler();
         var featureHandler = new FeatureHandler();
-        var towerHandler = new TowerHandler();
-        
-        customerHandler.SetSuccessor(featureHandler);
-        featureHandler.SetSuccessor(towerHandler);
+        var workerHandler = new WorkerHandler();
+        var deadHandler = new FeatureDeadHandler();
 
-        while (true)
+        customerHandler.SetSuccessor(featureHandler);
+        featureHandler.SetSuccessor(workerHandler);
+        featureHandler.SetSuccessor(deadHandler);
+
+        while (!mapModel.IsBurtnOut)
         {
             if (mapModel.CancellationTokenSource.IsCancellationRequested)
             {

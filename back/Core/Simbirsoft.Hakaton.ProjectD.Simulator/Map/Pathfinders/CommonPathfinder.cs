@@ -1,17 +1,17 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Models;
-using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
+﻿using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Models;
 
-namespace Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Pathfinders;
+namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map.Pathfinders;
 
-static class CommonPathfinder
+internal static class CommonPathfinder
 {
     public static async Task<List<CoordinateEntity>> FindPath(Maze maze, byte startX, byte startY, byte destX,
         byte destY)
     {
-        List<CoordinateEntity> path = new List<CoordinateEntity>();
+        var path = new List<CoordinateEntity>();
 
-        List<Tuple<byte, byte>> reachable = new List<Tuple<byte, byte>>();
-        List<Tuple<byte, byte>> explored = new List<Tuple<byte, byte>>();
+        var reachable = new List<Tuple<byte, byte>>();
+        var explored = new List<Tuple<byte, byte>>();
 
         PathPiece lastVisited = null;
         reachable.Add(new Tuple<byte, byte>(startX, startY));
@@ -54,8 +54,8 @@ static class CommonPathfinder
             lastVisited = newVisited;
         } while (reachable.Count != 0 && !reachable.Any(x => x.Item1 == destX && x.Item2 == destY));
 
-        path.Add(new(destX, destY));
-        PathPiece finalVisited = lastVisited;
+        path.Add(new CoordinateEntity(destX, destY));
+        var finalVisited = lastVisited;
         while (finalVisited != null)
         {
             path.Add(new CoordinateEntity(finalVisited.X, finalVisited.Y));
@@ -69,7 +69,7 @@ static class CommonPathfinder
 
     private static List<Tuple<byte, byte>> GetReachables(Maze maze, Tuple<byte, byte> piece)
     {
-        List<Tuple<byte, byte>> pathPieces = new List<Tuple<byte, byte>>();
+        var pathPieces = new List<Tuple<byte, byte>>();
 
         var (x, y) = piece;
 
@@ -81,7 +81,7 @@ static class CommonPathfinder
             var cell = maze.Cells[srcIndex - 1];
             if (!cell.Right)
             {
-                pathPieces.Add(new((byte)(x - 1), y));
+                pathPieces.Add(new Tuple<byte, byte>((byte)(x - 1), y));
             }
         }
 
@@ -90,7 +90,7 @@ static class CommonPathfinder
             var cell = maze.Cells[srcIndex - maze.X];
             if (!cell.Bottom)
             {
-                pathPieces.Add(new(x, (byte)(y - 1)));
+                pathPieces.Add(new Tuple<byte, byte>(x, (byte)(y - 1)));
             }
         }
 
@@ -99,7 +99,7 @@ static class CommonPathfinder
             var cell = srcCell;
             if (!cell.Right)
             {
-                pathPieces.Add(new((byte)(x + 1), y));
+                pathPieces.Add(new Tuple<byte, byte>((byte)(x + 1), y));
             }
         }
 
@@ -108,7 +108,7 @@ static class CommonPathfinder
             var cell = srcCell;
             if (!cell.Bottom)
             {
-                pathPieces.Add(new(x, (byte)(y + 1)));
+                pathPieces.Add(new Tuple<byte, byte>(x, (byte)(y + 1)));
             }
         }
 

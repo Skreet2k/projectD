@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { Ref, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IPositionPropsFiltered, TProps } from './Positioner.types';
-import { TICK_MS } from '../../../../../constants';
+import { IPositionPropsFiltered, TProps, TWayPoint } from './Positioner.types';
 
-const linearRule = `${TICK_MS}ms linear`;
 const PositionContainer = styled.div<IPositionPropsFiltered>`
   position: absolute;
   left: ${(props) => `${props.$xPx}px`};
   top: ${(props) => `${props.$yPx}px`};
   transform: translate(-50%, -50%);
-  transition: top ${linearRule}, left ${linearRule};
+  transition: ${(props) => `top ${props.$duration}ms linear, left ${props.$duration}ms linear`};
 `;
 
-const isGoodPx = (px: number | void) => Number.isNaN(Number(px));
-function Positioner({ children, xPx, yPx }: TProps) {
-  if (isGoodPx(xPx) || isGoodPx(yPx)) {
+const Positioner = React.forwardRef(({ children, wayPoints }: TProps, ref: Ref<HTMLDivElement>) => {
+  const [pxPosition, setPxPosition] = useState<TWayPoint>(wayPoints[0]);
+  useEffect(() => {
+    const futureWayPoints = wayPoints;
+    setPxPosition(futureWayPoints.shift()!);
+    futureWayPoints.forEach(({ delayMS, ...futurePxPosition }) => {
+      setTimeout(() => setPxPosition(futurePxPosition), delayMS);
+    });
+  }, [wayPoints]);
+  if (!pxPosition) {
     return null;
   }
+  const { xPx, yPx, duration } = pxPosition;
   return (
-    <PositionContainer $xPx={xPx} $yPx={yPx}>
+    <PositionContainer ref={ref} $xPx={xPx} $yPx={yPx} $duration={duration}>
       {children}
     </PositionContainer>
   );
-}
+});
 
 export default Positioner;

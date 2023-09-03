@@ -2,11 +2,11 @@
 
 public static class NameHelper
 {
-    private static string[] Epithets = { "Срочный", "Важный", "Неотложный", "Нужный", "Обязательный" };
-    private static string[] Jobs = { "Рефакторинг", "Фикс", "Анализ", "Баг", "Имплементейшен" };
-    private static string[] Entities = { "Класса", "Сервиса", "Модуля", "Проекта", "Таблицы" };
-    private static string[] Area = { "Связи", "Заказов", "Очереди", "Пользователей", "Статистики" };
-    private static Random _rand = new();
+    private static readonly string[] Epithets = { "Срочный", "Важный", "Неотложный", "Нужный", "Обязательный" };
+    private static readonly string[] Jobs = { "Рефакторинг", "Фикс", "Анализ", "Баг", "Имплементейшен" };
+    private static readonly string[] Entities = { "Класса", "Сервиса", "Модуля", "Проекта", "Таблицы" };
+    private static readonly string[] Area = { "Связи", "Заказов", "Очереди", "Пользователей", "Статистики" };
+    private static readonly Random _rand = new();
 
     /// <summary>
     /// Гененирует случайное название.

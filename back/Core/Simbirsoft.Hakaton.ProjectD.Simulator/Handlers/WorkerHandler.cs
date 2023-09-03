@@ -2,15 +2,17 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
-public class TowerHandler : Handler
+/// <inheritdoc />
+public class WorkerHandler : Handler
 {
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var worker in request.Workers)
         {
-            worker.Fire(request.Features);
+            worker.Do(request.Features);
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 }

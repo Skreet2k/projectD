@@ -3,13 +3,16 @@ using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 
+/// <summary>
+/// Генератор карты.
+/// </summary>
 public interface IMapGenerator
 {
     /// <summary>
     /// Получить карту с путём по заданным параметрам.
     /// </summary>
     /// <param name="width">Ширина.</param>
-    /// <param name="height">Длина,</param>
+    /// <param name="height">Длина.</param>
     /// <param name="startCoordinate">Кордината ачала пути по оси X.</param>
     /// <param name="finishCoordinate">Конец пути.</param>
     /// <param name="startX">Кордината начала пути по оси X.</param>

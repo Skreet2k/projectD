@@ -3,15 +3,17 @@ using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class FeatureHandler : Handler
 {
     private const int MaxPercent = 100;
 
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var feature in request.Features.ToList())
         {
-            HandleFeature(feature, request.Path);
+            HandleFeature(feature, request.Path, request);
 
             if (feature.NextCoordinate is null)
             {
@@ -19,20 +21,18 @@ public class FeatureHandler : Handler
             }
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 
-    private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path)
+    /// <summary>
+    /// Обработать фитчу.
+    /// </summary>
+    private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path, SimulationModel request)
     {
         // Заполняем следующую координату
         if (featureModel.NextCoordinate is null)
         {
             featureModel.NextCoordinate = GetNextCoordinate(featureModel.CurrentCoordinate, path);
-        }
-
-        if (featureModel.NextCoordinate is null)
-        {
-            return;
         }
 
         // Прибавляем прогресс движения в клетке
@@ -43,12 +43,23 @@ public class FeatureHandler : Handler
         {
             // Следующая координата становится текущей
             featureModel.CurrentCoordinate = featureModel.NextCoordinate;
+
+            // Условие, когда фича переходит с последней клетки в никуда
+            if (featureModel.CurrentCoordinate == null)
+            {
+                FinishPath(featureModel, request);
+                return;
+            }
+
             featureModel.NextCoordinate = GetNextCoordinate(featureModel.CurrentCoordinate, path);
 
             featureModel.ProgressPercents = 0;
         }
     }
 
+    /// <summary>
+    /// Получить следующую координату для фитчи.
+    /// </summary>
     private CoordinateDto GetNextCoordinate(CoordinateDto currentCoordinate, List<CoordinateDto> path)
     {
         for (var index = 0; index < path.Count; index++)
@@ -70,5 +81,14 @@ public class FeatureHandler : Handler
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Заканчиваем путь фичи.
+    /// </summary>
+    private void FinishPath(FeatureModel feature, SimulationModel simulation)
+    {
+        simulation.ReceiveDamage(feature.CurrentHealthPoints);
+        simulation.RemoveFeature(feature.Id);
     }
 }

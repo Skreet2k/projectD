@@ -19,5 +19,6 @@ public static class ModelConfiguration
     private static void AddConfigurations()
     {
         TestEntityConfiguration.Add();
+        WorkerEntityConfiguration.Add();
     }
 }
