@@ -19,12 +19,16 @@ type SettingContextProviderProps = {
 
 function SettingContextProvider({ children }: SettingContextProviderProps) {
   const [modalOpen, setModalOpen] = useState(false);
-  const toggleOpen = () => setModalOpen((val) => !val);
+  const toggleOpen = () => {
+    debugger;
+    setModalOpen((val) => !val);
+  };
   const settingsContext = useMemo(() => ({
     open: modalOpen,
     toggleOpen,
     setOpen: setModalOpen,
   }), [modalOpen]);
+
   return (
     <SettingsContext.Provider
       value={settingsContext}
