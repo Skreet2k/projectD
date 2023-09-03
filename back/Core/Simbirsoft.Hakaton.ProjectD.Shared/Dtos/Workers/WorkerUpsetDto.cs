@@ -11,7 +11,7 @@ public class WorkerUpsetDto
     /// Ид.
     /// </summary>
     public string Id { get; set; }
-    
+
     /// <summary>
     /// Координаты
     /// </summary>

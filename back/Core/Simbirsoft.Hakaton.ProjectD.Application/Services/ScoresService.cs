@@ -30,10 +30,10 @@ public class ScoresService : IScoresService
             .FirstOrDefault();
 
         var dto = _mapper.Map<UserScoreRecordDto>(score);
-        
+
         return new Result<UserScoreRecordDto>(dto);
     }
-    
+
     /// <inheritdoc />
     public ResultList<UserScoreRecordDto> GetRecordScores()
     {

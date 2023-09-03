@@ -1,8 +1,6 @@
 ﻿using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Simbirsoft.Hakaton.ProjectD.Application.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Workers;
@@ -15,8 +13,8 @@ namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
 [Authorize]
 public class WorkersController : ControllerBase
 {
-    private readonly IWorkersService _workersService;
     private readonly ISimulationSessionService _simulationSessionService;
+    private readonly IWorkersService _workersService;
 
     public WorkersController(IWorkersService workersService, ISimulationSessionService simulationSessionService)
     {
@@ -29,7 +27,7 @@ public class WorkersController : ControllerBase
     {
         return _workersService.GetWorkers();
     }
-    
+
     /// <summary>
     /// Добавляем работника.
     /// </summary>
@@ -40,7 +38,7 @@ public class WorkersController : ControllerBase
 
         _simulationSessionService.AddWorker(userId, worker.Id, worker.Coordinate);
     }
-        
+
     /// <summary>
     /// Удаляем работника.
     /// </summary>

@@ -32,7 +32,7 @@ public class FeatureModel
         if (CurrentHealthPoints <= 0)
         {
             OnComplete();
-            
+
             return true;
         }
 

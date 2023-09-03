@@ -47,7 +47,7 @@ public class SimulationStarter : ISimulationStarter
             await _hubContext.Clients.User(userId).UpdateClient(state);
             await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
-        
+
         var userScoreDto = new UserScoreRecordDto
         {
             Score = mapModel.Score,

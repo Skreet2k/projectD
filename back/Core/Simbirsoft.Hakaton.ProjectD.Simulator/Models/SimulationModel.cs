@@ -23,7 +23,7 @@ public class SimulationModel
     /// <summary>
     /// Заработанные деньги.
     /// </summary>
-    public int TotalMoney { get; set; } = 0;
+    public int TotalMoney { get; set; }
 
     public int MaximumHealthPoints { get; set; }
 
@@ -135,7 +135,7 @@ public class SimulationModel
     private int CalculateScore(int featuresCompleted = 1)
     {
         // Вычисление модификаторов.
-        double modifiersMultiplier = 1 + CurrentWave * Configuration.WaveScoreModifier;
+        var modifiersMultiplier = 1 + CurrentWave * Configuration.WaveScoreModifier;
 
         var result = (int)Math.Round(featuresCompleted * modifiersMultiplier);
 

@@ -19,7 +19,7 @@ public class ScoresController : ControllerBase
     {
         _scoresService = scoresService;
     }
-    
+
     [HttpGet("user")]
     public async Task<Result<UserScoreRecordDto>> GetScores()
     {
