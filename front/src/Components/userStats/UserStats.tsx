@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import Paper from '@mui/material/Paper';
+import {
+  TableHead,
+  Paper,
+  TableContainer,
+  TableCell,
+  TableBody,
+  Table,
+} from '@mui/material';
 import { api } from '../../lib/axios';
 import { StyledTableCell, StyledTableRow } from './styled';
 
