@@ -1,7 +1,6 @@
 import React, {
   useContext, useEffect, useRef, useState,
 } from 'react';
-import useSocketData from '../../../../../api/useSocketData/useSocketData';
 import Positioner from '../Positioner/Positioner';
 import { CoordinatePx, FieldObject, Position } from '../PayingField.types';
 import Feature from './Feature/Feature';
@@ -30,8 +29,8 @@ const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HT
 };
 
 export default function Features() {
-  const socketData = useSocketData();
-  const { fieldParams } = useContext(GameLayoutContext);
+  const { fieldParams, socket } = useContext(GameLayoutContext);
+  const socketData = socket?.socketData;
   const initialObject = fieldParams?.initialObject;
   const path = fieldParams?.path;
   const prevFeaturesData = useRef<TFeatureData[]>([]);

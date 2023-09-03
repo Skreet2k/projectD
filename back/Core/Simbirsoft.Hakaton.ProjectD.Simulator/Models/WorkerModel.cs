@@ -130,6 +130,15 @@ public class WorkerModel
     /// <param name="damage">Наносимый урон.</param>
     private void DealDamage(int damage)
     {
-        CurrentTarget?.ReceiveDamage(damage);
+        if (CurrentTarget == null)
+        {
+            return;
+        }
+
+        var isCompleted = CurrentTarget.ReceiveDamage(damage);
+        if (isCompleted)
+        {
+            CurrentTarget = null;
+        }
     }
 }

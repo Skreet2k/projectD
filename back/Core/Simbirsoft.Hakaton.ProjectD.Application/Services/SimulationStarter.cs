@@ -27,11 +27,9 @@ public class SimulationStarter : ISimulationStarter
         var customerHandler = new CustomerHandler();
         var featureHandler = new FeatureHandler();
         var workerHandler = new WorkerHandler();
-        var deadHandler = new FeatureDeadHandler();
 
         customerHandler.SetSuccessor(featureHandler);
         featureHandler.SetSuccessor(workerHandler);
-        featureHandler.SetSuccessor(deadHandler);
 
         while (!mapModel.IsBurntOut)
         {
