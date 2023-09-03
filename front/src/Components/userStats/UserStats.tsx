@@ -20,7 +20,7 @@ export default function UserStats() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.get(
-        'https://projectd.onebranch.dev/api/v1/scores/getuserscores',
+        'https://projectd.onebranch.dev/api/v1/scores/user',
       );
 
       setTableData(data.content);
