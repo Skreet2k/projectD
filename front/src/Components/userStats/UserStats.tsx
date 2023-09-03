@@ -13,10 +13,11 @@ type Row = {
   levelName: string;
   score: number;
   won: boolean;
+  wavesCleared: number;
 };
 
 export default function UserStats() {
-  const [tableData, setTableData] = useState<Row[]>([]);
+  const [tableData, setTableData] = useState<Row>();
   useEffect(() => {
     const fetch = async () => {
       const token = localStorage.getItem('token');
@@ -40,23 +41,20 @@ export default function UserStats() {
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>Уровень</StyledTableCell>
-            <StyledTableCell align="right">Победил</StyledTableCell>
             <StyledTableCell align="right">Счет</StyledTableCell>
+            <StyledTableCell align="right">Волн пройдено</StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {tableData.map((row: Row) => (
-            <StyledTableRow
-              key={row.levelId}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.levelName}
-              </TableCell>
-              <TableCell align="right">{row.won ? 'Да' : 'Нет'}</TableCell>
-              <TableCell align="right">{row.score}</TableCell>
-            </StyledTableRow>
-          ))}
+          <StyledTableRow
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          >
+            <TableCell component="th" scope="row">
+              {tableData?.levelName}
+            </TableCell>
+            <TableCell align="right">{tableData?.score}</TableCell>
+            <TableCell align="right">{tableData?.wavesCleared}</TableCell>
+          </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>
