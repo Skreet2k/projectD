@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { SettingsContext } from '../Providers/SettingsContextProvider/SettingsContextProvider';
+import { GameLayoutContext } from '../Providers/GameLayoutProvider/GameLayoutProvider';
 
 const Transition = React.forwardRef((
   props: TransitionProps & {
@@ -14,9 +15,22 @@ const Transition = React.forwardRef((
 
 function SettingsModal() {
   const { open, toggleOpen } = useContext(SettingsContext);
+  const { socket, endData } = useContext(GameLayoutContext);
+  // const [endData, setEndData] = useState<any>(null);
   const handleClose = () => {
     toggleOpen();
   };
+  useEffect(() => {
+    if (socket?.isGameEnded) {
+      // setEndData({ ...socket?.endedGameData || {} });
+      const { Score, TotalMoney, WavesCleared } = socket?.endedGameData || {};
+      localStorage.setItem('thisIsFine', JSON.stringify({ Score, TotalMoney, WavesCleared }));
+      endData.Score = Score;
+      endData.TotalMoney = TotalMoney;
+      endData.WavesCleared = WavesCleared;
+    }
+  }, [socket?.isGameEnded]);
+
   return (
     <Dialog
       open={open}
@@ -28,12 +42,16 @@ function SettingsModal() {
       <DialogTitle>Конец игры</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Модальное окно для показа пользователю его армии и возможности прокачки его героев
+          {`Очки: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).Score}`}
+          <br />
+          {`Заработано денег: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).TotalMoney}`}
+          <br />
+          {`Пройдено волн: ${(JSON.parse(localStorage.getItem('thisIsFine') || '{}') as any).WavesCleared}`}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         {/* <Button onClick={handleClose}>Disagree</Button> */}
-        <Button onClick={handleClose}>Сохранить настройки</Button>
+        <Button onClick={() => window.location.reload()}>Начать заново</Button>
       </DialogActions>
     </Dialog>
   // <div></div>
