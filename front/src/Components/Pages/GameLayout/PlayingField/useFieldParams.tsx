@@ -74,7 +74,7 @@ export const useFieldParams = (
 
   useEffect(() => {
     if (data && data?.isSuccess && data?.content) {
-      const { width, height, path } = data.content;
+      const { width, height } = data.content;
       const sizes = getSizes(height);
       setInitialFieldProps({
         initialObject: getInitialFieldObject({
