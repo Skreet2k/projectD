@@ -34,7 +34,7 @@ public class SimulationModel
 
     public int Score { get; set; }
 
-    public int CurrentWave { get; set; }
+    public int CurrentWave { get; set; } = -1;
 
     /// <summary>
     /// Команда выгорела?
