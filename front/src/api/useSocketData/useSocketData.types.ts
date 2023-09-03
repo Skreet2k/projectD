@@ -51,4 +51,6 @@ export type TSocket = {
   connection: HubConnection | null
   isSessionCreated: boolean
   isSessionStarted: boolean
+  isGameEnded: boolean
+  endedGameData: any
 };
