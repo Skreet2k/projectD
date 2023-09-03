@@ -5,7 +5,7 @@ namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class CustomerModel
 {
-    private SimulationModel _model;
+    private readonly SimulationConfiguration _config;
 
     /// <summary>
     /// Живые фичи на уровне.
@@ -17,13 +17,13 @@ public class CustomerModel
     /// </summary>
     private readonly List<FeatureModel> _featuresPool;
 
+    private readonly SimulationModel _model;
+
     /// <summary>
     /// ГСЧ.
     /// </summary>
     private readonly Random _rand;
 
-    private readonly SimulationConfiguration _config;
-    
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {
         _model = simulation;
@@ -56,8 +56,8 @@ public class CustomerModel
     /// </summary>
     private int CurrentWave
     {
-        get { return _model.CurrentWave; }
-        set { _model.CurrentWave = value; }
+        get => _model.CurrentWave;
+        set => _model.CurrentWave = value;
     }
 
     #endregion
@@ -111,13 +111,13 @@ public class CustomerModel
     /// </summary>
     private void GenerateWavePool()
     {
-        int taskHealth = (int)Math.Round(20 * (1 + _config.WaveHealthModifier * CurrentWave));
+        var taskHealth = (int)Math.Round(20 * (1 + _config.WaveHealthModifier * CurrentWave));
 
-        int taskSpeed = (int)Math.Round(50 * (1 + _config.WaveSpeedModifier * CurrentWave));
+        var taskSpeed = (int)Math.Round(50 * (1 + _config.WaveSpeedModifier * CurrentWave));
 
-        int taskReward = (int)Math.Round(10 * (1 + _config.WaveRewardModifier * CurrentWave));
+        var taskReward = (int)Math.Round(10 * (1 + _config.WaveRewardModifier * CurrentWave));
 
-        for (int i = 0; i < _config.WaveCapacity; i++)
+        for (var i = 0; i < _config.WaveCapacity; i++)
         {
             var feature = new FeatureModel
             {

@@ -19,7 +19,7 @@ public class SimulationStateDto
     /// Количество денег.
     /// </summary>
     public int Money { get; set; }
-    
+
     /// <summary>
     /// Количество заработанных денег.
     /// </summary>
@@ -44,7 +44,7 @@ public class SimulationStateDto
     /// Счёт.
     /// </summary>
     public int Score { get; set; } = 0;
-    
+
     /// <summary>
     /// Волна.
     /// </summary>

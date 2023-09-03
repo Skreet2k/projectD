@@ -11,14 +11,13 @@ namespace Simbirsoft.Hakaton.ProjectD.Application.Services;
 /// <inheritdoc />
 public class SimulationSessionService : ISimulationSessionService
 {
+    private const int X = 8;
+    private const int Y = 6;
     private static readonly ConcurrentDictionary<string, SimulationModel> UserSessions = new();
     private readonly IMapGenerator _mapGenerator;
     private readonly ISimulationStarter _simulationStarter;
     private readonly IWorkersService _workersService;
 
-    private const int X = 8;
-    private const int Y = 6;
-    
     public SimulationSessionService(
         IMapGenerator mapGenerator,
         ISimulationStarter simulationStarter,
@@ -32,7 +31,7 @@ public class SimulationSessionService : ISimulationSessionService
     /// <inheritdoc />
     public async Task<MapDto> CreateSessionAsync(string userId)
     {
-        Random rand = new Random();
+        var rand = new Random();
         var startY = rand.Next(Y);
         var endY = rand.Next(Y);
 
@@ -53,22 +52,14 @@ public class SimulationSessionService : ISimulationSessionService
             },
             Money = 100
         };
+
         mapModel.Customer = new CustomerModel(mapModel, levelPool);
-        
-        // TODO: тестовая башня.
-        mapModel.AddWorker(new WorkerModel
-        {
-            Id = "64f398d3d85d555bcf3e78dc",
-            Coordinate = new CoordinateDto { X = 0, Y = 0 },
-            Cost = 1,
-            Range = 100,
-            DamagePerTick = 5,
-            HealthPoints = 1000
-        });
 
         mapModel.CancellationTokenSource = new CancellationTokenSource();
 
         UserSessions.AddOrUpdate(userId, mapModel, (_, _) => mapModel);
+
+        await _simulationStarter.PrepareAsync(mapModel, userId);
 
         return mapResult.Content;
     }
@@ -83,7 +74,7 @@ public class SimulationSessionService : ISimulationSessionService
     }
 
     /// <inheritdoc />
-    public void AddWorker(string userId, string workerId, CoordinateDto coordinate)
+    public async Task AddWorkerAsync(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -109,10 +100,12 @@ public class SimulationSessionService : ISimulationSessionService
         };
 
         session.AddWorker(workerModel);
+
+        await _simulationStarter.PrepareAsync(session, userId);
     }
 
     /// <inheritdoc />
-    public void RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
+    public async Task RemoveWorkerAsync(string userId, string workerId, CoordinateDto coordinate)
     {
         UserSessions.TryGetValue(userId, out var session);
 
@@ -137,6 +130,8 @@ public class SimulationSessionService : ISimulationSessionService
                 Y = coordinate.Y
             }
         });
+
+        await _simulationStarter.PrepareAsync(session, userId);
     }
 
     /// <inheritdoc />
@@ -148,8 +143,7 @@ public class SimulationSessionService : ISimulationSessionService
         {
             return;
         }
-        
-        await session.CancellationTokenSource.CancelAsync();
 
+        await session.CancellationTokenSource.CancelAsync();
     }
 }

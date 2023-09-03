@@ -47,16 +47,24 @@ public class SimulationStarter : ISimulationStarter
             await _hubContext.Clients.User(userId).UpdateClient(state);
             await Task.Delay(mapModel.Configuration.MillisecondsToTick);
         }
-        
+
         var userScoreDto = new UserScoreRecordDto
         {
             Score = mapModel.Score,
             UserId = userId,
-            UserName = userName
+            UserName = userName,
+            WavesCleared = mapModel.CurrentWave - 1
         };
 
         var userScore = await _scoresService.AddOrUpdateRecordScoreAsync(userScoreDto);
 
         await _hubContext.Clients.User(userId).EndGame(userScore);
+    }
+
+    public async Task PrepareAsync(SimulationModel mapModel, string userId)
+    {
+        var state = _mapper.Map<SimulationStateDto>(mapModel);
+
+        await _hubContext.Clients.User(userId).UpdateClient(state);
     }
 }

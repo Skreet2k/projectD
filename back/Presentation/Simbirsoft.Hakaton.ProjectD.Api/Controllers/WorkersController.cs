@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Simbirsoft.Hakaton.ProjectD.Application.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Workers;
@@ -15,8 +14,8 @@ namespace Simbirsoft.Hakaton.ProjectD.Api.Controllers;
 [Authorize]
 public class WorkersController : ControllerBase
 {
-    private readonly IWorkersService _workersService;
     private readonly ISimulationSessionService _simulationSessionService;
+    private readonly IWorkersService _workersService;
 
     public WorkersController(IWorkersService workersService, ISimulationSessionService simulationSessionService)
     {
@@ -29,26 +28,26 @@ public class WorkersController : ControllerBase
     {
         return _workersService.GetWorkers();
     }
-    
+
     /// <summary>
     /// Добавляем работника.
     /// </summary>
     [HttpPost]
-    public void AddWorker(WorkerUpsetDto worker)
+    public async Task AddWorker(WorkerUpsetDto worker)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        _simulationSessionService.AddWorker(userId, worker.Id, worker.Coordinate);
+        await _simulationSessionService.AddWorkerAsync(userId, worker.Id, worker.Coordinate);
     }
-        
+
     /// <summary>
     /// Удаляем работника.
     /// </summary>
     [HttpDelete]
-    public void RemoveWorker(WorkerUpsetDto worker)
+    public async Task RemoveWorker(WorkerUpsetDto worker)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        _simulationSessionService.RemoveWorker(userId, worker.Id, worker.Coordinate);
+        await _simulationSessionService.RemoveWorkerAsync(userId, worker.Id, worker.Coordinate);
     }
 }

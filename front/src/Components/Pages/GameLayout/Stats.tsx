@@ -13,6 +13,7 @@ import { playingFieldTheme } from '../../../theme';
 
 export default function Stats() {
   const { socket }: any = useContext(GameLayoutContext);
+
   return (
     <div>
       <List>
