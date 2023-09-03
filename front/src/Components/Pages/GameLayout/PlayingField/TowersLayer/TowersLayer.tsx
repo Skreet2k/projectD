@@ -13,8 +13,8 @@ function TowersLayer({ workers }: TowersLayerProps) {
     level: DeveloperLevel.junior,
     type: TowerType.frontend,
     position: {
-      x: worker.Coordinate.X + 2,
-      y: worker.Coordinate.Y + 5,
+      x: worker.Coordinate.X,
+      y: worker.Coordinate.Y,
     },
   }));
   return (
