@@ -17,6 +17,7 @@ public class UserScoreProfile : Profile
             .ForMember(d => d.TotalMoney, opt => opt.MapFrom(s => s.TotalMoney))
             .ForMember(d => d.UserId, opt => opt.MapFrom(s => s.UserId))
             .ForMember(d => d.UserName, opt => opt.MapFrom(s => s.UserName))
+            .ForMember(d => d.WavesCleared, opt => opt.MapFrom(s => s.WavesCleared))
             .ForMember(d => d.Score, opt => opt.MapFrom(s => s.Score));
     }
 }
