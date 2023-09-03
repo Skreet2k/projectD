@@ -7,18 +7,8 @@ import backendSenior from './backend/backend-senior.svg';
 import qaJunior from './qa/qa-junior.svg';
 import qaMiddle from './qa/qa-middle.svg';
 import qaSenior from './qa/qa-senior.svg';
+import { DeveloperLevel, TowerType } from '../../Components/Pages/GameLayout/PlayingField/TowersLayer/TowerLayer.types';
 
-export enum TowerType {
-  frontend = 'frontend',
-  backend = 'backend',
-  qa = 'qa',
-}
-
-export enum DeveloperLevel {
-  junior = 'junior',
-  middle = 'middle',
-  senior = 'senior',
-}
 export const towers = {
   [TowerType.frontend]: {
     [DeveloperLevel.junior]: frontendJunior,

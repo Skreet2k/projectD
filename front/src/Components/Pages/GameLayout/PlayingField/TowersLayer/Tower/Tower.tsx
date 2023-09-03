@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { keyframes } from '@mui/material';
-import { zIndex } from '../../../../constants';
-import { DeveloperLevel, towers, TowerType } from '../../../../assets/towers';
-import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { zIndex } from '../../../../../../constants';
+import { towers } from '../../../../../../assets/towers';
+import { GameLayoutContext } from '../../../../../Providers/GameLayoutProvider/GameLayoutProvider';
+import { DeveloperLevel, TowerType } from '../TowerLayer.types';
 
 const spriteAnimation = (x: number) => keyframes`
   from{background-position-x:0;}
@@ -19,19 +20,18 @@ const TowerContainer = styled.div<{ $size: number, $top:number, $left: number, $
   background-size: cover;
   top: ${(props) => props.$top};
   left: ${(props) => props.$left};
-  
   animation : ${(props) => spriteAnimation(props.$size * 3)} 1s steps(3) infinite;
 `;
 
-type TowerProps = {
-  type: TowerType,
-  level: DeveloperLevel,
-};
-function Tower({ type, level }: TowerProps) {
+// type TowerProps = {
+//   type: TowerType,
+//   level: DeveloperLevel,
+// };
+function Tower() {
   const { sizes } = useContext(GameLayoutContext);
   const size = sizes?.sizeOfFieldCell;
 
-  const background = towers[type][level];
+  const background = towers[TowerType.frontend][DeveloperLevel.junior];
 
   return size ? (
     <TowerContainer $size={size} $top={0} $left={0} $background={background} />

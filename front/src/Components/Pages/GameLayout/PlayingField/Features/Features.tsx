@@ -28,6 +28,7 @@ const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HT
   }
   return [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
 };
+
 export default function Features() {
   const socketData = useSocketData();
   const { fieldParams } = useContext(GameLayoutContext);

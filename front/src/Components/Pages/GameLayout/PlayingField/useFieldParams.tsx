@@ -1,22 +1,26 @@
 import { useEffect, useState } from 'react';
 import {
-  FieldObject, InitialField, Position, Row,
+  FieldObject,
+  InitialField,
+  Position,
+  Row,
 } from './PayingField.types';
-import { MapResponse } from '../../../../services/map';
+import { MapResponse } from '../../../../services/map/map.types';
 
 const getSizes = (heightAmount: number) => ({
   sizeOfField: {
     width: window.innerWidth,
     height: window.innerHeight,
   },
-  sizeOfFieldCell: (window.innerHeight - 64 - 100) / heightAmount,
+  sizeOfFieldCell:
+    (window.innerHeight - 64 - 100) / heightAmount,
 });
 
 interface InitialFieldOptions {
-  path: Position[]
-  widthAmount: number
-  heightAmount: number
-  sizeOfFieldCell: number
+  path: Position[];
+  widthAmount: number;
+  heightAmount: number;
+  sizeOfFieldCell: number;
 }
 
 const getInitialFieldObject = ({
@@ -73,7 +77,10 @@ export const useFieldParams = (
       const sizes = getSizes(height);
       setInitialFieldProps({
         initialObject: getInitialFieldObject({
-          path, widthAmount: width, heightAmount: height, sizeOfFieldCell: sizes.sizeOfFieldCell,
+          path,
+          widthAmount: width,
+          heightAmount: height,
+          sizeOfFieldCell: sizes.sizeOfFieldCell,
         }),
         sizes,
         path,

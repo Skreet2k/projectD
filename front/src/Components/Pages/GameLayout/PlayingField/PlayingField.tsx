@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Cell from './Cell/Cell';
-import Tower from '../Tower/Tower';
-import { DeveloperLevel, TowerType } from '../../../../assets/towers';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import Features from './Features/Features';
+import TowersLayer from './TowersLayer/TowersLayer';
+import { DeveloperLevel, ITower, TowerType } from './TowersLayer/TowerLayer.types';
 
 const FieldWrapper = styled.div`
   position: relative;
@@ -22,6 +22,7 @@ const Row = styled.div`
 
 function PlayingField() {
   const { fieldParams } = useContext(GameLayoutContext);
+  const towers: ITower[] = [{ type: TowerType.frontend, level: DeveloperLevel.junior }];
 
   return (
     <FieldWrapper>
@@ -39,7 +40,7 @@ function PlayingField() {
         ))}
         <Features />
       </Field>
-      <Tower type={TowerType.backend} level={DeveloperLevel.junior} />
+      <TowersLayer towers={towers} />
     </FieldWrapper>
   );
 }

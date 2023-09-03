@@ -23,7 +23,7 @@
         "allowForLoopAfterthoughts": true
       }
     ],
-    "max-len": "off",
+    "max-len": 0,
     "no-unused-vars": 1,
     "space-infix-ops": 0
   }

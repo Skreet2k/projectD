@@ -3,6 +3,7 @@ import PlayingField from './PlayingField/PlayingField';
 import { PlayingArea, StyledGameLayout } from './GameLayout.styles';
 import GameLayoutProvider from '../../Providers/GameLayoutProvider/GameLayoutProvider';
 import TasksBar from './TasksBar/TasksBar';
+import Shop from './Shop/Shop';
 
 function GameLayout() {
   return (
@@ -13,7 +14,7 @@ function GameLayout() {
           <div>место для показателей</div>
           <PlayingField />
         </PlayingArea>
-        <div>правый бар</div>
+        <Shop />
       </StyledGameLayout>
     </GameLayoutProvider>
   );
