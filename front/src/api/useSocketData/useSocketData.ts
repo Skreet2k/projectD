@@ -13,6 +13,8 @@ export default function useSocketData(): TSocket {
   const [path, setPath] = useState<Position[]>([]);
   const isSessionCreated = useRef(false);
   const isSessionStarted = useRef(false);
+  const isGameEnded = useRef(false);
+  const endedGameData = useRef<any>({});
 
   const createSession = async () => {
     if (!connection || isSessionCreated.current) {
@@ -84,6 +86,11 @@ export default function useSocketData(): TSocket {
       // console.log(data);
     });
 
+    hubConnection.on('EndGame', (gameData: any) => {
+      isGameEnded.current = true;
+      endedGameData.current = gameData;
+    });
+
     hubConnection.start()
       .then(() => {
         setConnection(hubConnection);
@@ -99,5 +106,7 @@ export default function useSocketData(): TSocket {
     connection,
     isSessionCreated: isSessionCreated.current,
     isSessionStarted: isSessionStarted.current,
+    isGameEnded: isGameEnded.current,
+    endedGameData: endedGameData.current,
   };
 }

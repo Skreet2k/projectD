@@ -33,7 +33,7 @@ export const ShopContentWrapper = styled.div`
 
 const ShopContentBackground = styled.div<{ $width: number }>`
   min-width: ${(props) => `${props.$width}px`};
-  max-width: 20%;
+  max-width: 30%;
   position: relative;
   display: flex;
   height: 100%;
