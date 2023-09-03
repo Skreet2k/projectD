@@ -8,7 +8,7 @@ export type TPosition = {
 export type TFeature = {
   Id: string,
   CurrentCoordinate: TPosition,
-  NextCoordinate: TPosition,
+  NextCoordinate: TPosition | null,
   ProgressPercents: number,
   CurrentHealthPoints: number,
   MaxHealthPoints: number,
