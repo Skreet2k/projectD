@@ -11,7 +11,7 @@ public class FeatureHandler : Handler
     {
         foreach (var feature in request.Features.ToList())
         {
-            HandleFeature(feature, request.Path);
+            HandleFeature(feature, request.Path, request);
 
             if (feature.NextCoordinate is null)
             {
@@ -22,17 +22,12 @@ public class FeatureHandler : Handler
         _successor?.HandleRequest(request);
     }
 
-    private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path)
+    private void HandleFeature(FeatureModel featureModel, List<CoordinateDto> path, SimulationModel request)
     {
         // Заполняем следующую координату
         if (featureModel.NextCoordinate is null)
         {
             featureModel.NextCoordinate = GetNextCoordinate(featureModel.CurrentCoordinate, path);
-        }
-
-        if (featureModel.NextCoordinate is null)
-        {
-            return;
         }
 
         // Прибавляем прогресс движения в клетке
@@ -43,6 +38,14 @@ public class FeatureHandler : Handler
         {
             // Следующая координата становится текущей
             featureModel.CurrentCoordinate = featureModel.NextCoordinate;
+
+            // Условие, когда фича переходит с последней клетки в никуда
+            if (featureModel.CurrentCoordinate == null)
+            {
+                FinishPath(featureModel, request);
+                return;
+            }
+
             featureModel.NextCoordinate = GetNextCoordinate(featureModel.CurrentCoordinate, path);
 
             featureModel.ProgressPercents = 0;
@@ -70,5 +73,16 @@ public class FeatureHandler : Handler
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Заканчиваем путь фичи.
+    /// </summary>
+    /// <param name="feature"></param>
+    /// <param name="simulation"></param>
+    private void FinishPath(FeatureModel feature, SimulationModel simulation)
+    {
+        simulation.ReceiveDamage(feature.CurrentHealthPoints);
+        simulation.RemoveFeature(feature.Id);
     }
 }

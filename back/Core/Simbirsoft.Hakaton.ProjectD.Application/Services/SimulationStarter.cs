@@ -25,7 +25,7 @@ public class SimulationStarter
         featureHandler.SetSuccessor(workerHandler);
         featureHandler.SetSuccessor(deadHandler);
 
-        while (true)
+        while (!mapModel.IsBurtnOut)
         {
             if (mapModel.CancellationTokenSource.IsCancellationRequested)
             {

@@ -17,4 +17,6 @@ public class WorkerDto
     public int Damage { get; set; }
 
     public int Cost { get; set; }
+    
+    public int HealthPoints { get; set; }
 }

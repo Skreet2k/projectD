@@ -36,4 +36,9 @@ public class WorkerEntity : BaseEntity
     /// Стоимость размещения.
     /// </summary>
     public int Cost { get; set; }
+    
+    /// <summary>
+    /// Психическое здоровье разработчика.
+    /// </summary>
+    public int HealthPoints { get; set; }
 }

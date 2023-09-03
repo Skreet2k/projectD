@@ -37,6 +37,16 @@ public class WorkerModel
     /// Урон в тик.
     /// </summary>
     public int DamagePerTick { get; set; }
+    
+    /// <summary>
+    /// Стоимость.
+    /// </summary>
+    public int Cost { get; set; }
+    
+    /// <summary>
+    /// Здоровье Работника.
+    /// </summary>
+    public int HealthPoints { get; set; }
 
     /// <summary>
     /// Симуляция выстрела в тик.

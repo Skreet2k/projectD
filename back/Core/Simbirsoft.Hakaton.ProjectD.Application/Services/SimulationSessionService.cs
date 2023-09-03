@@ -78,10 +78,11 @@ public class SimulationSessionService
             Id = worker.Id,
             Coordinate = coordinate,
             DamagePerTick = worker.Damage,
-            Range = worker.Range
+            Range = worker.Range,
+            Cost = worker.Cost
         };
         
-        session.Workers.Add(workerModel);
+        session.AddWorker(workerModel);
     }
     
     public async Task RemoveWorker(string userId, string workerId, CoordinateDto coordinate)
@@ -100,12 +101,15 @@ public class SimulationSessionService
             return;
         }
 
-        var workerModel = session.Workers.FirstOrDefault(x =>
-            x.Id == workerId && x.Coordinate.X == coordinate.X && x.Coordinate.Y == coordinate.Y);
-        
-        session.Workers.Remove(workerModel);
-
-        session.Money += worker.Cost;
+        session.RemoveWorker(new WorkerModel
+        {
+            Id = workerId,
+            Coordinate = new CoordinateDto
+            {
+                X = coordinate.X,
+                Y = coordinate.Y
+            }
+        });
     }
     
     public async Task StopSessionAsync(string userId)
