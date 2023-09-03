@@ -53,7 +53,7 @@ public class SimulationStarter : ISimulationStarter
             Score = mapModel.Score,
             UserId = userId,
             UserName = userName,
-            WavesCleared = mapModel.CurrentWave - 1
+            WavesCleared = mapModel.CurrentWave
         };
 
         var userScore = await _scoresService.AddOrUpdateRecordScoreAsync(userScoreDto);

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: projectd-back
-        image: skreet2k/projectd-back:0.0.29
+        image: skreet2k/projectd-back:0.0.32
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: projectd-front
-        image: skreet2k/projectd-front:0.0.29
+        image: skreet2k/projectd-front:0.0.32
         imagePullPolicy: Always
         ports:
         - containerPort: 80

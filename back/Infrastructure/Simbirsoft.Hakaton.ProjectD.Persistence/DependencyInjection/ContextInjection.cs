@@ -14,5 +14,6 @@ public static class ContextInjection
     {
         services.AddSingleton<MongoDbContext>();
         services.AddOptions<MongoDbConfig>().Bind(configuration.GetSection(MongoDbConfig.DefaultSection));
+        services.AddOptions<GameConfiguration>().Bind(configuration.GetSection(GameConfiguration.DefaultSection));
     }
 }

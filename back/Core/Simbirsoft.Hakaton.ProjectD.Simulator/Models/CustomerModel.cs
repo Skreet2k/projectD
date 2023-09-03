@@ -1,11 +1,12 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
+﻿using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
+using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 using Simbirsoft.Hakaton.ProjectD.Shared.Helpers;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 public class CustomerModel
 {
-    private readonly SimulationConfiguration _config;
+    private readonly GameConfiguration _config;
 
     /// <summary>
     /// Живые фичи на уровне.
@@ -19,11 +20,6 @@ public class CustomerModel
 
     private readonly SimulationModel _model;
 
-    /// <summary>
-    /// ГСЧ.
-    /// </summary>
-    private readonly Random _rand;
-
     public CustomerModel(SimulationModel simulation, List<FeatureModel> levelFeatures)
     {
         _model = simulation;
@@ -31,10 +27,6 @@ public class CustomerModel
         _featuresPool = levelFeatures;
         StartCoordinate = simulation.Path[0];
         _config = simulation.Configuration;
-        if (_config.IsEndlessLevel)
-        {
-            _rand = new Random();
-        }
     }
 
     #region Свойства
@@ -111,13 +103,19 @@ public class CustomerModel
     /// </summary>
     private void GenerateWavePool()
     {
-        var taskHealth = (int)Math.Round(20 * (1 + _config.WaveHealthModifier * CurrentWave));
+        var taskHealth =
+            (int)Math.Round(_config.FeatureConfiguration.InitHealth *
+                            (1 + _config.WaveConfiguration.WaveHealthModifier * CurrentWave));
 
-        var taskSpeed = (int)Math.Round(50 * (1 + _config.WaveSpeedModifier * CurrentWave));
+        var taskSpeed =
+            (int)Math.Round(_config.FeatureConfiguration.InitSpeed *
+                            (1 + _config.WaveConfiguration.WaveSpeedModifier * CurrentWave));
 
-        var taskReward = (int)Math.Round(10 * (1 + _config.WaveRewardModifier * CurrentWave));
+        var taskReward =
+            (int)Math.Round(_config.FeatureConfiguration.InitReward *
+                            (1 + _config.WaveConfiguration.WaveRewardModifier * CurrentWave));
 
-        for (var i = 0; i < _config.WaveCapacity; i++)
+        for (var i = 0; i < _config.WaveConfiguration.WaveCapacity; i++)
         {
             var feature = new FeatureModel
             {

@@ -8,13 +8,14 @@
 
 
     <ItemGroup>
-        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Domain\Simbirsoft.Hakaton.ProjectD.Domain.csproj"/>
-        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj"/>
+        <ProjectReference Include="..\..\Infrastructure\Simbirsoft.Hakaton.ProjectD.Persistence\Simbirsoft.Hakaton.ProjectD.Persistence.csproj" />
+        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Domain\Simbirsoft.Hakaton.ProjectD.Domain.csproj" />
+        <ProjectReference Include="..\Simbirsoft.Hakaton.ProjectD.Shared\Simbirsoft.Hakaton.ProjectD.Shared.csproj" />
     </ItemGroup>
 
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="12.0.1"/>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
     </ItemGroup>
 
 

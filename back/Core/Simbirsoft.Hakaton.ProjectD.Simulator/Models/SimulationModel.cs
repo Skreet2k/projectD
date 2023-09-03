@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Simbirsoft.Hakaton.ProjectD.Persistence.Configurations;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Models;
@@ -7,7 +8,7 @@ public class SimulationModel
 {
     public List<CoordinateDto> Path { get; set; }
 
-    public SimulationConfiguration Configuration { get; set; }
+    public GameConfiguration Configuration { get; set; }
 
     public CustomerModel Customer { get; set; }
 
@@ -33,7 +34,7 @@ public class SimulationModel
 
     public int Score { get; set; }
 
-    public int CurrentWave { get; set; }
+    public int CurrentWave { get; set; } = -1;
 
     /// <summary>
     /// Команда выгорела?
@@ -135,7 +136,7 @@ public class SimulationModel
     private int CalculateScore(int featuresCompleted = 1)
     {
         // Вычисление модификаторов.
-        var modifiersMultiplier = 1 + CurrentWave * Configuration.WaveScoreModifier;
+        var modifiersMultiplier = 1 + CurrentWave * Configuration.WaveConfiguration.WaveScoreModifier;
 
         var result = (int)Math.Round(featuresCompleted * modifiersMultiplier);
 
