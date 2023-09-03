@@ -19,7 +19,7 @@ export type TFeature = {
 };
 
 export type TSocketData = {
-  Path: Position[],
+  Path: TPosition[],
   Configuration: {
     MillisecondsToTick: number,
     TicksToSpawn: number,
@@ -31,6 +31,7 @@ export type TSocketData = {
 };
 
 export type TSocket = {
+  path: Position[]
   socketData: TSocketData | null
   createSession: () => Promise<any>
   startSession: () => Promise<any>
