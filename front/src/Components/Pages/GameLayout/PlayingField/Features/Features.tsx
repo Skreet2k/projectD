@@ -20,7 +20,7 @@ const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx 
   return { xPx, yPx };
 };
 
-const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HTMLDivElement | null>, fieldObject:FieldObject, path: Position[]): TWayPoint[] => {
+const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HTMLDivElement | null>, fieldObject:FieldObject): TWayPoint[] => {
   // TODO make this smooth
   const featureElement = featureElements[feature.id];
   if (!featureElement) {
@@ -28,6 +28,7 @@ const getWayPoints = (feature: TFeatureProps, featureElements: Record<string, HT
   }
   return [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
 };
+
 export default function Features() {
   const socketData = useSocketData();
   const { fieldParams } = useContext(GameLayoutContext);
@@ -49,7 +50,7 @@ export default function Features() {
         nextCell: toPosition(fFromBack.NextCoordinate),
         name: fFromBack.Name,
       };
-      const wayPoints = getWayPoints(feature, featureElements.current, initialObject, path);
+      const wayPoints = getWayPoints(feature, featureElements.current, initialObject);
       return { feature, wayPoints };
     });
 

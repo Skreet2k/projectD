@@ -12,7 +12,7 @@ function Cell({ cell, cellSize }: CellProps) {
 
   const onClick = () => {
     if (shopTowerSelected) {
-      console.log(shopTowerSelected);
+      // console.log(shopTowerSelected);
       //
     }
   };

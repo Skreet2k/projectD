@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import {
   Card,
@@ -8,14 +8,12 @@ import {
   keyframes,
   Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   towers,
 } from '../../../../../assets/towers';
 import { GameLayoutContext } from '../../../../Providers/GameLayoutProvider/GameLayoutProvider';
-import { RootState } from '../../../../../store/store';
 import { setSelectedShopTower } from '../../../../../store/slices/gameLayoutSlice';
-import { DeveloperLevel, TowerType } from '../../PlayingField/TowersLayer/TowerLayer.types';
 import { Tower } from '../../../../../services/towers/towers';
 
 const spriteAnimation = (x: number) => keyframes`
@@ -47,10 +45,6 @@ function ShopItem({ tower }: ShopItemProps) {
   } = tower;
 
   const size = sizes?.sizeOfFieldCell;
-
-  const shopTowerSelected = useSelector(
-    (state: RootState) => state.gameLayout.shopTowerSelected,
-  );
 
   const background = towers[type][level];
 
