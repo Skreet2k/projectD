@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Cell from './Cell/Cell';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
@@ -19,7 +19,13 @@ const Row = styled.div`
 `;
 
 function PlayingField() {
-  const { fieldParams } = useContext(GameLayoutContext);
+  const { fieldParams, socket } = useContext(GameLayoutContext);
+  useEffect(() => {
+    if (!socket || !socket.connection) {
+      return;
+    }
+    socket.createSession().then(() => socket.startSession());
+  }, [socket?.connection]);
 
   // const { data } = useGetTowersQuery();
   // const content = data?.content;
