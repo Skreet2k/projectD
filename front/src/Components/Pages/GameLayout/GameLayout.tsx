@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import PlayingField from './PlayingField/PlayingField';
 import { PlayingArea, StyledGameLayout } from './GameLayout.styles';
 import GameLayoutProvider from '../../Providers/GameLayoutProvider/GameLayoutProvider';
