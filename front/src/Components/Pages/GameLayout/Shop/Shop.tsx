@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { GameLayoutContext } from '../../../Providers/GameLayoutProvider/GameLayoutProvider';
 import ShopItem from './ShopItem/ShopItem';
 import { useGetTowersQuery } from '../../../../services/towers/towers';
+import { playingFieldTheme } from '../../../../theme';
 
 export const ShopContentWrapper = styled.div`
   width: 100%;
@@ -36,7 +37,7 @@ const ShopContentBackground = styled.div<{ $width: number }>`
   position: relative;
   display: flex;
   height: 100%;
-  background-color: #f57c00; // TODO move to colors
+  background-color: ${playingFieldTheme.shopBackground}; // TODO move to colors
 `;
 function Shop() {
   // ширина в 3 ячейки
