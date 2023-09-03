@@ -16,6 +16,9 @@ public class SimulationSessionService : ISimulationSessionService
     private readonly ISimulationStarter _simulationStarter;
     private readonly IWorkersService _workersService;
 
+    private const int X = 8;
+    private const int Y = 6;
+    
     public SimulationSessionService(
         IMapGenerator mapGenerator,
         ISimulationStarter simulationStarter,
@@ -29,7 +32,11 @@ public class SimulationSessionService : ISimulationSessionService
     /// <inheritdoc />
     public async Task<MapDto> CreateSessionAsync(string userId)
     {
-        var mapResult = await _mapGenerator.GenerateMapAsync(8, 6, 0, 3, 7, 5);
+        Random rand = new Random();
+        var startY = rand.Next(Y);
+        var endY = rand.Next(Y);
+
+        var mapResult = await _mapGenerator.GenerateMapAsync(X, Y, 0, (byte)startY, 7, (byte)endY);
 
         var levelPool = new List<FeatureModel>();
 
