@@ -71,6 +71,8 @@ public class SimulationSessionService : ISimulationSessionService
     {
         UserSessions.TryGetValue(userId, out var session);
         await _simulationStarter.StartAsync(session, userId, userName);
+
+        await StopSessionAsync(userId);
     }
 
     /// <inheritdoc />
@@ -135,9 +137,12 @@ public class SimulationSessionService : ISimulationSessionService
     {
         UserSessions.Remove(userId, out var session);
 
-        if (session is not null)
+        if (session?.CancellationTokenSource == null || session.CancellationTokenSource.IsCancellationRequested)
         {
-            await session.CancellationTokenSource.CancelAsync();
+            return;
         }
+        
+        await session.CancellationTokenSource.CancelAsync();
+
     }
 }
