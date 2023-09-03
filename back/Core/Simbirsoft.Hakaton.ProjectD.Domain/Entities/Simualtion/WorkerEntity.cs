@@ -26,7 +26,7 @@ public class WorkerEntity : BaseEntity
     /// Радиус поражения.
     /// </summary>
     public int Range { get; set; }
-    
+
     /// <summary>
     /// Урон в секунду.
     /// </summary>
@@ -36,4 +36,9 @@ public class WorkerEntity : BaseEntity
     /// Стоимость размещения.
     /// </summary>
     public int Cost { get; set; }
+
+    /// <summary>
+    /// Психическое здоровье разработчика.
+    /// </summary>
+    public int HealthPoints { get; set; }
 }

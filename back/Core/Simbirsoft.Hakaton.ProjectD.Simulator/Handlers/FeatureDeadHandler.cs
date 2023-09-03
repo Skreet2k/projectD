@@ -1,10 +1,11 @@
-﻿using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
-using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
+﻿using Simbirsoft.Hakaton.ProjectD.Simulator.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class FeatureDeadHandler : Handler
 {
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         foreach (var feature in request.Features.ToList())
@@ -13,13 +14,14 @@ public class FeatureDeadHandler : Handler
             {
                 continue;
             }
+
             // Удаляем выполненую задачу.
             request.Features.Remove(feature);
-            
+
             // Добавляем деньги за выполнение.
             request.Money += feature.Reward;
         }
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 }

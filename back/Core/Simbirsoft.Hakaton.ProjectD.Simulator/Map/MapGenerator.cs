@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Generators;
-using Simbirsoft.Hakaton.ProjectD.Application.Services.Map.Pathfinders;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
 using Simbirsoft.Hakaton.ProjectD.Shared.Dtos.Map;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Generators;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Map.Pathfinders;
 using Skreet2k.Common.Models;
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Map;

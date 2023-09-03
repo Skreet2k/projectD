@@ -1,5 +1,8 @@
 ﻿namespace Simbirsoft.Hakaton.ProjectD.Domain.Entities.Map;
 
+/// <summary>
+/// Координата.
+/// </summary>
 public class CoordinateEntity
 {
     public CoordinateEntity(byte x, byte y)
@@ -8,7 +11,13 @@ public class CoordinateEntity
         Y = y;
     }
 
+    /// <summary>
+    /// X.
+    /// </summary>
     public byte X { get; }
 
+    /// <summary>
+    /// Y.
+    /// </summary>
     public byte Y { get; }
 }

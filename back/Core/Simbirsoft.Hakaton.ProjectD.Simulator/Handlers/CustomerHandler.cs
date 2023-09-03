@@ -2,12 +2,14 @@
 
 namespace Simbirsoft.Hakaton.ProjectD.Simulator.Handlers;
 
+/// <inheritdoc />
 public class CustomerHandler : Handler
 {
+    /// <inheritdoc />
     public override void HandleRequest(SimulationModel request)
     {
         request.Customer.MakeLifeHarder();
 
-        _successor?.HandleRequest(request);
+        Successor?.HandleRequest(request);
     }
 }

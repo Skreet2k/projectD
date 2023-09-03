@@ -4,6 +4,7 @@ using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Map;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Scores;
 using Simbirsoft.Hakaton.ProjectD.Domain.Abstractions.Services.Workers;
+using Simbirsoft.Hakaton.ProjectD.Simulator.Abstractions;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Map;
 using Simbirsoft.Hakaton.ProjectD.Simulator.Services;
 
@@ -25,8 +26,8 @@ public static class ServicesInjection
 
         services.AddScoped<IMapGenerator, MapGenerator>();
 
-        services.AddScoped<SimulationSessionService>();
+        services.AddScoped<ISimulationSessionService, SimulationSessionService>();
         services.AddScoped<MapServices>();
-        services.AddScoped<SimulationStarter>();
+        services.AddScoped<ISimulationStarter, SimulationStarter>();
     }
 }
