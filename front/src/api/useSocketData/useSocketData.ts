@@ -1,12 +1,53 @@
 import { useEffect, useRef, useState } from 'react';
-import { HubConnectionBuilder } from '@microsoft/signalr';
-import { NullableSocketData, TSocketData } from './useSocketData.types';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { TSocket, TSocketData } from './useSocketData.types';
 
-export default function useSocketData(): NullableSocketData {
-  const [socketData, setSocketData] = useState<NullableSocketData>(null);
+export default function useSocketData(): TSocket {
+  const [socketData, setSocketData] = useState<TSocketData | null>(null);
   const token = localStorage.getItem('token') || '';
   const uniqSocketRef = useRef(0);
   const prevToken = useRef(token);
+  const [connection, setConnection] = useState<HubConnection | null>(null);
+  const isSessionCreated = useRef(false);
+  const isSessionStarted = useRef(false);
+
+  const createSession = async () => {
+    if (!connection || isSessionCreated.current) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ connection, isSessionCreated });
+    }
+    return connection.invoke('CreateSession')
+      .then(() => {
+        isSessionCreated.current = true;
+      });
+  };
+
+  const startSession = async () => {
+    if (!connection || !isSessionCreated.current || isSessionStarted.current) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ connection, isSessionCreated, isSessionStarted });
+    }
+    // the returning promise is ever pending
+    connection.invoke('StartSession');
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.info('session started');
+        isSessionStarted.current = true;
+        resolve(true);
+      }, 200);
+    });
+  };
+
+  const callMethod = async (methodName: string) => {
+    if (!connection) {
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({ connection, isSessionCreated });
+    }
+    return connection.invoke(methodName);
+  };
+  const addWorker = async () => callMethod('AddWorker');
+  const removeWorker = async () => callMethod('RemoveWorker');
 
   useEffect(() => {
     const closureId = Math.random();
@@ -20,21 +61,27 @@ export default function useSocketData(): NullableSocketData {
       return;
     }
 
-    const connection = new HubConnectionBuilder()
+    const hubConnection = new HubConnectionBuilder()
       .withUrl('https://projectd.onebranch.dev/hubs/game', { accessTokenFactory: () => token })
       .build();
 
-    connection.on('UpdateClient', (data: TSocketData) => {
+    hubConnection.on('UpdateClient', (data: TSocketData) => {
       setSocketData(data);
     });
 
-    connection.start()
-      .then(() => connection.invoke('CreateSession'))
-      .then(() => connection.invoke('StartSession'));
-
-    // return () => {
-    //   connection.stop();
-    // };
+    hubConnection.start()
+      .then(() => {
+        setConnection(hubConnection);
+      });
   }, [token]);
-  return socketData;
+  return {
+    socketData,
+    createSession,
+    startSession,
+    addWorker,
+    removeWorker,
+    connection,
+    isSessionCreated: isSessionCreated.current,
+    isSessionStarted: isSessionStarted.current,
+  };
 }

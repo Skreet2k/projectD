@@ -1,3 +1,4 @@
+import { HubConnection } from '@microsoft/signalr';
 import { Position } from '../../Components/Pages/GameLayout/PlayingField/PayingField.types';
 
 export type TPosition = {
@@ -29,4 +30,13 @@ export type TSocketData = {
   Features: TFeature[]
 };
 
-export type NullableSocketData = TSocketData | null;
+export type TSocket = {
+  socketData: TSocketData | null
+  createSession: () => Promise<any>
+  startSession: () => Promise<any>
+  addWorker: () => Promise<any>
+  removeWorker: () => Promise<any>
+  connection: HubConnection | null
+  isSessionCreated: boolean
+  isSessionStarted: boolean
+};
