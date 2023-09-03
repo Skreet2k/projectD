@@ -97,7 +97,8 @@ public class SimulationSessionService : ISimulationSessionService
             Coordinate = coordinate,
             DamagePerTick = worker.Damage,
             Range = worker.Range,
-            Cost = worker.Cost
+            Cost = worker.Cost,
+            HealthPoints = worker.HealthPoints
         };
 
         session.AddWorker(workerModel);
