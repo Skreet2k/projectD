@@ -30,7 +30,7 @@ spec:
         - name: GameConfiguration__TicksToSpawn
           value: "5"
         - name: GameConfiguration__FeatureConfiguration__InitSpeed
-          value: "10"
+          value: "25"
           
 ---
 apiVersion: apps/v1
