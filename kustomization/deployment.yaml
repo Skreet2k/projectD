@@ -27,6 +27,8 @@ spec:
           value: Development
         - name: MongoDbConfig__ConnectionString
           value: mongodb://root:A4hPcRbtE8@mongodb.default.svc.cluster.local:27017/
+        - name: GameConfiguration__TicksToSpawn
+          value: 5
 ---
 apiVersion: apps/v1
 kind: Deployment
