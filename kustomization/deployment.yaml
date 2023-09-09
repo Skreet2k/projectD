@@ -28,7 +28,7 @@ spec:
         - name: MongoDbConfig__ConnectionString
           value: mongodb://root:A4hPcRbtE8@mongodb.default.svc.cluster.local:27017/
         - name: GameConfiguration__TicksToSpawn
-          value: "20"
+          value: "15"
         - name: GameConfiguration__FeatureConfiguration__InitSpeed
           value: "20"
         - name: GameConfiguration__FeatureConfiguration__TicksToSpawnModifierPerWaves
@@ -36,7 +36,7 @@ spec:
         - name: GameConfiguration__MillisecondsToTick
           value: "100"    
         - name: GameConfiguration__WaveConfiguration__WaveSpeedModifier
-          value: "0.1"    
+          value: "0.0"    
 ---
 apiVersion: apps/v1
 kind: Deployment
