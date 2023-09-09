@@ -32,7 +32,7 @@ spec:
         - name: GameConfiguration__FeatureConfiguration__InitSpeed
           value: "20"
         - name: GameConfiguration__FeatureConfiguration__TicksToSpawnModifierPerWaves
-          value: "1"
+          value: "10"
         - name: GameConfiguration__MillisecondsToTick
           value: "100"    
         - name: GameConfiguration__WaveConfiguration__WaveSpeedModifier
