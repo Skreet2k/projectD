@@ -59,7 +59,7 @@ public class SimulationStarter : ISimulationStarter
 
         var userScore = await _scoresService.AddOrUpdateRecordScoreAsync(userScoreDto);
 
-        await _hubContext.Clients.User(userId).EndGame(userScore);
+        await _hubContext.Clients.User(userId).EndGame(userScoreDto);
     }
 
     public async Task PrepareAsync(SimulationModel mapModel, string userId)
