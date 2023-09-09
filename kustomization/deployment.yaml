@@ -30,7 +30,7 @@ spec:
         - name: GameConfiguration__TicksToSpawn
           value: "20"
         - name: GameConfiguration__FeatureConfiguration__InitSpeed
-          value: "50"
+          value: "20"
         - name: GameConfiguration__MillisecondsToTick
           value: "100"    
 ---
