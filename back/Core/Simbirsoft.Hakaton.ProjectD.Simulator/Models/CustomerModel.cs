@@ -35,6 +35,11 @@ public class CustomerModel
     /// Счётчик прошедших тиков.
     /// </summary>
     private int CurrentTick { get; set; }
+    
+    /// <summary>
+    /// Модификатор скорости спавна.
+    /// </summary>
+    private int SpawnTicksModificator { get; set; }
 
     /// <summary>
     /// Координата начала пути.
@@ -65,7 +70,7 @@ public class CustomerModel
     {
         // Каждый тик смотрим, прошло ли нужное количество тиков с прошлого спауна.
         CurrentTick++;
-        if (CurrentTick == _config.TicksToSpawn)
+        if (CurrentTick >= _config.TicksToSpawn - SpawnTicksModificator)
         {
             // Если прошло, обнуляем счётчик тиков и спауним
             CurrentTick = 0;
@@ -81,6 +86,12 @@ public class CustomerModel
         if (_config.IsEndlessLevel && _featuresPool.Count == 0)
         {
             CurrentWave++;
+            // Увеличиваем скорость спауна фитч каждые SpeedSpawnModifierWaveCount волн
+            if (CurrentWave % _config.FeatureConfiguration.TicksToSpawnModifierPerWaves == 0)
+            {
+                SpawnTicksModificator++;
+            }
+
             GenerateWavePool();
         }
 

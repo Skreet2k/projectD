@@ -111,4 +111,9 @@ public class FeatureConfiguration
     /// Начальная награда.
     /// </summary>
     public int InitReward { get; set; }
+
+    /// <summary>
+    /// Модификатор увеличения скорости спауна на 1 каждые <see cref="TicksToSpawnModifierPerWaves"/> волн.
+    /// </summary>
+    public int TicksToSpawnModifierPerWaves { get; set; }
 }
