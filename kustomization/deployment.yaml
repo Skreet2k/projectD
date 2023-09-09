@@ -33,6 +33,8 @@ spec:
           value: "20"
         - name: GameConfiguration__MillisecondsToTick
           value: "100"    
+        - name: GameConfiguration__WaveConfiguration__WaveSpeedModifier
+          value: "0.1"    
 ---
 apiVersion: apps/v1
 kind: Deployment
