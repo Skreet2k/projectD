@@ -38,7 +38,7 @@ spec:
         - name: GameConfiguration__WaveConfiguration__WaveSpeedModifier
           value: "0.1"
         - name: GameConfiguration__WaveConfiguration__WaveRewardModifier
-          value: "0.05"
+          value: "0.02"
 ---
 apiVersion: apps/v1
 kind: Deployment
