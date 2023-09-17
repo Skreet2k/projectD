@@ -11,18 +11,6 @@ const PositionContainer = styled.div<IPositionPropsFiltered>`
 `;
 
 function Positioner({ children, wayPoints }: TProps) {
-  // const [pxPosition, setPxPosition] = useState<TWayPoint>(wayPoints[0]);
-  // useEffect(() => {
-  //   const futureWayPoints = [...wayPoints];
-  //   setPxPosition(futureWayPoints.shift()!);
-  //   futureWayPoints.forEach(({ delayMS, ...futurePxPosition }) => {
-  //     setTimeout(() => setPxPosition(futurePxPosition), delayMS);
-  //   });
-  // }, [wayPoints]);
-  // if (!pxPosition) {
-  //   return null;
-  // }
-
   const firstPoint = wayPoints[0];
   if (!firstPoint) {
     return null;

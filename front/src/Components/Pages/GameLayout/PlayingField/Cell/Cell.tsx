@@ -16,7 +16,10 @@ function Cell({ cell, cellSize }: CellProps) {
   const onClick = () => {
     if (shopTowerSelected) {
       if (!cell?.isPath) {
-        addTower({ id: shopTowerSelected.id, coordinate: { X: cell.position.x, Y: cell.position.y } });
+        addTower({
+          id: shopTowerSelected.id,
+          coordinate: { X: cell.position.x, Y: cell.position.y },
+        });
       }
       dispatch(setSelectedShopTower({ id: '' }));
     }
@@ -26,7 +29,6 @@ function Cell({ cell, cellSize }: CellProps) {
     <CellDiv
       $size={cellSize}
       $cellInfo={cell}
-      // id={`${position.x}${position.y}`} /* don't set symbols between x and y */
       onClick={onClick}
       role="button"
     />
