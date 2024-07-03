@@ -1,10 +1,13 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import { Avatar, Typography } from '@mui/material';
+import {
+  Avatar,
+  Typography,
+  ListItem,
+  List,
+  Drawer,
+  Box,
+  Button,
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import UserStats from '../userStats/UserStats';
 import { RootState } from '../../store/store';
@@ -35,7 +38,10 @@ export default function Profile() {
         onClose={() => toggleDrawer(false)}
       >
         <Box
-          sx={{ background: playingFieldTheme.playingAreaBackground, height: '100%' }}
+          sx={{
+            background: playingFieldTheme.playingAreaBackground,
+            height: '100%',
+          }}
           onClick={() => toggleDrawer(false)}
         >
           <List>

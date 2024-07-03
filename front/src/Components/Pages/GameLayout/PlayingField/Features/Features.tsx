@@ -7,16 +7,24 @@ import { TPosition } from '../../../../../api/useSocketData/useSocketData.types'
 import { TWayPoint } from '../Positioner/Positioner.types';
 import { TFeatureProps } from './Feature/Feature.types';
 
-const toPosition = (upperPosition: TPosition):Position => {
+const toPosition = (upperPosition: TPosition): Position => {
   const { X, Y } = upperPosition;
   return { x: X, y: Y };
 };
-const getCellCenterPx = (pos: Position, fieldObject: FieldObject): CoordinatePx => {
+const getCellCenterPx = (
+  pos: Position,
+  fieldObject: FieldObject,
+): CoordinatePx => {
   const { xPx = 50, yPx = 50 } = fieldObject.rows[pos.y].cells[pos.x].centerPx!;
   return { xPx, yPx };
 };
 
-const getWayPoints = (feature: TFeatureProps, fieldObject:FieldObject): TWayPoint[] => [{ ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 }];
+const getWayPoints = (
+  feature: TFeatureProps,
+  fieldObject: FieldObject,
+): TWayPoint[] => [
+  { ...getCellCenterPx(feature.currentCell, fieldObject), duration: 500 },
+];
 export default function Features() {
   const { fieldParams, socket } = useContext(GameLayoutContext);
   const socketData = socket?.socketData;
@@ -31,20 +39,19 @@ export default function Features() {
       speed: fFromBack.ProgressPerTick,
       progress: fFromBack.ProgressPercents,
       currentCell: toPosition(fFromBack.CurrentCoordinate),
-      nextCell: toPosition(fFromBack.NextCoordinate || fFromBack.CurrentCoordinate),
+      nextCell: toPosition(
+        fFromBack.NextCoordinate || fFromBack.CurrentCoordinate,
+      ),
       name: fFromBack.Name,
     };
     const wayPoints = getWayPoints(feature, initialObject);
     return { feature, wayPoints };
   });
-  // featuresData.push({ feature: { currentCell: { x: 1, y: 1 }, name: 'test', id: 'tid' }, wayPoints: [{ xPx: 450, yPx: 450, duration: 500 }] });
+
   return (
     <>
       {featuresData.map(({ feature, wayPoints }) => (
-        <Positioner
-          key={feature.id}
-          wayPoints={wayPoints}
-        >
+        <Positioner key={feature.id} wayPoints={wayPoints}>
           <Feature {...feature} />
         </Positioner>
       ))}
