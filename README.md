@@ -1,2 +1,6 @@
 # projectD
-Lets Haking GO GO GO GO GO GO GO GO GO
+Lets Haking GO
+
+Игра для обучения работы со спринтами.
+
+Проект для 2х дневного хакатона
